@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto.GestionePersonale.Interface.ModuloRegistraImpiegato">
+   <children>
+      <AnchorPane prefHeight="84.0" prefWidth="600.0" style="-fx-background-color: #E5AA17;">
+         <children>
+            <ImageView fx:id="shieldImageView" fitHeight="42.0" fitWidth="69.0" layoutX="32.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-security-shield-green-48.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="86.0" layoutY="27.0" text="Registra Impiegato" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="141.0" layoutY="113.0" text="Nome" />
+      <TextField fx:id="nome" layoutX="235.0" layoutY="109.0" prefHeight="26.0" prefWidth="251.0" promptText="nome" />
+      <Button layoutX="235.0" layoutY="289.0" mnemonicParsing="false" onAction="#cliccaRegistra" prefHeight="60.0" prefWidth="251.0" style="-fx-background-color: #E5AA17;" text="Registra" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Label layoutX="139.0" layoutY="148.0" text="Cognome" />
+      <TextField fx:id="cognome" layoutX="235.0" layoutY="144.0" prefHeight="26.0" prefWidth="251.0" promptText="cognome" />
+      <TextField fx:id="email" layoutX="235.0" layoutY="213.0" prefHeight="26.0" prefWidth="251.0" promptText="email" />
+      <Label layoutX="143.0" layoutY="218.0" text="Email" />
+      <TextField fx:id="ruolo" layoutX="235.0" layoutY="180.0" prefHeight="26.0" prefWidth="251.0" promptText="ruolo" />
+      <Label layoutX="143.0" layoutY="185.0" text="Ruolo" />
+      <Label fx:id="registerMsgLabel" contentDisplay="CENTER" layoutX="143.0" layoutY="258.0" prefHeight="17.0" prefWidth="346.0" />
+   </children>
+</AnchorPane>
