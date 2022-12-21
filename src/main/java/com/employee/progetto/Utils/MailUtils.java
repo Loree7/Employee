@@ -13,6 +13,7 @@ public class MailUtils {
             properties.put("mail.smtp.auth", "true");
             properties.put("mail.smtp.starttls.enable", "true");
             Session session = Session.getInstance(properties, new Authenticator() {
+                1041784284663-04gmu02l1jju8aa4c4brlco2j2220cp9.apps.googleusercontent.com
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication("employee.teamddll", "Progetto22");
                 }
