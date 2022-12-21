@@ -1,6 +1,6 @@
-package com.example.progetto.GestionePersonale.Interface;
+package com.employee.progetto.GestionePersonale.Interface;
 
-import com.example.progetto.GestionePersonale.Control.GestoreRegistraImpiegato;
+import com.employee.progetto.GestionePersonale.Control.GestoreRegistraImpiegato;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;

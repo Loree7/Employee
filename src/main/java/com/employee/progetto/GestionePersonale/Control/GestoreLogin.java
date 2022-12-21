@@ -1,11 +1,11 @@
-package com.example.progetto.GestionePersonale.Control;
+package com.employee.progetto.GestionePersonale.Control;
 
-import com.example.progetto.Entity.Utente;
-import com.example.progetto.GestionePersonale.Interface.ModuloLogin;
-import com.example.progetto.PortaleAmministratore;
-import com.example.progetto.PortaleImpiegato;
-import com.example.progetto.Utils.DBMS;
-import com.example.progetto.Utils.Utils;
+import com.employee.progetto.Entity.Utente;
+import com.employee.progetto.GestionePersonale.Interface.ModuloLogin;
+import com.employee.progetto.PortaleAmministratore;
+import com.employee.progetto.PortaleImpiegato;
+import com.employee.progetto.Utils.DBMS;
+import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
 public class GestoreLogin {

@@ -1,4 +1,4 @@
-package com.example.progetto.Entity;
+package com.employee.progetto.Entity;
 
 public class Utente {
     //devo mettere il final sugli attributi???

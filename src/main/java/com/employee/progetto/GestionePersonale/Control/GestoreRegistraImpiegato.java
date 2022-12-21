@@ -1,9 +1,9 @@
-package com.example.progetto.GestionePersonale.Control;
+package com.employee.progetto.GestionePersonale.Control;
 
-import com.example.progetto.GestionePersonale.Interface.ModuloRegistraImpiegato;
-import com.example.progetto.Utils.DBMS;
-import com.example.progetto.Utils.MailUtils;
-import com.example.progetto.Utils.Utils;
+import com.employee.progetto.GestionePersonale.Interface.ModuloRegistraImpiegato;
+import com.employee.progetto.Utils.DBMS;
+import com.employee.progetto.Utils.MailUtils;
+import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
 import java.security.SecureRandom;
@@ -26,10 +26,13 @@ public class GestoreRegistraImpiegato{
         }
         for(String str : ruoli) {
             if (ruolo.toLowerCase().equals(str)) {
-                DBMS.registraImpiegato(nome, cognome, ruolo, email, generaPassword(12));
+                String password = generaPassword(12);
+                DBMS.registraImpiegato(nome, cognome, ruolo, email,password);
                 Utils.creaPannelloConferma("Impiegato registrato correttamente");
                 s.close(); //chiude registra
-                MailUtils.inviaMail("prova","Prova 1",email);
+                MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
+                        +", Email: "+email+", Password: "+password
+                        ,"Invio Credenziali",email);
                 return;
             }
         }

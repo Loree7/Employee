@@ -1,7 +1,7 @@
-package com.example.progetto.GestionePersonale.Interface;
+package com.employee.progetto.GestionePersonale.Interface;
 
-import com.example.progetto.Entity.Impiegato;
-import com.example.progetto.GestionePersonale.Control.GestoreRicercaImpiegato;
+import com.employee.progetto.Entity.Impiegato;
+import com.employee.progetto.GestionePersonale.Control.GestoreRicercaImpiegato;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,7 +13,6 @@ public class VistaImpiegato {
     public VistaImpiegato(Impiegato impiegato,GestoreRicercaImpiegato gestoreRicercaImpiegato){
         this.gestoreRicercaImpiegato = gestoreRicercaImpiegato;
         this.impiegato = impiegato;
-        //email.setText(impiegato.getE);
     }
     @FXML
     private Label messaggio;

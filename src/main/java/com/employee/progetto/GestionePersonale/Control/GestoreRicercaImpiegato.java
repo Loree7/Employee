@@ -1,10 +1,10 @@
-package com.example.progetto.GestionePersonale.Control;
+package com.employee.progetto.GestionePersonale.Control;
 
-import com.example.progetto.Entity.Impiegato;
-import com.example.progetto.GestionePersonale.Interface.ModuloRicercaImpiegato;
-import com.example.progetto.GestionePersonale.Interface.VistaImpiegato;
-import com.example.progetto.Utils.DBMS;
-import com.example.progetto.Utils.Utils;
+import com.employee.progetto.Entity.Impiegato;
+import com.employee.progetto.GestionePersonale.Interface.ModuloRicercaImpiegato;
+import com.employee.progetto.GestionePersonale.Interface.VistaImpiegato;
+import com.employee.progetto.Utils.DBMS;
+import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
 public class GestoreRicercaImpiegato {

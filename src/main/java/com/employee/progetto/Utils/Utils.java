@@ -1,9 +1,8 @@
-package com.example.progetto.Utils;
+package com.employee.progetto.Utils;
 
-import com.example.progetto.Common.PannelloConferma;
-import com.example.progetto.Common.PannelloErrore;
-import com.example.progetto.GestionePersonale.Interface.VistaImpiegato;
-import com.example.progetto.Main;
+import com.employee.progetto.Common.PannelloConferma;
+import com.employee.progetto.Common.PannelloErrore;
+import com.employee.progetto.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;

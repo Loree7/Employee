@@ -1,21 +1,21 @@
-module com.example.progetto {
+module com.employee.progetto {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
     requires java.mail;
 
-    exports com.example.progetto;
-    opens com.example.progetto to javafx.fxml;
+    exports com.employee.progetto;
+    opens com.employee.progetto to javafx.fxml;
     //apri fxml
-    opens com.example.progetto.GestionePersonale to javafx.fxml;
-    opens com.example.progetto.Pannelli to javafx.fxml;
+    opens com.employee.progetto.GestionePersonale to javafx.fxml;
+    opens com.employee.progetto.Pannelli to javafx.fxml;
     //exporta e apri package
-    exports com.example.progetto.Utils;
-    opens com.example.progetto.Utils to javafx.fxml;
-    exports com.example.progetto.GestionePersonale.Control;
-    opens com.example.progetto.GestionePersonale.Control to javafx.fxml;
-    exports com.example.progetto.GestionePersonale.Interface;
-    opens com.example.progetto.GestionePersonale.Interface to javafx.fxml;
-    exports com.example.progetto.Common;
-    opens com.example.progetto.Common to javafx.fxml;
+    exports com.employee.progetto.Utils;
+    opens com.employee.progetto.Utils to javafx.fxml;
+    exports com.employee.progetto.GestionePersonale.Control;
+    opens com.employee.progetto.GestionePersonale.Control to javafx.fxml;
+    exports com.employee.progetto.GestionePersonale.Interface;
+    opens com.employee.progetto.GestionePersonale.Interface to javafx.fxml;
+    exports com.employee.progetto.Common;
+    opens com.employee.progetto.Common to javafx.fxml;
 }

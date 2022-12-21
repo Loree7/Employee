@@ -1,4 +1,4 @@
-package com.example.progetto.Entity;
+package com.employee.progetto.Entity;
 
 public class Impiegato extends Utente{
     public Impiegato(String matricola, String nome, String cognome, String ruolo,String email){

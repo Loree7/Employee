@@ -1,4 +1,4 @@
-package com.example.progetto.Common;
+package com.employee.progetto.Common;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;

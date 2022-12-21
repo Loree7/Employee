@@ -1,8 +1,8 @@
-package com.example.progetto.Utils;
+package com.employee.progetto.Utils;
 
-import com.example.progetto.Entity.Amministratore;
-import com.example.progetto.Entity.Impiegato;
-import com.example.progetto.Entity.Utente;
+import com.employee.progetto.Entity.Amministratore;
+import com.employee.progetto.Entity.Impiegato;
+import com.employee.progetto.Entity.Utente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
