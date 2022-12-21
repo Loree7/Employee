@@ -45,7 +45,8 @@ public class GestoreRicercaImpiegato {
         String[] ruoli = {"alto","medio","basso"};
         for(String s : ruoli) {
             if (s.equals(ruolo.toLowerCase())) {
-                if (!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome())){
+                if (!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome())
+                        || !email.equals(impiegato.getEmail() || !password.equals(impiegato.getPassword())){
 
                 }
             }
