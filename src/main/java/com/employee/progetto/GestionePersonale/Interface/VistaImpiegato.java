@@ -44,6 +44,6 @@ public class VistaImpiegato {
     }
     @FXML
     public void cliccaModifica(){
-        gestoreRicercaImpiegato.modifica(nome.getText(),cognome.getText(),ruolo.getText(),email.getText(),password.getText());
+        gestoreRicercaImpiegato.modifica(nome.getText(),cognome.getText(),ruolo.getText(),email.getText(),password.getText(),(Stage) nome.getScene().getWindow());
     }
 }

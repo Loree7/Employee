@@ -1,6 +1,7 @@
 package com.example.progetto;
 
 import com.example.progetto.GestionePersonale.Control.GestoreLogin;
+import com.example.progetto.Utils.MailUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ public class Main extends Application {
             Platform.exit();
             System.exit(0);
         });
+        MailUtils.inviaMail("prov","Prova1","davidebonura58@gmail.com");
         new GestoreLogin(stage);
     }
 

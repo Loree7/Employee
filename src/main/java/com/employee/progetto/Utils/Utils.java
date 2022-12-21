@@ -2,6 +2,7 @@ package com.example.progetto.Utils;
 
 import com.example.progetto.Common.PannelloConferma;
 import com.example.progetto.Common.PannelloErrore;
+import com.example.progetto.GestionePersonale.Interface.VistaImpiegato;
 import com.example.progetto.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -56,6 +57,7 @@ public class Utils {
     public static void creaPannelloErrore(String messaggio, Stage daDistruggere) {
         Stage stage = new Stage();
         stage.setResizable(false);
+        stage.setTitle("Errore");
         if (Main.mainStage != null) {
             try {
                 stage.initOwner(Main.mainStage);
@@ -75,6 +77,15 @@ public class Utils {
 
     public static void creaPannelloConferma(String messaggio, Stage daDistruggere) {
         Stage stage = new Stage();
+        stage.setTitle("Conferma");
+        stage.setResizable(false);
+        if (Main.mainStage != null) {
+            try {
+                stage.initOwner(Main.mainStage);
+                stage.initModality(Modality.APPLICATION_MODAL);
+            } catch (Exception e) {
+            }
+        }
         FXMLLoader loader = creaLoader("Pannelli/Conferma.fxml");
         loader.setControllerFactory(c -> {
             return new PannelloConferma(messaggio, daDistruggere);

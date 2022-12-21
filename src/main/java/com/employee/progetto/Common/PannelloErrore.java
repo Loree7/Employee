@@ -8,10 +8,6 @@ public class PannelloErrore extends Pannello{
         super(messaggioErrore, s);
     }
     @FXML
-    public void initialize(){
-        s.setTitle("Errore");
-    }
-    @FXML
     protected void cliccaConferma() {
         if (s != null) s.close();
         ((Stage) messaggio.getScene().getWindow()).close();

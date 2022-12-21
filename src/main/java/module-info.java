@@ -2,6 +2,7 @@ module com.example.progetto {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.mail;
 
     exports com.example.progetto;
     opens com.example.progetto to javafx.fxml;

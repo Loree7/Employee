@@ -34,22 +34,35 @@ public class GestoreRicercaImpiegato {
             Utils.creaPannelloErrore("Non puoi eliminare l'amministratore");
         else {
             DBMS.elimina(matricola);
-            Utils.creaPannelloConferma("Impiegato eliminato correttamente", s);
+            Utils.creaPannelloConferma("Impiegato eliminato correttamente");
+            s.close(); //chiude vista impiegato
         }
     }
-    public void modifica(String nome,String cognome,String ruolo,String email,String password){
+    public void modifica(String nome,String cognome,String ruolo,String email,String password,Stage s){
         if(nome.isBlank() || cognome.isBlank() || ruolo.isBlank() || email.isBlank() || password.isBlank()){
             Utils.creaPannelloErrore("Completa tutti i campi");
             return;
         }
-        String[] ruoli = {"alto","medio","basso"};
-        for(String s : ruoli) {
-            if (s.equals(ruolo.toLowerCase())) {
+        String[] ruoli = {"alto","medio","basso","amministratore"};
+        for(String str : ruoli) {
+            if (str.equals(ruolo.toLowerCase())) {
                 if (!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome())
-                        || !email.equals(impiegato.getEmail()) || !password.equals(impiegato.getPassword())){
-                    DBMS.modifica(nome,cognome,ruolo,email,password);
+                        || !password.equals(impiegato.getPassword()) || !email.equals(impiegato.getEmail())){ // se ha cambiato uno dei campi
+                    if(!email.equals(impiegato.getEmail())){ //se cambia email
+                        if(DBMS.controllaEmail(email)) { // controllo se già è presente
+                            Utils.creaPannelloErrore("Email già presente");
+                            return;
+                        }
+                    }
+                    DBMS.modifica(impiegato.getMatricola(), nome, cognome, ruolo, email, password);
+                    Utils.creaPannelloConferma("Impiegato modificato correttamente");
+                    s.close(); //chiude vista impiegato
+                    return;
                 }
+                Utils.creaPannelloErrore("Non hai modificato nulla");
+                return;
             }
         }
+        Utils.creaPannelloErrore("Ruolo non esistente");
     }
 }
