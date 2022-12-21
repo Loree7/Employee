@@ -47,7 +47,7 @@ public class GestoreRicercaImpiegato {
             if (s.equals(ruolo.toLowerCase())) {
                 if (!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome())
                         || !email.equals(impiegato.getEmail()) || !password.equals(impiegato.getPassword())){
-
+                    DBMS.modifica(nome,cognome,ruolo,email,password);
                 }
             }
         }

@@ -107,4 +107,16 @@ public class DBMS {
             e.getCause();
         }
     }
+    public static void modifica(String matricola){
+        Connection dbConnection = getConnection();
+        String m = "update utente set nome=" where matricola=" + matricola;
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(m);
+        } catch(Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
 }
