@@ -30,7 +30,7 @@ public class VistaImpiegato {
 
 
     @FXML
-    protected void initialize() {
+    public void initialize() {
         messaggio.setText(impiegato.getMatricola());
         nome.setText(impiegato.getNome());
         cognome.setText(impiegato.getCognome());
@@ -44,6 +44,6 @@ public class VistaImpiegato {
     }
     @FXML
     public void cliccaModifica(){
-
+        gestoreRicercaImpiegato.modifica(nome.getText(),cognome.getText(),ruolo.getText(),email.getText(),password.getText())
     }
 }

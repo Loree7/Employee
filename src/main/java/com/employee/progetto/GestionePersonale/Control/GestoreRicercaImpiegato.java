@@ -37,4 +37,15 @@ public class GestoreRicercaImpiegato {
             Utils.creaPannelloConferma("Impiegato eliminato correttamente", s);
         }
     }
+    public void modifica(String nome,String cognome,String ruolo,String email,String password){
+        if(nome.isBlank() || cognome.isBlank() || ruolo.isBlank() || email.isBlank() || password.isBlank()){
+            Utils.creaPannelloErrore("Completa tutti i campi");
+            return;
+        }
+        String[] ruoli = {"alto","medio","basso"};
+        for(String s : ruoli)
+            if(s.equals(ruolo.toLowerCase()))
+                if(!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome()))
+
+    }
 }

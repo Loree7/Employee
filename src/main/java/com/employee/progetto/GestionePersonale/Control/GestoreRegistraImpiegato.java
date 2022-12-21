@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 import java.security.SecureRandom;
 
 public class GestoreRegistraImpiegato{
-    private String[] ruoli = {"alto","medio","basso"};
     public GestoreRegistraImpiegato() {
         Utils.cambiaInterfaccia("GestionePersonale/ModuloRegistraImpiegato.fxml",new Stage(), c -> {
             return new ModuloRegistraImpiegato(this);
         });
     }
     public void registraImpiegato(String nome,String cognome,String ruolo,String email,Stage s){
+        String[] ruoli = {"alto","medio","basso"};
         if(nome.isBlank() || cognome.isBlank() || ruolo.isBlank() || email.isBlank()){
             Utils.creaPannelloErrore("Completa tutti i campi");
             return;
