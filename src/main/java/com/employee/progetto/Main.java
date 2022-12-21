@@ -20,7 +20,7 @@ public class Main extends Application {
             Platform.exit();
             System.exit(0);
         });
-        MailUtils.inviaMail("prov","Prova1","davidebonura58@gmail.com");
+        MailUtils.inviaMail("prov","Prova1","davidebonura58@gmail.comgit");
         new GestoreLogin(stage);
     }
 

@@ -14,11 +14,11 @@ public class MailUtils {
             properties.put("mail.smtp.starttls.enable", "true");
             Session session = Session.getInstance(properties, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("Davide Bonura", "DeHxqvm7Py");
+                    return new PasswordAuthentication("employee.teamddll", "Progetto22");
                 }
             });
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("davidebonura53@gmail.com"));
+            message.setFrom(new InternetAddress("employee.teamddll@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject(sub);
             message.setText(msg);
