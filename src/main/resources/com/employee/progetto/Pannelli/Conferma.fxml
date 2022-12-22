@@ -2,11 +2,25 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.Common.PannelloConferma">
+<AnchorPane prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: #E9EAE9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.Common.PannelloConferma">
    <children>
-      <Label fx:id="messaggio" alignment="CENTER" contentDisplay="CENTER" layoutX="60.0" layoutY="36.0" prefHeight="20.0" prefWidth="293.0" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" layoutY="137.0" mnemonicParsing="false" onAction="#cliccaConferma" prefHeight="20.0" prefWidth="200.0" text="Conferma" />
+      <Label fx:id="messaggio" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="125.0" prefHeight="20.0" prefWidth="293.0" textFill="#959591">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="170.0" mnemonicParsing="false" onAction="#cliccaConferma" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: #53A258; -fx-font-weight: BOLD;" text="Conferma" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="168.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/icons8-ok-64.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
