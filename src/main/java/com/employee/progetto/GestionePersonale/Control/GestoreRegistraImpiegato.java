@@ -31,7 +31,7 @@ public class GestoreRegistraImpiegato{
                 Utils.creaPannelloConferma("Impiegato registrato correttamente");
                 s.close(); //chiude registra
                 MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
-                        +", Email: "+email+", Password: "+password
+                        +", Email: "+email+", Password: "+password+ ", Matricola: "+DBMS.getMatricola(email)
                         ,"Invio Credenziali",email);
                 return;
             }

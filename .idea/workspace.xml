@@ -5,45 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="329bdc67-0e9c-4c79-82af-6d831a0e129d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloComunicaAssenza.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloComunicaCongedo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloComunicaMalattia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloRichiestaFerie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloRichiestaSciopero.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaAssenza.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaCongedo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaMalattia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreRichiestaFerie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreRichiestaSciopero.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/ModuloComunicaRitardo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/ModuloRichiestaPermesso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/SituazioneLavorativa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/VisualizzaDati.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Control/GestoreComunicaRitardo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Control/GestoreRichiestaPermesso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Control/GestoreSituazioneLavorativa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Control/GestoreVisualizzaDati.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneServizi/Boundary/VisualizzaServizi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneServizi/Control/GestoreVisualizzaServizi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneTurni/Boundary/VisualizzaTurni.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneTurni/Control/GestoreVisualizzaTurni.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Control/GestoreLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Control/GestoreLogin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Control/GestoreRegistraImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Control/GestoreRegistraImpiegato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Control/GestoreRicercaImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Control/GestoreRicercaImpiegato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Interface/ModuloLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Boundary/ModuloLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Interface/ModuloRegistraImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Boundary/ModuloRegistraImpiegato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Interface/ModuloRicercaImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Boundary/ModuloRicercaImpiegato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Interface/VistaImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestionePersonale/Boundary/VistaImpiegato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleAmministratore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleAmministratore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloLogin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloLogin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloRegistraImpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloRegistraImpiegato.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloRicercaImpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloRicercaImpiegato.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/VistaImpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/VistaImpiegato.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,10 +39,15 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.40229884&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/images" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.com.employee.progetto.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.progetto.Main" />
