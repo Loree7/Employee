@@ -32,10 +32,11 @@ public class Utils {
             e.printStackTrace();
         }
     }
-    public static Object cambiaInterfaccia(String interfaccia, Stage stage, Callback c) {
+    public static Object cambiaInterfaccia(String interfaccia,String titolo,Stage stage, Callback c) {
         FXMLLoader loader = creaLoader(interfaccia);
         loader.setControllerFactory(c);
         creaInterfaccia(loader, 600, 400, stage);
+        stage.setTitle(titolo);
         return loader.getController();
     }
     public static Object cambiaInterfaccia(String interfaccia, Stage stage, Callback c, int w, int h) {

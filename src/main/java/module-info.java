@@ -14,8 +14,8 @@ module com.employee.progetto {
     opens com.employee.progetto.Utils to javafx.fxml;
     exports com.employee.progetto.GestionePersonale.Control;
     opens com.employee.progetto.GestionePersonale.Control to javafx.fxml;
-    exports com.employee.progetto.GestionePersonale.Interface;
-    opens com.employee.progetto.GestionePersonale.Interface to javafx.fxml;
+    exports com.employee.progetto.GestionePersonale.Boundary;
+    opens com.employee.progetto.GestionePersonale.Boundary to javafx.fxml;
     exports com.employee.progetto.Common;
     opens com.employee.progetto.Common to javafx.fxml;
 }

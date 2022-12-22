@@ -1,6 +1,6 @@
 package com.employee.progetto.GestionePersonale.Control;
 
-import com.employee.progetto.GestionePersonale.Interface.ModuloRegistraImpiegato;
+import com.employee.progetto.GestionePersonale.Boundary.ModuloRegistraImpiegato;
 import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.MailUtils;
 import com.employee.progetto.Utils.Utils;
@@ -10,7 +10,7 @@ import java.security.SecureRandom;
 
 public class GestoreRegistraImpiegato{
     public GestoreRegistraImpiegato() {
-        Utils.cambiaInterfaccia("GestionePersonale/ModuloRegistraImpiegato.fxml",new Stage(), c -> {
+        Utils.cambiaInterfaccia("GestionePersonale/ModuloRegistraImpiegato.fxml","Modulo Registra Impiegato",new Stage(), c -> {
             return new ModuloRegistraImpiegato(this);
         });
     }

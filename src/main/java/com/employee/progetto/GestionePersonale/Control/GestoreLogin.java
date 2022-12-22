@@ -1,7 +1,7 @@
 package com.employee.progetto.GestionePersonale.Control;
 
 import com.employee.progetto.Entity.Utente;
-import com.employee.progetto.GestionePersonale.Interface.ModuloLogin;
+import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
 import com.employee.progetto.PortaleAmministratore;
 import com.employee.progetto.PortaleImpiegato;
 import com.employee.progetto.Utils.DBMS;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class GestoreLogin {
     private static Utente utente;
     public GestoreLogin(Stage stage){
-        Utils.cambiaInterfaccia("GestionePersonale/ModuloLogin.fxml",stage, c->{
+        Utils.cambiaInterfaccia("GestionePersonale/ModuloLogin.fxml","ModuloLogin",stage, c->{
             return new ModuloLogin(this);
         });
     }
@@ -26,9 +26,9 @@ public class GestoreLogin {
             return;
         }
         if(utente.getRuolo().equals("Amministratore"))
-            Utils.cambiaInterfaccia("PortaleAmministratore.fxml",s,c->{
+            Utils.cambiaInterfaccia("PortaleAmministratore.fxml","Portale Amministratore",s,c->{
             return new PortaleAmministratore(/*utente.getNome(),utente.getCognome()*/);});
-        else Utils.cambiaInterfaccia("PortaleImpiegato.fxml",s,c->{
+        else Utils.cambiaInterfaccia("PortaleImpiegato.fxml","Portale Impiegato",s,c->{
             return new PortaleImpiegato();});
     }
 

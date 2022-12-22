@@ -1,4 +1,4 @@
-package com.employee.progetto.GestionePersonale.Interface;
+package com.employee.progetto.GestionePersonale.Boundary;
 
 import com.employee.progetto.GestionePersonale.Control.GestoreRegistraImpiegato;
 import javafx.fxml.FXML;

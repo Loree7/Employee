@@ -5,7 +5,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleAmministratore">
    <children>
-      <Button layoutX="68.0" layoutY="105.0" mnemonicParsing="false" onAction="#registraImpiegato" text="RegistraImpiegato" />
-      <Button layoutX="99.0" layoutY="224.0" mnemonicParsing="false" onAction="#ricercaImpiegato" text="RicercaImpiegato" />
+      <Button layoutX="68.0" layoutY="105.0" mnemonicParsing="false" onAction="#cliccaRegistraImpiegato" text="Registra Impiegato" />
+      <Button layoutX="99.0" layoutY="224.0" mnemonicParsing="false" onAction="#cliccaRicercaImpiegato" text="Ricerca Impiegato" />
    </children>
 </AnchorPane>

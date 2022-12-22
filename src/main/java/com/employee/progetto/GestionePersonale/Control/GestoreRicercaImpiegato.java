@@ -1,8 +1,8 @@
 package com.employee.progetto.GestionePersonale.Control;
 
 import com.employee.progetto.Entity.Impiegato;
-import com.employee.progetto.GestionePersonale.Interface.ModuloRicercaImpiegato;
-import com.employee.progetto.GestionePersonale.Interface.VistaImpiegato;
+import com.employee.progetto.GestionePersonale.Boundary.ModuloRicercaImpiegato;
+import com.employee.progetto.GestionePersonale.Boundary.VistaImpiegato;
 import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
@@ -10,7 +10,8 @@ import javafx.stage.Stage;
 public class GestoreRicercaImpiegato {
     private Impiegato impiegato;
     public GestoreRicercaImpiegato(){
-        Utils.cambiaInterfaccia("GestionePersonale/ModuloRicercaImpiegato.fxml",new Stage(), c->{
+        Utils.cambiaInterfaccia("GestionePersonale/ModuloRicercaImpiegato.fxml","Modulo Ricerca Impiegato",
+                new Stage(), c->{
             return new ModuloRicercaImpiegato(this);
         });
     }
@@ -21,7 +22,7 @@ public class GestoreRicercaImpiegato {
         }
         impiegato = DBMS.ricercaImpiegato(matricola);
         if(impiegato!=null){
-            Utils.cambiaInterfaccia("GestionePersonale/VistaImpiegato.fxml",s,c->{
+            Utils.cambiaInterfaccia("GestionePersonale/VistaImpiegato.fxml","Vista Impiegato",s,c->{
                 return new VistaImpiegato(impiegato,this);
             });
         }else{
