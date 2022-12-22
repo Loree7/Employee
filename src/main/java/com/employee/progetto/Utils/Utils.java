@@ -28,6 +28,7 @@ public class Utils {
             Scene s = new Scene(loader.load(), w, h);
             stage.setScene(s);
             stage.show();
+            stage.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
         }
