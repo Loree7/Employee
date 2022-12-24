@@ -11,7 +11,7 @@
    <children>
       <Label fx:id="messaggio" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="125.0" prefHeight="20.0" prefWidth="293.0" textFill="#959591">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font></Label>
       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="170.0" mnemonicParsing="false" onAction="#cliccaConferma" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: #CC5849;" text="Conferma" textFill="WHITE">
          <font>
