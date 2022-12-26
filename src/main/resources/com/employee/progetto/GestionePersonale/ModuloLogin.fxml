@@ -14,9 +14,9 @@
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="279.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="brandImageView" fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="brandImageView" fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../images/download.png" />
+                  <Image url="@../../../../images/logo.png" />
                </image>
             </ImageView>
          </children>
@@ -32,13 +32,13 @@
             </ImageView>
             <Label layoutX="27.0" layoutY="185.0" text="Password" />
             <PasswordField fx:id="password" layoutX="95.0" layoutY="180.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="150.0" promptText="password" />
-            <Button alignment="CENTER" layoutX="90.0" layoutY="283.0" mnemonicParsing="false" onAction="#cliccaLogin" prefHeight="58.0" prefWidth="177.0" style="-fx-background-color: #E5AA17;" text="LOGIN" textFill="WHITE">
+            <Button alignment="CENTER" layoutX="72.0" layoutY="284.0" mnemonicParsing="false" onAction="#cliccaLogin" prefHeight="58.0" prefWidth="177.0" style="-fx-background-color: F89C4D;" text="LOGIN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
             <Label layoutX="28.0" layoutY="124.0" text="Matricola" />
-            <TextField fx:id="matricola" layoutX="98.0" layoutY="120.0" prefHeight="26.0" prefWidth="150.0" promptText="matricola" />
+            <TextField fx:id="matricola" layoutX="95.0" layoutY="120.0" prefHeight="26.0" prefWidth="150.0" promptText="matricola" />
          </children>
       </AnchorPane>
    </right>

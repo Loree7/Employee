@@ -3,13 +3,36 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestionePersonale.Boundary.ModuloRicercaImpiegato">
    <children>
-      <Label layoutX="184.0" layoutY="116.0" text="Matricola" />
-      <TextField fx:id="matricola" layoutX="271.0" layoutY="112.0" promptText="matricola" />
-      <Button layoutX="309.0" layoutY="164.0" mnemonicParsing="false" onAction="#cliccaRicerca" text="Ricerca" />
+      <Label layoutX="106.0" layoutY="189.0" text="Matricola">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Label>
+      <TextField fx:id="matricola" layoutX="220.0" layoutY="188.0" prefHeight="26.0" prefWidth="189.0" promptText="matricola" />
+      <Button layoutX="175.0" layoutY="262.0" mnemonicParsing="false" onAction="#cliccaRicerca" prefHeight="60.0" prefWidth="251.0" style="-fx-background-color: #F89C4D;" text="Ricerca" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font></Button>
+      <Pane prefHeight="84.0" prefWidth="600.0" style="-fx-background-color: #F89C4D;">
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-cerca-client-64.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="93.0" layoutY="29.0" text="Ricerca Impiegato" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
