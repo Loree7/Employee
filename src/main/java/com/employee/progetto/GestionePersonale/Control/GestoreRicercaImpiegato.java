@@ -1,6 +1,7 @@
 package com.employee.progetto.GestionePersonale.Control;
 
 import com.employee.progetto.Entity.Impiegato;
+import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
 import com.employee.progetto.GestionePersonale.Boundary.ModuloRicercaImpiegato;
 import com.employee.progetto.GestionePersonale.Boundary.VistaImpiegato;
 import com.employee.progetto.Utils.DBMS;
@@ -44,10 +45,11 @@ public class GestoreRicercaImpiegato {
             Utils.creaPannelloErrore("Completa tutti i campi");
             return;
         }
-        String[] ruoli = {"alto","medio","basso","amministratore"};
+        String[] ruoli = {"alto","intermedio","medio","basso","amministratore"};
         for(String str : ruoli) {
+            System.out.println(ruolo + " " + str);
             if (str.equals(ruolo.toLowerCase())) {
-                if (!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome())
+                if (!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome()) || !ruolo.equals(impiegato.getRuolo())
                         || !password.equals(impiegato.getPassword()) || !email.equals(impiegato.getEmail())){ // se ha cambiato uno dei campi
                     if(!email.equals(impiegato.getEmail())){ //se cambia email
                         if(DBMS.controllaEmail(email)) { // controllo se già è presente

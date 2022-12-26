@@ -10,12 +10,13 @@ import java.security.SecureRandom;
 
 public class GestoreRegistraImpiegato{
     public GestoreRegistraImpiegato() {
-        Utils.cambiaInterfaccia("GestionePersonale/ModuloRegistraImpiegato.fxml","Modulo Registra Impiegato",new Stage(), c -> {
+        Utils.cambiaInterfaccia("GestionePersonale/ModuloRegistraImpiegato.fxml","Modulo Registra Impiegato"
+                ,new Stage(), c -> {
             return new ModuloRegistraImpiegato(this);
         });
     }
     public void registraImpiegato(String nome,String cognome,String ruolo,String email,Stage s){
-        String[] ruoli = {"alto","medio","basso"};
+        String[] ruoli = {"alto","medio","intermedio","basso"};
         if(nome.isBlank() || cognome.isBlank() || ruolo.isBlank() || email.isBlank()){
             Utils.creaPannelloErrore("Completa tutti i campi");
             return;
@@ -26,17 +27,18 @@ public class GestoreRegistraImpiegato{
         }
         for(String str : ruoli) {
             if (ruolo.toLowerCase().equals(str)) {
+                Utils.creaPannelloConferma("Impiegato registrato correttamente");
                 String password = generaPassword(12);
                 DBMS.registraImpiegato(nome, cognome, ruolo, email,password);
-                Utils.creaPannelloConferma("Impiegato registrato correttamente");
-                s.close(); //chiude registra
-                MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
-                        +", Email: "+email+", Password: "+password+ ", Matricola: "+DBMS.getMatricola(email)
+                s.close(); //chiude modulo registra
+                MailUtils.inviaMail("Ecco a te i tuoi dati:, Matricola: "+DBMS.getMatricola(email) +
+                                "\nNome: "+nome+", Cognome: "+cognome+"\nRuolo: "+ruolo +", Email: "+email+
+                                ", Password: "+password
                         ,"Invio Credenziali",email);
                 return;
             }
         }
-        Utils.creaPannelloErrore("Ruolo non esistente, scegli tra: Alto, Medio, Basso");
+        Utils.creaPannelloErrore("Ruolo non esistente, scegli tra:\nAlto, Medio, Intermedio, Basso");
     }
 
     public String generaPassword(int len){

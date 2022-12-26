@@ -70,7 +70,7 @@ public class Utils {
         loader.setControllerFactory(c -> {
             return new PannelloErrore(messaggio, daDistruggere);
         });
-        creaInterfaccia(loader, 400, 250, stage);
+        creaInterfaccia(loader, 500, 350, stage);
     }
     public static void creaPannelloConferma(String messaggio) {
         creaPannelloConferma(messaggio, null);
@@ -91,6 +91,6 @@ public class Utils {
         loader.setControllerFactory(c -> {
             return new PannelloConferma(messaggio, daDistruggere);
         });
-        creaInterfaccia(loader, 400, 250, stage);
+        creaInterfaccia(loader, 500, 350, stage);
     }
 }
