@@ -30,35 +30,9 @@ public class Main extends Application {
         });
         new GestoreLogin(stage);
     }
-    public static void generaTurni(){
-        //Almeno 5 impiegati per funzionare
-        int numImpiegati = DBMS.getNumPersonale();
-        int servizio1 = (int) Math.floor(numImpiegati/2.5);
-        int servizio2 = numImpiegati/3;
-        int servizio3 = numImpiegati/4;
-        int servizio4 = numImpiegati - servizio1-servizio2-servizio3;
-        if(servizio3 > (servizio4+4)){
-            servizio3 -= 2;
-            servizio4 += 2;
-        }
-        System.out.println("Servizio 1: " + servizio1);
-        System.out.println("Servizio 2: " + servizio2);
-        System.out.println("Servizio 3: " + servizio3);
-        System.out.println("Servizio 4: " + servizio4);
-    }
-    public static void propostaTurni() {
-        LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
-        Instant instant = dataInizioTrimestre.atStartOfDay(ZoneId.systemDefault()).toInstant();
-        Duration duration = Duration.between(instant, Instant.now());
-        if (duration.toDays() >= 90) {
-            DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3));
-            generaTurni();
-        }
-    }
     public static void main(String[] args) {
-        //creare una boundary e control per chiamare un metodo che fa ste due righe ?
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        //executor.scheduleAtFixedRate(Main::propostaTurni, 0, 1, TimeUnit.DAYS);
+        // la boundary chiede da sola la data ogni giorni o a ogni esecuzione
+        new BoundarySistema(new GestoreSistema());
         launch();
     }
 }

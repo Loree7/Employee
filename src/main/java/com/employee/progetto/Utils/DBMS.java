@@ -208,7 +208,7 @@ public class DBMS {
     }
     public static int getNumPersonale(){
         Connection dbConnection = getConnection();
-        String gN = "select count(distinct(matricola)) from utente,astensioni where tipo != 'congedo'";
+        String gN = "select count(distinct(matricola)) from utente,astensioni where tipo != 'congedo' and ruolo != 'Amministratore'";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gN);
