@@ -12,11 +12,21 @@ public class ModuloLogin {
         this.gestoreLogin = gestoreLogin;
     }
     @FXML
+    public void initialize(){
+        matricola.setOnAction(event -> {
+            password.requestFocus();
+        });
+        password.setOnAction(event -> {
+            cliccaLogin();
+        });
+    }
+    @FXML
     private TextField matricola;
     @FXML
     private PasswordField password;
     @FXML
     public void cliccaLogin(){
+        matricola.requestFocus();
         gestoreLogin.verificaCredenziali(matricola.getText(),password.getText(),(Stage) matricola.getScene().getWindow());
     }
 }

@@ -8,8 +8,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DBMS {
     public static Connection databaseLink;
@@ -208,7 +211,7 @@ public class DBMS {
     }
     public static int getNumPersonale(){
         Connection dbConnection = getConnection();
-        String gN = "select count(distinct(matricola)) from utente,astensioni where tipo != 'congedo' and ruolo != 'Amministratore'";
+        String gN = "select count(distinct(matricola)) from utente,astensioni where tipo != 'congedo' and id_impiegato=matricola";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gN);
@@ -220,5 +223,54 @@ public class DBMS {
             e.getCause();
         }
         return 0;
+    }
+    public static Impiegato getImpiegatoMenoOre(LocalDate giorno){
+        Connection dbConnection = getConnection();
+        String gI = "select matricola,nome,cognome,ruolo,email from utente,turno where id_impiegato=matricola and matricola not in" +
+                "(select id_impiegato from turno where data = '" + giorno + "') and matricola not in" +
+                "(select id_impiegato from astensioni where '" + giorno + "' between data_inizio and data_fine)" +
+                "group by matricola order by ore asc limit 1";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gI);
+            if(queryResult.next())
+                return new Impiegato(queryResult.getString(1),queryResult.getString(2)
+                        ,queryResult.getString(3),queryResult.getString(4),queryResult.getString(5));
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static List<String> getServizi(){
+        List<String> servizi = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gS = "select nome from servizio";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gS);
+            while(queryResult.next())
+                servizi.add(queryResult.getString(1).toLowerCase());
+            return servizi;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static void inserisciTurno(LocalTime ora_inizio,LocalTime ora_fine,LocalDate giorno,int id_servizio,String id_impiegato){
+        Connection dbConnection = getConnection();
+        String iT = "insert into turno (ora_inizio,ora_fine,data,id_servizio,id_impiegato) " +
+                "values ('" + ora_inizio + "','" + ora_fine + "','" + giorno + "'," + id_servizio + "," + id_impiegato + ")";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(iT);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 }

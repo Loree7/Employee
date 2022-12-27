@@ -36,6 +36,22 @@ public class VistaImpiegato {
         ruolo.setText(impiegato.getRuolo());
         email.setText(impiegato.getEmail());
         password.setText(impiegato.getPassword());
+
+        nome.setOnAction(event -> {
+            cognome.requestFocus();
+        });
+        cognome.setOnAction(event -> {
+            ruolo.requestFocus();
+        });
+        ruolo.setOnAction(event -> {
+            email.requestFocus();
+        });
+        email.setOnAction(event -> {
+            password.requestFocus();
+        });
+        password.setOnAction(event -> {
+            cliccaModifica();
+        });
     }
     @FXML
     public void cliccaElimina(){

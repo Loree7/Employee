@@ -11,6 +11,21 @@ public class ModuloRegistraImpiegato {
         this.gestoreRegistraImpiegato = gestoreRegistraImpiegato;
     }
     @FXML
+    public void initialize(){
+        nome.setOnAction(event -> {
+            cognome.requestFocus();
+        });
+        cognome.setOnAction(event -> {
+            ruolo.requestFocus();
+        });
+        ruolo.setOnAction(event -> {
+            email.requestFocus();
+        });
+        email.setOnAction(event -> {
+            cliccaRegistra();
+        });
+    }
+    @FXML
     private TextField nome;
     @FXML
     private TextField cognome;

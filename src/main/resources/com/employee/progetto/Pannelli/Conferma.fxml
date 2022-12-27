@@ -11,7 +11,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="250.0" mnemonicParsing="false" onAction="#cliccaConferma" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: #53A258; -fx-font-weight: BOLD;" text="Conferma" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="150.0" layoutY="250.0" mnemonicParsing="false" onAction="#cliccaConferma" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: #53A258; -fx-font-weight: BOLD;" text="Conferma" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>

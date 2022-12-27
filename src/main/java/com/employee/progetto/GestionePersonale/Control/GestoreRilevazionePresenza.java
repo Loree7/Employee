@@ -1,6 +1,5 @@
 package com.employee.progetto.GestionePersonale.Control;
 
-import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
 import com.employee.progetto.GestionePersonale.Boundary.ModuloRilevazionePresenza;
 import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;

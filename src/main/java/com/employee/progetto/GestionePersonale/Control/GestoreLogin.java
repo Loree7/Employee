@@ -1,6 +1,5 @@
 package com.employee.progetto.GestionePersonale.Control;
 
-import com.employee.progetto.Entity.Impiegato;
 import com.employee.progetto.Entity.Utente;
 import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
 import com.employee.progetto.PortaleAmministratore;
@@ -28,7 +27,7 @@ public class GestoreLogin {
         }
         if(utente.getRuolo().equals("Amministratore"))
             Utils.cambiaInterfaccia("PortaleAmministratore.fxml","Portale Amministratore",s,c->{
-            return new PortaleAmministratore(/*utente.getNome(),utente.getCognome()*/);});
+            return new PortaleAmministratore();});
         else{
             Utils.cambiaInterfaccia("PortaleImpiegato.fxml","Portale Impiegato",s,c->{
                 return new PortaleImpiegato();});

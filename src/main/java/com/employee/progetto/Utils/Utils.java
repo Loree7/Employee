@@ -52,10 +52,6 @@ public class Utils {
         return loader.getController();
     }
     public static void creaPannelloErrore(String messaggio) {
-        creaPannelloErrore(messaggio, null);
-    }
-
-    public static void creaPannelloErrore(String messaggio, Stage daDistruggere) {
         Stage stage = new Stage();
         stage.setResizable(false);
         stage.setTitle("Errore");
@@ -68,15 +64,11 @@ public class Utils {
         }
         FXMLLoader loader = creaLoader("Pannelli/Errore.fxml");
         loader.setControllerFactory(c -> {
-            return new PannelloErrore(messaggio, daDistruggere);
+            return new PannelloErrore(messaggio, stage);
         });
         creaInterfaccia(loader, 500, 350, stage);
     }
     public static void creaPannelloConferma(String messaggio) {
-        creaPannelloConferma(messaggio, null);
-    }
-
-    public static void creaPannelloConferma(String messaggio, Stage daDistruggere) {
         Stage stage = new Stage();
         stage.setTitle("Conferma");
         stage.setResizable(false);
@@ -89,7 +81,7 @@ public class Utils {
         }
         FXMLLoader loader = creaLoader("Pannelli/Conferma.fxml");
         loader.setControllerFactory(c -> {
-            return new PannelloConferma(messaggio, daDistruggere);
+            return new PannelloConferma(messaggio, stage);
         });
         creaInterfaccia(loader, 500, 350, stage);
     }

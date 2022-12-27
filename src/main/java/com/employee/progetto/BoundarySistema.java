@@ -1,6 +1,7 @@
 package com.employee.progetto;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,6 @@ public class BoundarySistema {
         executor.scheduleAtFixedRate(this::chiediData, 0, 1, TimeUnit.DAYS);
     }
     public void chiediData(){
-        gestoreSistema.controlloData(Instant.now());
+        gestoreSistema.controlloData(LocalDate.now());
     }
 }

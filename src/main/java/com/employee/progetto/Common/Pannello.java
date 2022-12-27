@@ -9,9 +9,9 @@ public class Pannello {
     protected Label messaggio;
     protected String messaggioText;
     protected Stage s;
-    protected String titolo;
     public Pannello(String messaggio, Stage s) {
         this.messaggioText = messaggio;
+        this.s = s;
     }
     @FXML
     protected void initialize() {

@@ -2,17 +2,17 @@ package com.employee.progetto;
 
 import com.employee.progetto.Utils.DBMS;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.*;
 
 public class GestoreSistema {
-    public void controlloData(Instant now){
+    public void controlloData(LocalDate now){
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
-        Instant instant = dataInizioTrimestre.atStartOfDay(ZoneId.systemDefault()).toInstant();
-        Duration duration = Duration.between(instant,now);
-        if (duration.toDays() >= 90) {
+        Period period = Period.between(dataInizioTrimestre,now);
+       while(period.getYears()>0) {
+           DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(9));
+           dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
+           period = Period.between(dataInizioTrimestre,now);
+       }if(period.getMonths() >= 3) {
             DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3));
             generaTurni();
         }

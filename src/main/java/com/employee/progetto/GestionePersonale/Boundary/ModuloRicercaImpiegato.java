@@ -11,6 +11,12 @@ public class ModuloRicercaImpiegato {
         this.gestoreRicercaImpiegato = gestoreRicercaImpiegato;
     }
     @FXML
+    public void initialize(){
+        matricola.setOnAction(event -> {
+            cliccaRicerca();
+        });
+    }
+    @FXML
     private TextField matricola;
     public void cliccaRicerca(){
         gestoreRicercaImpiegato.ricercaImpiegato(matricola.getText(),(Stage) matricola.getScene().getWindow());
