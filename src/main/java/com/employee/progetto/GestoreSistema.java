@@ -42,9 +42,25 @@ public class GestoreSistema {
                     impiegati.get(0).add(integer);
             }
         }
-        for(List<Integer> l : impiegati){
-            for(Integer i : l);
-                //DBMS.inserisciTurno("06:00:00");
-        }
+        LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
+        LocalDate giorno = dataInizioTrimestre;
+        Period period = Period.between(dataInizioTrimestre,giorno);
+        do {
+            for (int i = 0; i < impiegati.size(); i++) {
+                for (int j = 0; j < impiegati.get(i).size(); j++) {
+                    if (j % 2 == 0)
+                        DBMS.inserisciTurno(LocalTime.parse("06:00:00"), LocalTime.parse("14:00:00")
+                                , giorno, (i + 1), impiegati.get(i).get(j).toString());
+                    else
+                        DBMS.inserisciTurno(LocalTime.parse("14:00:00"), LocalTime.parse("22:00:00")
+                                , giorno, (i + 1), impiegati.get(i).get(j).toString());
+                }
+            }
+            //CONTROLLARE SE GIORNO è SABATO O DOMENICA E NEL CASO NON GENERARARE TURNI
+            //CONTROLLARE PER OGNI impiegati.get(i).get(j) <-(è una matricola) SE IL GIORNO è BETWEEN LE SUE FERIE
+            giorno = giorno.plusDays(1);
+            period = Period.between(dataInizioTrimestre,giorno);
+        }while(period.getMonths()<3);
+        System.out.println(giorno);
     }
 }
