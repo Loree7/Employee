@@ -5,6 +5,7 @@ import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
 import com.employee.progetto.GestionePersonale.Boundary.ModuloRicercaImpiegato;
 import com.employee.progetto.GestionePersonale.Boundary.VistaImpiegato;
 import com.employee.progetto.Utils.DBMS;
+import com.employee.progetto.Utils.MailUtils;
 import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
@@ -59,6 +60,9 @@ public class GestoreRicercaImpiegato {
                     }
                     DBMS.modifica(impiegato.getMatricola(), nome, cognome, ruolo, email, password);
                     Utils.creaPannelloConferma("Impiegato modificato correttamente");
+                    MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
+                                    +", Email: "+email+", Password: "+password+ ", Matricola: "+DBMS.getMatricola(email)
+                            ,"Invio Credenziali",email);
                     s.close(); //chiude vista impiegato
                     return;
                 }
