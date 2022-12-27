@@ -8,11 +8,12 @@ public class GestoreSistema {
     public void controlloData(LocalDate now){
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
         Period period = Period.between(dataInizioTrimestre,now);
-       while(period.getYears()>0) {
-           DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(9));
+       while(period.getYears()>0) { //in realtà non serve se inserisci una dataInizioTrimestre normale
+           DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusYears(1));
            dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
            period = Period.between(dataInizioTrimestre,now);
-       }if(period.getMonths() >= 3) {
+       }
+       if(period.getMonths() >= 3) {
             DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3));
             generaTurni();
         }
