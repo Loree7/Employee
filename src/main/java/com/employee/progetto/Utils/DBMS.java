@@ -7,11 +7,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class DBMS {
@@ -36,16 +38,18 @@ public class DBMS {
     }
     public static Utente verificaCredenziali(String matricola, String password) {
         Connection dbConnection = getConnection();
+        String vP = "select nome,cognome,ruolo,email,ferie,password from utente where matricola =" + matricola;
         String vC = "SELECT nome,cognome,ruolo,email,ferie FROM utente WHERE matricola = " + matricola + " AND password = '" + password + "'";
         try {
             Statement statement = dbConnection.createStatement();
-            ResultSet queryResult = statement.executeQuery(vC);
-            if (queryResult.next()) {
-                if (queryResult.getString(3).equals("Amministratore"))
-                    return new Amministratore(matricola, queryResult.getString(1), queryResult.getString(2)
-                            , queryResult.getString(3), queryResult.getString(4));
-                else return new Impiegato(matricola, queryResult.getString(1), queryResult.getString(2)
-                        , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5));
+            ResultSet queryResult = statement.executeQuery(vP);
+            if(queryResult.next()){
+                if(password.equals(queryResult.getString(6)))
+                    if (queryResult.getString(3).equals("Amministratore"))
+                        return new Amministratore(matricola, queryResult.getString(1), queryResult.getString(2)
+                                , queryResult.getString(3), queryResult.getString(4));
+                    else return new Impiegato(matricola, queryResult.getString(1), queryResult.getString(2)
+                            , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5));
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
@@ -272,5 +276,70 @@ public class DBMS {
             e.printStackTrace();
             e.getCause();
         }
+    }
+    public static List<List<Integer>> getImpiegati(){
+        List<List<Integer>> impiegati = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String mA = "select matricola from utente where ruolo= 'Alto'";
+        String mI = "select matricola from utente where ruolo= 'Intermedio'";
+        String mM = "select matricola from utente where ruolo= 'Medio'";
+        String mB = "select matricola from utente where ruolo= 'Basso'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet matricole = statement.executeQuery(mA);
+            impiegati.add(new ArrayList<>());
+            impiegati.add(new ArrayList<>());
+            impiegati.add(new ArrayList<>());
+            impiegati.add(new ArrayList<>());
+            while (matricole.next())
+                impiegati.get(0).add(matricole.getInt(1));
+
+            matricole = statement.executeQuery(mI);
+            while (matricole.next())
+                impiegati.get(1).add(matricole.getInt(1));
+
+            matricole = statement.executeQuery(mM);
+            while (matricole.next())
+                impiegati.get(2).add(matricole.getInt(1));
+
+            matricole = statement.executeQuery(mB);
+            while (matricole.next())
+                impiegati.get(3).add(matricole.getInt(1));
+            return impiegati;
+        }catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static List<Integer> getNumImpiegati() {
+        List<Integer> num = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gA = "select count(matricola) from utente where ruolo= 'Alto'";
+        String gI = "select count(matricola) from utente where ruolo= 'Intermedio'";
+        String gM = "select count(matricola) from utente where ruolo= 'Medio'";
+        String gB = "select count(matricola) from utente where ruolo= 'Basso'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet numImpiegati = statement.executeQuery(gA);
+            if(numImpiegati.next())
+                num.add(numImpiegati.getInt(1));
+            numImpiegati = statement.executeQuery(gI);
+            if(numImpiegati.next())
+                num.add(numImpiegati.getInt(1));
+            numImpiegati = statement.executeQuery(gM);
+            if(numImpiegati.next())
+                num.add(numImpiegati.getInt(1));
+            numImpiegati = statement.executeQuery(gB);
+            if(numImpiegati.next())
+                num.add(numImpiegati.getInt(1));
+            return num;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
     }
 }
