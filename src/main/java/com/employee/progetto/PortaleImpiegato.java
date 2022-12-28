@@ -9,8 +9,11 @@ import com.employee.progetto.GestioneImpiegato.Control.GestoreVisualizzaDati;
 import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.GestionePersonale.Control.GestoreRilevazionePresenza;
 import com.employee.progetto.GestioneTurni.Control.GestoreVisualizzaTurni;
+import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.Utils;
 import javafx.fxml.FXML;
+
+import java.time.LocalDate;
 
 public class PortaleImpiegato {
     @FXML
@@ -54,7 +57,15 @@ public class PortaleImpiegato {
             Utils.creaPannelloErrore("Non hai più ferie rimanenti");
             return;
         }
-        new GestoreRichiestaFerie();
+        LocalDate now = LocalDate.now();
+        LocalDate dataFineTrimestre= LocalDate.parse(DBMS.getDataInizioTrimestre()).plusMonths(3).plusDays(-1);
+        //L'amministratore può registrare solo se siamo un giorno prima l'inizio del prossimo trimestre
+        if(now.equals(dataFineTrimestre))
+            new GestoreRichiestaFerie();
+        else{
+            Utils.creaPannelloErrore("Non puoi richiedere le ferie durante il corso del trimestre");
+            return;
+        }
     }
     @FXML
     public void cliccaRichiestaSciopero(){

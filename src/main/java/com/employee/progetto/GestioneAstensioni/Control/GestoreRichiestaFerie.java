@@ -37,6 +37,7 @@ public class GestoreRichiestaFerie {
             Utils.creaPannelloErrore("Non puoi richiedere più di 4 settimane di ferie");
             return;
         }
+        //Mettere periodi dove non si può andare in ferie nel db tipo? e fare una query per prenderle e controllare
         if(DBMS.controllaPeriodo(data_inizio,data_fine)){
             if(!DBMS.controllaFerie(data_inizio,data_fine, ((Impiegato) GestoreLogin.getUtente()).getMatricola())) {
                 Utils.creaPannelloConferma("Richiesta di ferie effettuata con successo");

@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="350.0" prefWidth="500.0" style="-fx-background-color: #E9EAE9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.Common.PannelloConferma">
    <children>
-      <Label fx:id="messaggio" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="175.0" prefHeight="26.0" prefWidth="450.0" textFill="#959591">
+      <Label fx:id="messaggio" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="175.0" prefHeight="64.0" prefWidth="453.0" textFill="#959591" wrapText="true">
          <font>
             <Font size="18.0" />
          </font></Label>

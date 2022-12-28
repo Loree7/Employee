@@ -32,5 +32,10 @@
             </ImageView>
          </children>
       </Pane>
+      <Button layoutX="14.0" layoutY="240.0" mnemonicParsing="false" onAction="#cliccaComunicaStraordinari" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Straordinari" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

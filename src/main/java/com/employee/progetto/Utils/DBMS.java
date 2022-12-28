@@ -7,12 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -145,6 +142,7 @@ public class DBMS {
         return 0;
     }
     public static boolean controllaPeriodo(LocalDate data_inizio,LocalDate data_fine){
+        //Mettere periodi dove non si può andare in ferie nel db tipo? e fare una query per prenderle e controllare
         LocalDate inizio_periodo = LocalDate.of(2022, 6, 1);
         LocalDate fine_periodo = LocalDate.of(2022, 7, 1);
         if(data_inizio.isAfter(fine_periodo) || data_fine.isBefore(inizio_periodo)) //se richiedo prima o dopo il periodo
@@ -152,18 +150,16 @@ public class DBMS {
         return false;
     }
     public static boolean controllaFerie(LocalDate data_inizio,LocalDate data_fine,String matricola){
+        //mi dice se la matricola è in ferie nelle date inserite
         Connection dbConnection = getConnection();
         String cF = "select id from astensioni where exists (select * from astensioni where data_inizio between '" +
                 data_inizio + "' and '" + data_fine + "' or data_fine between '" + data_inizio + "' and '" + data_fine +
                 "' and id_impiegato = " + matricola + ")";
-        System.out.println(cF);
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(cF);
-            if(queryResult.next()){
-                System.out.println("prova");
+            if(queryResult.next())
                 return true;
-            }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
@@ -212,21 +208,6 @@ public class DBMS {
             e.printStackTrace();
             e.getCause();
         }
-    }
-    public static int getNumPersonale(){
-        Connection dbConnection = getConnection();
-        String gN = "select count(distinct(matricola)) from utente,astensioni where tipo != 'congedo' and id_impiegato=matricola";
-        try {
-            Statement statement = dbConnection.createStatement();
-            ResultSet queryResult = statement.executeQuery(gN);
-            if(queryResult.next())
-                return queryResult.getInt(1);
-        } catch (Exception e) {
-            erroreComunicazioneDBMS();
-            e.printStackTrace();
-            e.getCause();
-        }
-        return 0;
     }
     public static Impiegato getImpiegatoMenoOre(LocalDate giorno){
         Connection dbConnection = getConnection();
@@ -335,6 +316,62 @@ public class DBMS {
             if(numImpiegati.next())
                 num.add(numImpiegati.getInt(1));
             return num;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static HashMap<String,List<List<LocalDate>>> getAstensioni(List<List<Integer>> impiegati,boolean flag){
+        HashMap<String,List<List<LocalDate>>> astensioni = new HashMap<>();
+        Connection dbConnection = getConnection();
+        LocalDate now = LocalDate.now();
+        try{
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult;
+            for(List<Integer> l : impiegati){
+                for(Integer i : l){ //per ogni matricola prendo le astensioni e le metto in una lista
+                    String gA;
+                    if(!flag)
+                        gA = "select data_inizio,data_fine from astensioni where id_impiegato=" + i + " and data_fine > '" + now + "'";
+                    else gA = "select data_inizio,data_fine from astensioni where id_impiegato=" + i +
+                            " and data_fine > '" + now.withDayOfMonth(1).plusMonths(-1) + "' and data_inizio < '" + now.withDayOfMonth(1)+"'";
+                    queryResult = statement.executeQuery(gA);
+                    List<List<LocalDate>> temp = new ArrayList<>();
+                    if(queryResult.next()) {
+                        List<LocalDate> t = new ArrayList<>();
+                        t.add(LocalDate.parse(queryResult.getString(1)));
+                        t.add(LocalDate.parse(queryResult.getString(2)));
+                        temp.add(t);
+                        while (queryResult.next()) {
+                            List<LocalDate> t2 = new ArrayList<>();
+                            t2.add(LocalDate.parse(queryResult.getString(1)));
+                            t2.add(LocalDate.parse(queryResult.getString(2)));
+                            temp.add(t2);
+                        }
+                        astensioni.put(i.toString(), temp);
+                    }
+                }
+            }
+            return astensioni;
+        }catch (Exception e){
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static HashMap<String,Integer> getGiorniAstensione(String tipo) {
+        HashMap<String, Integer> giorniAstensione = new HashMap<>();
+        Connection dbConnection = getConnection();
+        String gGA = "select id_impiegato,sum(datediff(data_fine,data_inizio)+1) from astensioni where tipo = '" + tipo + "' group by id_impiegato";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gGA);
+            while (queryResult.next())
+                giorniAstensione.put(queryResult.getString(1), queryResult.getInt(2));
+            return giorniAstensione;
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
