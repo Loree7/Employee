@@ -362,6 +362,7 @@ public class DBMS {
         }
         return null;
     }
+    //da togliere :
     public static HashMap<String,Integer> getGiorniAstensione(String tipo) {
         HashMap<String, Integer> giorniAstensione = new HashMap<>();
         Connection dbConnection = getConnection();
@@ -372,6 +373,89 @@ public class DBMS {
             while (queryResult.next())
                 giorniAstensione.put(queryResult.getString(1), queryResult.getInt(2));
             return giorniAstensione;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static void aggiornaAstensione(LocalDate data_inizio,LocalDate data_fine,String id_impiegato){
+        Connection dbConnection = getConnection();
+        String cercaAstensione = "select id from astensioni where id_impiegato = " + id_impiegato + " and data_fine = '"+data_fine+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(cercaAstensione);
+            if(queryResult.next()) {
+                String uA = "update astensioni set data_inizio = '" + data_inizio  + "' where id = " + queryResult.getInt(1);
+                statement.executeUpdate(uA);
+            }
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void cancellaAstensione(String id_impiegato,LocalDate data_fine){
+        Connection dbConnection = getConnection();
+        String cercaAstensione = "select id from astensioni where id_impiegato = " + id_impiegato + " and data_fine = '"+data_fine+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(cercaAstensione);
+            if(queryResult.next()) {
+                String cA = "delete from astensioni where id = " + queryResult.getInt(1);
+                statement.executeUpdate(cA);
+            }
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void inserisciStipendio(String id_impiegato,int stipendio){
+        Connection dbConnection = getConnection();
+        String iS = "insert into stipendio (id_impiegato,stipendio,data) " +
+                "values (" + id_impiegato + "," + stipendio + ",'" + LocalDate.now() + "')";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(iS);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static List<Integer> getOre(String matricola){
+        List<Integer> ore = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gO = "select oreServizio1,oreServizio2,oreServizio3,oreServizio4 from utente where matricola="+matricola;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gO);
+            if(queryResult.next()) {
+                ore.add(queryResult.getInt(1));
+                ore.add(queryResult.getInt(2));
+                ore.add(queryResult.getInt(3));
+                ore.add(queryResult.getInt(4));
+            }
+            return ore;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static List<Integer> getGratifiche(){
+        List<Integer> gratifiche = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gG = "select gratifica from servizio";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gG);
+            while(queryResult.next())
+                gratifiche.add(queryResult.getInt(1));
+            return gratifiche;
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();

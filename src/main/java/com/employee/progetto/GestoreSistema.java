@@ -25,7 +25,7 @@ public class GestoreSistema {
             DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3));
             generaTurni();
         }
-       if(period.getMonths() >= 1)
+       if(now.getDayOfMonth()==1)
            calcolaStipendio();
     }
     public void generaTurni(){
@@ -83,23 +83,39 @@ public class GestoreSistema {
     }
     public void calcolaStipendio(){
         LocalDate now = LocalDate.now();
-        HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(DBMS.getImpiegati(),true);
+        List<List<Integer>> impiegati = DBMS.getImpiegati();
+        HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(impiegati,true);
+        HashMap<String,Integer> giorniAstensioni = new HashMap<>();
         for(Map.Entry<String,List<List<LocalDate>>> m : astensioni.entrySet()){
+            giorniAstensioni.put(m.getKey(),0);
            for(List<LocalDate> l : m.getValue()){
                LocalDate data_fine = l.get(1);
-               while(l.get(1).getYear()>now.getYear()){
-                   l.set(1,l.get(1).plusDays(-1));
-               }
-               if(l.get(1).getMonthValue()>=now.getMonthValue())
+               //se l'anno della data di fine è maggiore dell'anno dell'anno corrente
+               // o se il mese della data di fine è maggiore del mese dell'anno corrente
+               if(l.get(1).getYear()>now.getYear() || l.get(1).getMonthValue()>=now.getMonthValue()){
+                   // la data di fine diventa l'ultimo giorno del mese di cui si calcola lo stipendio
                    l.set(1,now.plusMonths(-1).withDayOfMonth(now.plusMonths(-1).lengthOfMonth()));
-               if(data_fine.isAfter(now.plusMonths(-1).withDayOfMonth(now.plusMonths(-1).lengthOfMonth())))
-                    DBMS.inserisciAstensioni(now.withDayOfMonth(1),data_fine,m.getKey(),'ferie');
+                   // aggiorno il record mettendo come data d'inizio il primo giorno del mese dopo
+                   LocalDate nuova_data_inizio = now.withDayOfMonth(1);
+                   DBMS.aggiornaAstensione(nuova_data_inizio,data_fine,m.getKey());
+               }else // se le astensioni rientrano nel mese le cancello semplicemente
+                   DBMS.cancellaAstensione(m.getKey(),data_fine);
+               int giorni = giorniAstensioni.get(m.getKey()) + Period.between(l.get(0),l.get(1)).getDays();
+               giorniAstensioni.put(m.getKey(),giorni);
+               //2022-10-03 - 2023-01-03 diventerà 2022-10-03 - 2022-11-30 e aggiungo il record 2022-12-01 - 2023-01-03
+               //il prossimo mese, 2022-12-01 - 2023-01-03 dienterà 2022-12-01 - 2022-12-31 -> 2023-01-01 - 2023-01-03 fine
             }
         }
-        for(Map.Entry<String,List<List<LocalDate>>> m : astensioni.entrySet()){
-            System.out.println(m.getKey() + " " + m.getValue());
+        for(List<Integer> l : impiegati) {
+            for (Integer i : l) {
+                int stipendio = 0;
+                List<Integer> ore = DBMS.getOre(i.toString());
+                List<Integer> gratifiche = DBMS.getGratifiche();
+                if(giorniAstensioni.containsKey(i))//se la matricola ha delle astensioni
+                    stipendio += giorniAstensioni.get(i) * 8 * gratifiche.get(impiegati.indexOf(l)); // astensioni * 8 ore * gratifica
+                stipendio += ore.get(0)*gratifiche.get(0) + ore.get(1)*gratifiche.get(1) + ore.get(2)*gratifiche.get(2) + ore.get(3)*gratifiche.get(3);
+                DBMS.inserisciStipendio(i.toString(),stipendio);
+            }
         }
-        //int giorniAstensioni = ;
-        //int stipendio = oreServizio1*14+oreServizio2*12+oreServizio3*10+oreServizio4*8 + giorniAstensioni*8*8;
     }
 }
