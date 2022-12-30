@@ -2,11 +2,12 @@ package com.employee.progetto.Utils;
 
 import com.employee.progetto.Entity.Amministratore;
 import com.employee.progetto.Entity.Impiegato;
+import com.employee.progetto.Entity.Turno;
 import com.employee.progetto.Entity.Utente;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -456,6 +457,29 @@ public class DBMS {
             while(queryResult.next())
                 gratifiche.add(queryResult.getInt(1));
             return gratifiche;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+
+    public static List<Turno> mostraTurni(LocalDate data) {
+        List<Turno> turni = FXCollections.observableArrayList();
+        Connection dbConnection = getConnection();
+        String mT = "Select ora_inizio, ora_fine, data, id_servizio, id_impiegato from turno where data='" + data + "'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(mT);
+            if(queryResult.next()) {
+               Turno t = new Turno(LocalTime.parse(queryResult.getString(1)), LocalTime.parse(queryResult.getString(2)), LocalDate.parse(queryResult.getString(3)), queryResult.getInt(4), queryResult.getString(5));
+               turni.add(t);
+            }
+            for (Turno tu : turni) {
+                System.out.println(tu);
+            }
+            return turni;
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();

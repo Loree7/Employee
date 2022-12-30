@@ -10,11 +10,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ECECE7;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleAmministratore">
    <children>
-      <Button layoutX="14.0" layoutY="88.0" mnemonicParsing="false" onAction="#cliccaRegistraImpiegato" prefHeight="48.0" prefWidth="167.0" style="-fx-background-color: F89C4D;" text="Registra Impiegato" textFill="WHITE">
+      <Button layoutX="14.0" layoutY="88.0" mnemonicParsing="false" onAction="#cliccaRegistraImpiegato" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Registra Impiegato" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#cliccaRicercaImpiegato" prefHeight="48.0" prefWidth="167.0" style="-fx-background-color: F89C4D;" text="Ricerca Impiegato" textFill="WHITE">
+      <Button layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#cliccaRicercaImpiegato" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Ricerca Impiegato" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
@@ -33,6 +33,11 @@
          </children>
       </Pane>
       <Button layoutX="14.0" layoutY="240.0" mnemonicParsing="false" onAction="#cliccaComunicaStraordinari" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Straordinari" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurniAmministratore" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>

@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="329bdc67-0e9c-4c79-82af-6d831a0e129d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Entity/Turno.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneTurni/Boundary/MenuVisualizzaTurno.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneTurni/MenuVisualizzaTurno.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneTurni/ModuloVisualizzaTurni.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestoreSistema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestoreSistema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneTurni/Boundary/VisualizzaTurni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneTurni/Boundary/VisualizzaTurni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneTurni/Control/GestoreVisualizzaTurni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneTurni/Control/GestoreVisualizzaTurni.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,5 +94,16 @@
       <updated>1671652037180</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
