@@ -465,8 +465,8 @@ public class DBMS {
         return null;
     }
 
-    public static List<Turno> mostraTurni(LocalDate data) {
-        List<Turno> turni = FXCollections.observableArrayList();
+    public static ObservableList<Turno> mostraTurni(LocalDate data) {
+        ObservableList<Turno> turni = FXCollections.observableArrayList();
         Connection dbConnection = getConnection();
         String mT = "Select ora_inizio, ora_fine, data, id_servizio, id_impiegato from turno where data='" + data + "'";
         try {
@@ -475,9 +475,6 @@ public class DBMS {
             if(queryResult.next()) {
                Turno t = new Turno(LocalTime.parse(queryResult.getString(1)), LocalTime.parse(queryResult.getString(2)), LocalDate.parse(queryResult.getString(3)), queryResult.getInt(4), queryResult.getString(5));
                turni.add(t);
-            }
-            for (Turno tu : turni) {
-                System.out.println(tu);
             }
             return turni;
         } catch (Exception e) {

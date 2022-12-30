@@ -2,11 +2,33 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneTurni.Boundary.VisualizzaTurni">
    <children>
-      <DatePicker fx:id="dPicker" layoutX="207.0" layoutY="116.0" promptText="cerca un turno" />
-      <Button fx:id="visualizTurno" layoutX="246.0" layoutY="187.0" mnemonicParsing="false" onAction="#visualizzaTurni" text="Visualizza Turno" />
+      <DatePicker fx:id="dPicker" layoutX="207.0" layoutY="157.0" promptText="cerca dei turni" />
+      <Button fx:id="visualizTurno" layoutX="174.0" layoutY="235.0" mnemonicParsing="false" onAction="#visualizzaTurni" prefHeight="60.0" prefWidth="251.0" style="-fx-background-color: #F89C4D;" text="Visualizza Turni" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font></Button>
+      <Pane prefHeight="84.0" prefWidth="600.0" style="-fx-background-color: #F89C4D;">
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="21.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-quello-che-faccio-64.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="108.0" layoutY="29.0" text="Visualizza Turni" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

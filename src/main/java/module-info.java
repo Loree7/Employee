@@ -11,6 +11,7 @@ module com.employee.progetto {
     opens com.employee.progetto.GestioneAstensioni to javafx.fxml;
     opens com.employee.progetto.Pannelli to javafx.fxml;
     opens com.employee.progetto.GestioneTurni to javafx.fxml;
+    opens com.employee.progetto.Entity to javafx.base;
     //exporta e apri package
     exports com.employee.progetto.Utils;
     opens com.employee.progetto.Utils to javafx.fxml;

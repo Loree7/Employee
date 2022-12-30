@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 
-import java.io.IOException;
 
 public class VisualizzaTurni {
 
@@ -21,7 +20,7 @@ public class VisualizzaTurni {
     private Button visualizTurno;
 
 
-    public void visualizzaTurni() throws IOException {
+    public void visualizzaTurni() {
         gestoreVisualizzaTurni.mostraTurni(dPicker.getValue());
     }
 

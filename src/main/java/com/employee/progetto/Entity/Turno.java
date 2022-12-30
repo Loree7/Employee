@@ -5,18 +5,37 @@ import java.time.LocalTime;
 import java.util.Date;
 
 public class Turno {
-    private LocalTime ora_Inizio; //Metterle Date?
-    private LocalTime ora_Fine;
+    private LocalTime oraInizio;
+    private LocalTime oraFine;
     private LocalDate data;
-    private int id_Servizio;
+    private int idServizio;
     private String matricola;
 
+    public LocalTime getOraFine() {
+        return oraFine;
+    }
 
-    public Turno(LocalTime ora_Inizio, LocalTime ora_Fine, LocalDate data, int id_Servizio, String matricola) {
-        this.ora_Inizio = ora_Inizio;
-        this.ora_Fine = ora_Fine;
+    public LocalDate getData() {
+        return data;
+    }
+
+    public int getIdServizio() {
+        return idServizio;
+    }
+
+    public String getMatricola() {
+        return matricola;
+    }
+
+    public LocalTime getOraInizio() {
+        return oraInizio;
+    }
+
+    public Turno(LocalTime oraInizio, LocalTime oraFine, LocalDate data, int idServizio, String matricola) {
+        this.oraInizio = oraInizio;
+        this.oraFine = oraFine;
         this.data = data;
-        this.id_Servizio = id_Servizio;
+        this.idServizio = idServizio;
         this.matricola = matricola;
     }
 }
