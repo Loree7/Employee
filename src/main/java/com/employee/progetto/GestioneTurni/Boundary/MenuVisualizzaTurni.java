@@ -20,13 +20,8 @@ public class MenuVisualizzaTurni {
         this.gestoreVisualizzaTurni = gestoreVisualizzaTurni;
         this.turni = turni;
     }
-
     @FXML
     private TableView<Turno> tabellaTurni;
-
-    @FXML
-    private Label giornoTurniLabel;
-
     @FXML
     private TableColumn<Turno, LocalTime> oraInizioColumn;
     @FXML
@@ -49,8 +44,4 @@ public class MenuVisualizzaTurni {
         matricolaColumn.setCellValueFactory(new PropertyValueFactory<>("matricola"));
         tabellaTurni.setItems(turni);
     }
-
-    public TableView getTabellaTurni() {return tabellaTurni; }
-
-
 }

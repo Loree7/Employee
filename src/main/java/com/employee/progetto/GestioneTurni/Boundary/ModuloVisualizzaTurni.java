@@ -2,27 +2,18 @@ package com.employee.progetto.GestioneTurni.Boundary;
 
 import com.employee.progetto.GestioneTurni.Control.GestoreVisualizzaTurni;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 
 
-public class VisualizzaTurni {
-
+public class ModuloVisualizzaTurni {
     private GestoreVisualizzaTurni gestoreVisualizzaTurni;
-
-    public VisualizzaTurni(GestoreVisualizzaTurni gestoreVisualizzaTurni) {
+    public ModuloVisualizzaTurni(GestoreVisualizzaTurni gestoreVisualizzaTurni) {
         this.gestoreVisualizzaTurni = gestoreVisualizzaTurni;
     }
     @FXML
-    private DatePicker dPicker;
-
-    @FXML
-    private Button visualizTurno;
-
-
-    public void visualizzaTurni() {
-        gestoreVisualizzaTurni.mostraTurni(dPicker.getValue());
+    private DatePicker data;
+    public void cliccaVisualizzaTurni() {
+        data.requestFocus();
+        gestoreVisualizzaTurni.mostraTurni(data.getValue());
     }
-
-
 }

@@ -21,6 +21,7 @@ public class ModuloRichiestaFerie {
     private DatePicker data_fine;
     @FXML
     public void richiedi(){
+        data_inizio.requestFocus();
         gestoreRichiestaFerie.richiedi(data_inizio.getValue(),data_fine.getValue(),(Stage) data_fine.getScene().getWindow());
     }
 }
