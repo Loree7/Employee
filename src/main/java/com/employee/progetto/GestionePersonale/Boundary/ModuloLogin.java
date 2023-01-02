@@ -1,7 +1,9 @@
 package com.employee.progetto.GestionePersonale.Boundary;
 
 import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
+import com.employee.progetto.GestionePersonale.Control.GestoreRilevazionePresenza;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -25,8 +27,16 @@ public class ModuloLogin {
     @FXML
     private PasswordField password;
     @FXML
+    private Hyperlink rilevazionePresenza;
+    @FXML
     public void cliccaLogin(){
         matricola.requestFocus();
         gestoreLogin.verificaCredenziali(matricola.getText(),password.getText(),(Stage) matricola.getScene().getWindow());
+    }
+    @FXML
+    public void cliccaRilevazionePresenza(){
+        matricola.requestFocus();
+        rilevazionePresenza.setVisited(false);
+        new GestoreRilevazionePresenza();
     }
 }

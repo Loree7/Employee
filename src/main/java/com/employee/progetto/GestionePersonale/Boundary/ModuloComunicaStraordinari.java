@@ -6,6 +6,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 import java.time.LocalTime;
 
@@ -23,9 +24,6 @@ public class ModuloComunicaStraordinari {
         servizio.setOnAction(event -> {
             giorno.requestFocus();
         });
-        giorno.setOnAction(event -> {
-            comunica();
-        });
     }
     private ToggleGroup group;
     @FXML
@@ -37,12 +35,13 @@ public class ModuloComunicaStraordinari {
     @FXML
     private RadioButton fascia14_22;
     @FXML
-    public void comunica(){
+    public void cliccaComunica(){
+        servizio.requestFocus();
         if(group.getSelectedToggle()==fascia6_14)
             gestoreComunicaStraordinari.comunicaStraordinari(servizio.getText(),giorno.getValue()
-                    ,LocalTime.parse("06:00:00"),LocalTime.parse("14:00:00"));
+                    ,LocalTime.parse("06:00:00"),LocalTime.parse("14:00:00"),(Stage) servizio.getScene().getWindow());
         else
             gestoreComunicaStraordinari.comunicaStraordinari(servizio.getText(),giorno.getValue()
-                    , LocalTime.parse("14:00:00"),LocalTime.parse("22:00:00"));
+                    , LocalTime.parse("14:00:00"),LocalTime.parse("22:00:00"),(Stage) servizio.getScene().getWindow());
     }
 }

@@ -7,7 +7,11 @@ import com.employee.progetto.Entity.Utente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -134,7 +138,7 @@ public class DBMS {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gM);
             if(queryResult.next())
-            return queryResult.getInt(1);
+                return queryResult.getInt(1);
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
@@ -142,13 +146,35 @@ public class DBMS {
         }
         return 0;
     }
+    public static List<List<LocalDate>> getPeriodi(){
+        List<List<LocalDate>> periodi = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gP = "select data_inizio,data_fine from periodo";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gP);
+            while(queryResult.next()){
+                List<LocalDate> l = new ArrayList<>();
+                l.add(LocalDate.parse(queryResult.getString(1)));
+                l.add(LocalDate.parse(queryResult.getString(2)));
+                periodi.add(l);
+            }
+            return periodi;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
     public static boolean controllaPeriodo(LocalDate data_inizio,LocalDate data_fine){
-        //Mettere periodi dove non si può andare in ferie nel db tipo? e fare una query per prenderle e controllare
-        LocalDate inizio_periodo = LocalDate.of(2022, 6, 1);
-        LocalDate fine_periodo = LocalDate.of(2022, 7, 1);
-        if(data_inizio.isAfter(fine_periodo) || data_fine.isBefore(inizio_periodo)) //se richiedo prima o dopo il periodo
-            return true;
-        return false;
+        List<List<LocalDate>> periodi = DBMS.getPeriodi();
+        for(List<LocalDate> l : periodi) {
+            if(data_fine.isBefore(l.get(0)) || data_inizio.isAfter(l.get(1)))
+                continue;
+            return false;
+        }
+        return true;
     }
     public static boolean controllaFerie(LocalDate data_inizio,LocalDate data_fine,String matricola){
         //mi dice se la matricola è in ferie nelle date inserite
@@ -212,10 +238,13 @@ public class DBMS {
     }
     public static Impiegato getImpiegatoMenoOre(LocalDate giorno){
         Connection dbConnection = getConnection();
-        String gI = "select matricola,nome,cognome,ruolo,email from utente,turno where id_impiegato=matricola and matricola not in" +
-                "(select id_impiegato from turno where data = '" + giorno + "') and matricola not in" +
-                "(select id_impiegato from astensioni where '" + giorno + "' between data_inizio and data_fine)" +
-                "group by matricola order by ore asc limit 1";
+        System.out.println(giorno);
+        String gI = "select matricola,nome,cognome,ruolo,email,(oreServizio1+oreServizio2+oreServizio3+oreServizio4) as ore " +
+                "from utente where ruolo != 'amministratore' and matricola not in " +
+                "(select id_impiegato from turno where data = '"+giorno+"') and matricola not in" +
+                "(select id_impiegato from astensioni where '"+giorno+"' between data_inizio and data_fine)" +
+                "order by ore limit 1";
+        System.out.println(gI);
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gI);
@@ -328,6 +357,8 @@ public class DBMS {
         HashMap<String,List<List<LocalDate>>> astensioni = new HashMap<>();
         Connection dbConnection = getConnection();
         LocalDate now = LocalDate.now();
+        //simulazione :
+        //now = LocalDate.parse("2022-12-01");
         try{
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult;
@@ -337,7 +368,7 @@ public class DBMS {
                     if(!flag)
                         gA = "select data_inizio,data_fine from astensioni where id_impiegato=" + i + " and data_fine > '" + now + "'";
                     else gA = "select data_inizio,data_fine from astensioni where id_impiegato=" + i +
-                            " and data_fine > '" + now.withDayOfMonth(1).plusMonths(-1) + "' and data_inizio < '" + now.withDayOfMonth(1)+"'";
+                            " and data_fine > '" + now.plusMonths(-1) + "' and data_inizio < '" + now+"'";
                     queryResult = statement.executeQuery(gA);
                     List<List<LocalDate>> temp = new ArrayList<>();
                     if(queryResult.next()) {
@@ -357,24 +388,6 @@ public class DBMS {
             }
             return astensioni;
         }catch (Exception e){
-            erroreComunicazioneDBMS();
-            e.printStackTrace();
-            e.getCause();
-        }
-        return null;
-    }
-    //da togliere :
-    public static HashMap<String,Integer> getGiorniAstensione(String tipo) {
-        HashMap<String, Integer> giorniAstensione = new HashMap<>();
-        Connection dbConnection = getConnection();
-        String gGA = "select id_impiegato,sum(datediff(data_fine,data_inizio)+1) from astensioni where tipo = '" + tipo + "' group by id_impiegato";
-        try {
-            Statement statement = dbConnection.createStatement();
-            ResultSet queryResult = statement.executeQuery(gGA);
-            while (queryResult.next())
-                giorniAstensione.put(queryResult.getString(1), queryResult.getInt(2));
-            return giorniAstensione;
-        } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
             e.getCause();
@@ -439,6 +452,8 @@ public class DBMS {
                 ore.add(queryResult.getInt(3));
                 ore.add(queryResult.getInt(4));
             }
+            String updateOre = "update utente set oreServizio1=0,oreServizio2=0,oreServizio3=0,oreServizio4=0 where matricola="+matricola;
+            statement.executeUpdate(updateOre);
             return ore;
         } catch (Exception e) {
             erroreComunicazioneDBMS();
@@ -464,8 +479,76 @@ public class DBMS {
         }
         return null;
     }
-
-    public static ObservableList<Turno> mostraTurni(LocalDate data) {
+    public static int controllaTurno(String nome,String cognome,String matricola){
+        Connection dbConnection = getConnection();
+        String cI = "select matricola from utente where matricola="+matricola+" and nome='"+nome+"' and cognome='"+cognome+"'";
+        String cT = "select id,ora_inizio,rilevato from turno where id_impiegato=" + matricola + " and data = '" + LocalDate.now() + "'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(cI);
+            if(queryResult.next()) { //se esiste quell'impiegato
+                queryResult = statement.executeQuery(cT);
+                if (queryResult.next()) {
+                    if (queryResult.getBoolean(3))
+                        return -2;
+                    LocalTime now = LocalTime.now();
+                    //se l'orario corrente è dopo l'ora_inizio + 10 minuti
+                    if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10)))
+                        return -1;
+                    return queryResult.getInt(1);
+                }else return 0;
+            }else return -3;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return 0;
+    }
+    public static String getRuolo(int id){
+        List<String> servizi = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gR = "select ruolo from servizio where id=" + id;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gR);
+            queryResult.next();
+            return queryResult.getString(1);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static void rilevaPresenza(int id){
+        Connection dbConnection = getConnection();
+        String rP = "select ora_inizio,ora_fine,id_impiegato,id_servizio from turno where id=" + id;
+        String rilevaTurno = "update turno set rilevato=true where id=" + id;
+        String updateOre;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(rP);
+            queryResult.next();
+            String ruolo = DBMS.getRuolo(queryResult.getInt(4));
+            long ore = Duration.between(LocalTime.parse(queryResult.getString(1)),LocalTime.parse(queryResult.getString(2))).toHours();
+            if(ruolo.toLowerCase().equals("alto"))
+                updateOre = "update utente set oreServizio1 = oreServizio1 +"+(int) ore+" where matricola="+queryResult.getInt(3);
+            else if(ruolo.toLowerCase().equals("intermedio"))
+                updateOre = "update utente set oreServizio2 = oreServizio2 +"+(int) ore+" where matricola="+queryResult.getInt(3);
+            else if(ruolo.toLowerCase().equals("medio"))
+                updateOre = "update utente set oreServizio3 = oreServizio3 +"+(int) ore+" where matricola="+queryResult.getInt(3);
+            else
+                updateOre = "update utente set oreServizio3 = oreServizio3 +"+(int) ore+" where matricola="+queryResult.getInt(3);
+            statement.executeUpdate(rilevaTurno);
+            statement.executeUpdate(updateOre);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static ObservableList<Turno> getTurni(LocalDate data) {
         ObservableList<Turno> turni = FXCollections.observableArrayList();
         Connection dbConnection = getConnection();
         String mT = "Select ora_inizio, ora_fine, data, id_servizio, id_impiegato from turno where data='" + data + "'";
@@ -473,8 +556,8 @@ public class DBMS {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(mT);
             if(queryResult.next()) {
-               Turno t = new Turno(LocalTime.parse(queryResult.getString(1)), LocalTime.parse(queryResult.getString(2)), LocalDate.parse(queryResult.getString(3)), queryResult.getInt(4), queryResult.getString(5));
-               turni.add(t);
+                Turno t = new Turno(LocalTime.parse(queryResult.getString(1)), LocalTime.parse(queryResult.getString(2)), LocalDate.parse(queryResult.getString(3)), queryResult.getInt(4), queryResult.getString(5));
+                turni.add(t);
             }
             return turni;
         } catch (Exception e) {

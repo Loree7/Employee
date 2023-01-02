@@ -37,7 +37,6 @@ public class GestoreRichiestaFerie {
             Utils.creaPannelloErrore("Non puoi richiedere più di 4 settimane di ferie");
             return;
         }
-        //Mettere periodi dove non si può andare in ferie nel db tipo? e fare una query per prenderle e controllare
         if(DBMS.controllaPeriodo(data_inizio,data_fine)){
             if(!DBMS.controllaFerie(data_inizio,data_fine, ((Impiegato) GestoreLogin.getUtente()).getMatricola())) {
                 Utils.creaPannelloConferma("Richiesta di ferie effettuata con successo");
@@ -45,17 +44,11 @@ public class GestoreRichiestaFerie {
                 ferieRimanenti -= giorni;
                 ((Impiegato) GestoreLogin.getUtente()).setFerie(ferieRimanenti);
                 DBMS.inserisciFerie(data_inizio, data_fine, GestoreLogin.getUtente().getMatricola(), ferieRimanenti);
-                return;
-            }else{
+            }else
                 Utils.creaPannelloErrore("Hai già richiesto queste ferie");
-                return;
-            }
         }else{
-            LocalDate inizio_periodo = LocalDate.of(2022, 6, 1);
-            LocalDate fine_periodo = LocalDate.of(2022, 7, 1);
-            Utils.creaPannelloErrore("Una o entrambe le date non rientrano nel seguente periodo\n" +
-                    inizio_periodo + " - " + fine_periodo);
-            return;
+            Utils.creaPannelloErrore("Una o entrambe le date inserite rientrano nei seguenti periodi\n" +
+                    DBMS.getPeriodi());
         }
     }
 }

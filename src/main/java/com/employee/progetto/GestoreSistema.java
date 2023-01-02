@@ -10,25 +10,25 @@ import java.util.Map;
 
 public class GestoreSistema {
     public void controlloData(LocalDate now){
-        calcolaStipendio();
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
-        //se si vuole simulare usare le 2 righe di codice
+        //simulazione :
+        //now = LocalDate.parse("2022-12-01");
         //dataInizioTrimestre = LocalDate.parse("2022-12-01");
-        //now = LocalDate.parse("2023-03-01");
         Period period = Period.between(dataInizioTrimestre,now);
-       while(period.getYears()>0) { //in realtà non serve se inserisci una dataInizioTrimestre normale
-           DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusYears(1));
+        while(period.getYears()>0) { //in realtà non serve se inserisci una dataInizioTrimestre normale
+           DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(9));
            dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
            period = Period.between(dataInizioTrimestre,now);
-       }
-       if(period.getMonths() >= 3) {
+        }
+        if(period.getMonths() >= 3) {
             DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3));
             generaTurni();
         }
-       if(now.getDayOfMonth()==1)
+        if(now.getDayOfMonth()==1)
            calcolaStipendio();
     }
     public void generaTurni(){
+        System.out.println("Generazione Turni");
         List<Integer> numImpiegati = DBMS.getNumImpiegati();
         List<List<Integer>> impiegati = DBMS.getImpiegati();
         for(int i=3;i>0;i--){
@@ -82,12 +82,16 @@ public class GestoreSistema {
         }while(period.getMonths()<3);
     }
     public void calcolaStipendio(){
+        System.out.println("Calcolo stipendi");
         LocalDate now = LocalDate.now();
+        //simulazione :
+        //now = LocalDate.parse("2022-12-01");
         List<List<Integer>> impiegati = DBMS.getImpiegati();
         HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(impiegati,true);
         HashMap<String,Integer> giorniAstensioni = new HashMap<>();
         for(Map.Entry<String,List<List<LocalDate>>> m : astensioni.entrySet()){
             giorniAstensioni.put(m.getKey(),0);
+            //per ogni astensione
            for(List<LocalDate> l : m.getValue()){
                LocalDate data_fine = l.get(1);
                //se l'anno della data di fine è maggiore dell'anno dell'anno corrente
@@ -111,8 +115,8 @@ public class GestoreSistema {
                 int stipendio = 0;
                 List<Integer> ore = DBMS.getOre(i.toString());
                 List<Integer> gratifiche = DBMS.getGratifiche();
-                if(giorniAstensioni.containsKey(i))//se la matricola ha delle astensioni
-                    stipendio += giorniAstensioni.get(i) * 8 * gratifiche.get(impiegati.indexOf(l)); // astensioni * 8 ore * gratifica
+                if(giorniAstensioni.containsKey(i.toString())) //se la matricola ha delle astensioni
+                    stipendio += giorniAstensioni.get(i.toString()) * 8 * gratifiche.get(impiegati.indexOf(l)); // astensioni * 8 ore * gratifica
                 stipendio += ore.get(0)*gratifiche.get(0) + ore.get(1)*gratifiche.get(1) + ore.get(2)*gratifiche.get(2) + ore.get(3)*gratifiche.get(3);
                 DBMS.inserisciStipendio(i.toString(),stipendio);
             }

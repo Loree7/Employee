@@ -1,7 +1,6 @@
 package com.employee.progetto.GestionePersonale.Control;
 
 import com.employee.progetto.Entity.Impiegato;
-import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
 import com.employee.progetto.GestionePersonale.Boundary.ModuloRicercaImpiegato;
 import com.employee.progetto.GestionePersonale.Boundary.VistaImpiegato;
 import com.employee.progetto.Utils.DBMS;

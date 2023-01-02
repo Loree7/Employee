@@ -2,6 +2,7 @@ package com.employee.progetto.GestionePersonale.Control;
 
 import com.employee.progetto.Entity.Utente;
 import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
+import com.employee.progetto.GestionePersonale.Boundary.ModuloRilevazionePresenza;
 import com.employee.progetto.PortaleAmministratore;
 import com.employee.progetto.PortaleImpiegato;
 import com.employee.progetto.Utils.DBMS;
@@ -33,7 +34,6 @@ public class GestoreLogin {
                 return new PortaleImpiegato();});
         }
     }
-
     public static Utente getUtente(){
         return utente;
     }

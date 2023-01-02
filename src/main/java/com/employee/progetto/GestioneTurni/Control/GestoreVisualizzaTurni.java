@@ -19,7 +19,7 @@ public class GestoreVisualizzaTurni{
     }
     public void mostraTurni(LocalDate data) {
         Utils.cambiaInterfaccia("GestioneTurni/MenuVisualizzaTurni.fxml", "Menu Visualizza Turni", new Stage(), c->{
-            return new MenuVisualizzaTurni(this, DBMS.mostraTurni(data));
+            return new MenuVisualizzaTurni(this, DBMS.getTurni(data));
         });
     }
 }

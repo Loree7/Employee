@@ -3,10 +3,7 @@ package com.employee.progetto.GestioneAstensioni.Boundary;
 import com.employee.progetto.GestioneAstensioni.Control.GestoreRichiestaFerie;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.util.Date;
 
 public class ModuloRichiestaFerie {
     private GestoreRichiestaFerie gestoreRichiestaFerie;

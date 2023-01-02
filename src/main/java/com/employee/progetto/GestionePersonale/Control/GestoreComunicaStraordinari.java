@@ -19,7 +19,7 @@ public class GestoreComunicaStraordinari {
                     return new ModuloComunicaStraordinari(this);
                 });
     }
-    public void comunicaStraordinari(String servizio, LocalDate giorno,LocalTime ora_inizio,LocalTime ora_fine){
+    public void comunicaStraordinari(String servizio, LocalDate giorno,LocalTime ora_inizio,LocalTime ora_fine,Stage s){
         if(servizio.isBlank() || giorno == null){
             Utils.creaPannelloErrore("Completa tutti i campi");
             return;
@@ -41,7 +41,7 @@ public class GestoreComunicaStraordinari {
             if(servizio.toLowerCase().equals(str)){
                 Impiegato impiegato = DBMS.getImpiegatoMenoOre(giorno);
                 if(impiegato==null){
-                    Utils.creaPannelloErrore("Non esiste un impiegato libero questa data che non sia già in turno");
+                    Utils.creaPannelloErrore("Non esiste un impiegato libero per questa data");
                     return;
                 }
                 Utils.creaPannelloConferma("Straordinari comunicati all'impiegato:\n" +
@@ -50,6 +50,7 @@ public class GestoreComunicaStraordinari {
                                 "svolgere gli straordinari giorno: " + giorno
                         ,"Straordinari",impiegato.getEmail());
                 DBMS.inserisciTurno(ora_inizio,ora_fine,giorno,servizi.indexOf(str)+1,impiegato.getMatricola());
+                s.close(); //chiudo il modulo
                 return;
             }
         }

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestionePersonale.Boundary.ModuloComunicaStraordinari">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestionePersonale.Boundary.ModuloComunicaStraordinari">
    <children>
-      <Button layoutX="254.0" layoutY="200.0" mnemonicParsing="false" onAction="#comunica" text="Comunica" />
-      <Label layoutX="145.0" layoutY="84.0" text="Servizio" />
       <TextField fx:id="servizio" layoutX="220.0" layoutY="80.0" promptText="servizio" />
+      <Button layoutX="254.0" layoutY="200.0" mnemonicParsing="false" onAction="#cliccaComunica" text="Comunica" />
+      <Label layoutX="145.0" layoutY="84.0" text="Servizio" />
       <Label layoutX="145.0" layoutY="148.0" text="Giorno" />
       <DatePicker fx:id="giorno" layoutX="207.0" layoutY="144.0" promptText="giorno" />
       <Label layoutX="132.0" layoutY="43.0" text="Fascia oraria" />
