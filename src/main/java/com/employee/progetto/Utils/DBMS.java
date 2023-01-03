@@ -299,7 +299,8 @@ public class DBMS {
             ResultSet queryResult = statement.executeQuery(gS);
             if(queryResult.next()) {
                 String gN = "select count(id_impiegato) from turno where rilevato=true and data='" + LocalDate.now() + "' and " +
-                        "id_servizio=" + queryResult.getInt(1);
+                        "id_servizio=" + queryResult.getInt(1) + " and ora_inizio<='"+LocalTime.now()+"' and " +
+                        "ora_fine>='"+LocalTime.now()+"'";
                 queryResult = statement.executeQuery(gN);
                 if(queryResult.next())
                     return queryResult.getInt(1);
