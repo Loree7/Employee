@@ -20,7 +20,7 @@ public class DBMS {
     public static Connection getConnection() {
         String databaseName = "dbTeam";
         String databaseUser = "root";
-        String databasePassword = "root";
+        String databasePassword = "Lorenzo10";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
         try {
@@ -275,11 +275,11 @@ public class DBMS {
     public static ObservableList<Servizio> prendiServizi() {
         ObservableList<Servizio> servizio = FXCollections.observableArrayList();
         Connection dbConnection = getConnection();
-        String mS = "Select nome, stato from servizio";
+        String mS = "select nome,stato from servizio";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(mS);
-            if(queryResult.next()) {
+            while(queryResult.next()) {
                 Servizio s = new Servizio(queryResult.getString(1),queryResult.getString(2));
                 servizio.add(s);
             }
@@ -290,6 +290,26 @@ public class DBMS {
             e.getCause();
         }
         return null;
+    }
+    public static int getNumDipendenti(String nome){
+        Connection dbConnection = getConnection();
+        String gS = "select id from servizio where nome='"+nome+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gS);
+            if(queryResult.next()) {
+                String gN = "select count(id_impiegato) from turno where rilevato=true and data='" + LocalDate.now() + "' and " +
+                        "id_servizio=" + queryResult.getInt(1);
+                queryResult = statement.executeQuery(gN);
+                if(queryResult.next())
+                    return queryResult.getInt(1);
+            }
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return 0;
     }
 
     public static void inserisciTurno(LocalTime ora_inizio,LocalTime ora_fine,LocalDate giorno,int id_servizio,String id_impiegato){

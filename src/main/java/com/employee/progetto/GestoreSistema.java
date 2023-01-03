@@ -125,6 +125,7 @@ public class GestoreSistema {
             }
         }
     }
+    //AGGIUSTARE TESTI EMAIL
     public void gestioneSciopero(){
         List<String> email = DBMS.getEmailSciopero();
         if(email.size()>0) {

@@ -15,11 +15,14 @@ import java.time.LocalTime;
 public class MenuVisualizzaTurni {
 
     private GestoreVisualizzaTurni gestoreVisualizzaTurni;
-
-    public MenuVisualizzaTurni(GestoreVisualizzaTurni gestoreVisualizzaTurni, ObservableList<Turno> turni) {
+    private LocalDate data;
+    public MenuVisualizzaTurni(GestoreVisualizzaTurni gestoreVisualizzaTurni, ObservableList<Turno> turni,LocalDate data) {
         this.gestoreVisualizzaTurni = gestoreVisualizzaTurni;
         this.turni = turni;
+        this.data = data;
     }
+    @FXML
+    private Label messaggio;
     @FXML
     private TableView<Turno> tabellaTurni;
     @FXML
@@ -43,5 +46,6 @@ public class MenuVisualizzaTurni {
         numServizioColumn.setCellValueFactory(new PropertyValueFactory<>("idServizio"));
         matricolaColumn.setCellValueFactory(new PropertyValueFactory<>("matricola"));
         tabellaTurni.setItems(turni);
+        messaggio.setText("Turni del: " + data.toString());
     }
 }

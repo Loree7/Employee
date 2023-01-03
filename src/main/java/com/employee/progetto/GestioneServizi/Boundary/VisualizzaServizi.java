@@ -26,17 +26,15 @@ public class VisualizzaServizi {
     @FXML
     private TableColumn<Servizio, String> statoColumn;
     @FXML
-    private TableColumn<Servizio, Integer> numDipendentiColumn;
+    private TableColumn<Servizio,Integer> numDipendentiColumn;
     @FXML
     public void initialize (){
         ObservableList<Servizio> servizi = DBMS.prendiServizi();
-        for(Servizio s : servizi){
-            System.out.println(s);
-        }
+        for(Servizio s : servizi)
+            s.setNumDipendenti(DBMS.getNumDipendenti(s.getNome()));
         servizioColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         statoColumn.setCellValueFactory(new PropertyValueFactory<>("stato"));
-
-        //numDipendentiColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
+        numDipendentiColumn.setCellValueFactory(new PropertyValueFactory<>("numDipendenti"));
         tabellaServizi.setItems(servizi);
     }
 }
