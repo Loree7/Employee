@@ -2,7 +2,7 @@ package com.employee.progetto.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
+
 
 public class Turno {
     private LocalTime oraInizio;

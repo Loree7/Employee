@@ -1,9 +1,6 @@
 package com.employee.progetto.Utils;
 
-import com.employee.progetto.Entity.Amministratore;
-import com.employee.progetto.Entity.Impiegato;
-import com.employee.progetto.Entity.Turno;
-import com.employee.progetto.Entity.Utente;
+import com.employee.progetto.Entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -23,7 +20,7 @@ public class DBMS {
     public static Connection getConnection() {
         String databaseName = "dbTeam";
         String databaseUser = "root";
-        String databasePassword = "Lorenzo10";
+        String databasePassword = "root";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
         try {
@@ -274,6 +271,27 @@ public class DBMS {
         }
         return null;
     }
+
+    public static ObservableList<Servizio> prendiServizi() {
+        ObservableList<Servizio> servizio = FXCollections.observableArrayList();
+        Connection dbConnection = getConnection();
+        String mS = "Select nome, stato from servizio";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(mS);
+            if(queryResult.next()) {
+                Servizio s = new Servizio(queryResult.getString(1),queryResult.getString(2));
+                servizio.add(s);
+            }
+            return servizio;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+
     public static void inserisciTurno(LocalTime ora_inizio,LocalTime ora_fine,LocalDate giorno,int id_servizio,String id_impiegato){
         Connection dbConnection = getConnection();
         String iT = "insert into turno (ora_inizio,ora_fine,data,id_servizio,id_impiegato) " +

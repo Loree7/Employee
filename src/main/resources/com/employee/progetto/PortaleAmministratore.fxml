@@ -42,5 +42,10 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
+      <Button layoutX="265.0" layoutY="88.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Servizi" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
