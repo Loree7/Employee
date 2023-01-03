@@ -9,8 +9,9 @@ module com.employee.progetto {
     //apri fxml
     opens com.employee.progetto.GestionePersonale to javafx.fxml;
     opens com.employee.progetto.GestioneAstensioni to javafx.fxml;
-    opens com.employee.progetto.Pannelli to javafx.fxml;
     opens com.employee.progetto.GestioneTurni to javafx.fxml;
+    opens com.employee.progetto.GestioneImpiegato to javafx.fxml;
+    opens com.employee.progetto.Pannelli to javafx.fxml;
     opens com.employee.progetto.Entity to javafx.base;
     //exporta e apri package
     exports com.employee.progetto.Utils;
@@ -29,5 +30,8 @@ module com.employee.progetto {
     opens com.employee.progetto.GestioneTurni.Control to javafx.fxml;
     exports com.employee.progetto.GestioneTurni.Boundary;
     opens com.employee.progetto.GestioneTurni.Boundary to javafx.fxml;
-
+    exports com.employee.progetto.GestioneImpiegato.Control;
+    opens com.employee.progetto.GestioneImpiegato.Control to javafx.fxml;
+    exports com.employee.progetto.GestioneImpiegato.Boundary;
+    opens com.employee.progetto.GestioneImpiegato.Boundary to javafx.fxml;
 }

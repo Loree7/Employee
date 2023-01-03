@@ -6,6 +6,8 @@ import com.employee.progetto.GestioneImpiegato.Control.GestoreRichiestaPermesso;
 import com.employee.progetto.GestioneImpiegato.Control.GestoreComunicaRitardo;
 import com.employee.progetto.GestioneImpiegato.Control.GestoreSituazioneLavorativa;
 import com.employee.progetto.GestioneImpiegato.Control.GestoreVisualizzaDati;
+import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
+import com.employee.progetto.GestionePersonale.Control.GestoreComunicaStraordinari;
 import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.GestionePersonale.Control.GestoreRilevazionePresenza;
 import com.employee.progetto.GestioneTurni.Control.GestoreVisualizzaTurni;
@@ -36,6 +38,10 @@ public class PortaleImpiegato {
     }
     @FXML
     public void cliccaRichiestaPermesso(){
+        if(((Impiegato) GestoreLogin.getUtente()).getOrePermesso()==0){
+            Utils.creaPannelloErrore("Non hai più ore di permesso rimanenti");
+            return;
+        }
         new GestoreRichiestaPermesso();
     }
     @FXML
@@ -44,7 +50,14 @@ public class PortaleImpiegato {
     }
     @FXML
     public void cliccaComunicaCongedo(){
-        new GestoreComunicaCongedo();
+        LocalDate now = LocalDate.now();
+        LocalDate dataFineTrimestre= LocalDate.parse(DBMS.getDataInizioTrimestre()).plusMonths(3).plusDays(-1);
+        //simulazione
+        //now=dataFineTrimestre;
+        if(now.equals(dataFineTrimestre))
+            new GestoreComunicaCongedo();
+        else
+            Utils.creaPannelloErrore("Non puoi comunicare il congedo durante il corso del trimestre");
     }
     @FXML
     public void cliccaComunicaMalattia(){
@@ -59,13 +72,10 @@ public class PortaleImpiegato {
         }
         LocalDate now = LocalDate.now();
         LocalDate dataFineTrimestre= LocalDate.parse(DBMS.getDataInizioTrimestre()).plusMonths(3).plusDays(-1);
-        //L'amministratore può registrare solo se siamo un giorno prima l'inizio del prossimo trimestre
         if(now.equals(dataFineTrimestre))
             new GestoreRichiestaFerie();
-        else{
+        else
             Utils.creaPannelloErrore("Non puoi richiedere le ferie durante il corso del trimestre");
-            return;
-        }
     }
     @FXML
     public void cliccaRichiestaSciopero(){

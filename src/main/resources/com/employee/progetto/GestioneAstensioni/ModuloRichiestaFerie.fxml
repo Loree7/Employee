@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneAstensioni.Boundary.ModuloRichiestaFerie">
    <children>
-      <Button layoutX="273.0" layoutY="200.0" mnemonicParsing="false" onAction="#richiedi" text="Richiedi" />
+      <Button layoutX="273.0" layoutY="200.0" mnemonicParsing="false" onAction="#cliccaRichiedi" text="Richiedi" />
       <Label layoutX="137.0" layoutY="68.0" text="Data inizio:" />
       <Label layoutX="137.0" layoutY="140.0" text="Data fine:" />
       <DatePicker fx:id="data_inizio" layoutX="220.0" layoutY="63.0" />

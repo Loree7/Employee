@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleImpiegato">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleImpiegato">
    <children>
-      <Button layoutX="138.0" layoutY="53.0" mnemonicParsing="false" onAction="#cliccaRichiestaFerie" text="Richiesta Ferie" />
+      <Button layoutX="143.0" layoutY="69.0" mnemonicParsing="false" onAction="#cliccaRichiestaFerie" text="Richiesta Ferie" />
+      <Button layoutX="143.0" layoutY="138.0" mnemonicParsing="false" onAction="#cliccaComunicaRitardo" text="Comunica Ritardo" />
+      <Button layoutX="152.0" layoutY="200.0" mnemonicParsing="false" onAction="#cliccaRichiestaPermesso" text="Richiesta Permesso" />
+      <Button layoutX="143.0" layoutY="245.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" text="Richiesta Sciopero" />
+      <Button layoutX="143.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaComunicaCongedo" text="Comunica Congedo Parentale" />
    </children>
 </AnchorPane>

@@ -16,12 +16,10 @@ public class ModuloRichiestaFerie {
         data_fine.setShowWeekNumbers(true);
     }
     @FXML
-    private DatePicker data_inizio;
+    private DatePicker data_inizio,data_fine;
     @FXML
-    private DatePicker data_fine;
-    @FXML
-    public void richiedi(){
+    public void cliccaRichiedi(){
         data_inizio.requestFocus();
-        gestoreRichiestaFerie.richiedi(data_inizio.getValue(),data_fine.getValue(),(Stage) data_fine.getScene().getWindow());
+        gestoreRichiestaFerie.richiediFerie(data_inizio.getValue(),data_fine.getValue(),(Stage) data_fine.getScene().getWindow());
     }
 }

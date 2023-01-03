@@ -40,18 +40,17 @@ public class DBMS {
     }
     public static Utente verificaCredenziali(String matricola, String password) {
         Connection dbConnection = getConnection();
-        String vP = "select nome,cognome,ruolo,email,ferie,password from utente where matricola =" + matricola;
-        String vC = "SELECT nome,cognome,ruolo,email,ferie FROM utente WHERE matricola = " + matricola + " AND password = '" + password + "'";
+        String vC = "select nome,cognome,ruolo,email,ferie,password,orePermesso from utente where matricola =" + matricola;
         try {
             Statement statement = dbConnection.createStatement();
-            ResultSet queryResult = statement.executeQuery(vP);
+            ResultSet queryResult = statement.executeQuery(vC);
             if(queryResult.next()){
                 if(password.equals(queryResult.getString(6)))
                     if (queryResult.getString(3).equals("Amministratore"))
                         return new Amministratore(matricola, queryResult.getString(1), queryResult.getString(2)
                                 , queryResult.getString(3), queryResult.getString(4));
                     else return new Impiegato(matricola, queryResult.getString(1), queryResult.getString(2)
-                            , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5));
+                            , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5),queryResult.getInt(7));
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
@@ -176,8 +175,8 @@ public class DBMS {
         }
         return true;
     }
-    public static boolean controllaFerie(LocalDate data_inizio,LocalDate data_fine,String matricola){
-        //mi dice se la matricola è in ferie nelle date inserite
+    public static boolean controllaAstensione(LocalDate data_inizio,LocalDate data_fine,String matricola){
+        //mi dice se la matricola è in astenssione nelle date inserite
         Connection dbConnection = getConnection();
         String cF = "select id from astensioni where exists (select * from astensioni where data_inizio between '" +
                 data_inizio + "' and '" + data_fine + "' or data_fine between '" + data_inizio + "' and '" + data_fine +
@@ -242,7 +241,7 @@ public class DBMS {
         String gI = "select matricola,nome,cognome,ruolo,email,(oreServizio1+oreServizio2+oreServizio3+oreServizio4) as ore " +
                 "from utente where ruolo != 'amministratore' and matricola not in " +
                 "(select id_impiegato from turno where data = '"+giorno+"') and matricola not in" +
-                "(select id_impiegato from astensioni where '"+giorno+"' between data_inizio and data_fine)" +
+                "(select id_impiegato from astensioni where tipo != 'sciopero' and '"+giorno+"' between data_inizio and data_fine)" +
                 "order by ore limit 1";
         System.out.println(gI);
         try {
@@ -366,8 +365,8 @@ public class DBMS {
                 for(Integer i : l){ //per ogni matricola prendo le astensioni e le metto in una lista
                     String gA;
                     if(!flag)
-                        gA = "select data_inizio,data_fine from astensioni where id_impiegato=" + i + " and data_fine > '" + now + "'";
-                    else gA = "select data_inizio,data_fine from astensioni where id_impiegato=" + i +
+                        gA = "select data_inizio,data_fine from astensioni where tipo != 'sciopero' and id_impiegato=" + i + " and data_fine > '" + now + "'";
+                    else gA = "select data_inizio,data_fine from astensioni where tipo != 'sciopero' and id_impiegato=" + i +
                             " and data_fine > '" + now.plusMonths(-1) + "' and data_inizio < '" + now+"'";
                     queryResult = statement.executeQuery(gA);
                     List<List<LocalDate>> temp = new ArrayList<>();
@@ -566,5 +565,120 @@ public class DBMS {
             e.getCause();
         }
         return null;
+    }
+    public static String getFasciaOraria(String matricola,LocalDate data){
+        Connection dbConnection = getConnection();
+        String gF = "select ora_inizio,ora_fine from turno where rilevato=false and id_impiegato="+matricola+" and data='"+data+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gF);
+            if(queryResult.next())
+                return queryResult.getTime(1).toLocalTime().getHour() + "-" + queryResult.getTime(2).toLocalTime().getHour();
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static void aggiornaTurno(String matricola,LocalDate data,LocalTime ora_inizio,LocalTime ora_fine){
+        Connection dbConnection = getConnection();
+        String aT = "update turno set ora_inizio='"+ora_inizio+"',ora_fine='"+ora_fine+"' where data='"+data+"' and id_impiegato="+matricola;
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(aT);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void aggiornaOrePermesso(String matricola,int orePermesso){
+        Connection dbConnection = getConnection();
+        String aO = "update utente set orePermesso="+orePermesso+" where matricola="+matricola;
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(aO);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static List<String> getEmailSciopero(){
+        List<Integer> matricole = new ArrayList<>();
+        List<String> email = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gM = "select id_impiegato from astensioni where tipo='sciopero' and " +
+                "data_inizio='"+LocalDate.now()+"' and data_fine='"+LocalDate.now()+"'";
+        String gE = "select email from utente where matricola=";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gM);
+            while(queryResult.next())
+                matricole.add(queryResult.getInt(1));
+            for (Integer i : matricole) {
+                queryResult = statement.executeQuery(gE + i);
+                if(queryResult.next())
+                    email.add(queryResult.getString(1));
+            }
+            return email;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static void eliminaRichiesteSciopero(){
+        Connection dbConnection = getConnection();
+        String eR = "delete from astensioni where tipo='sciopero' and " +
+                "data_inizio='"+LocalDate.now()+"' and data_fine='"+LocalDate.now()+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(eR);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void eliminaTurno(int matricola){
+        Connection dbConnection = getConnection();
+        String eT = "delete from turno where id_impiegato="+matricola+" and data='"+LocalDate.now()+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(eT);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void inserisciSciopero(String matriola,LocalDate data){
+        Connection dbConnection = getConnection();
+        String iS = "insert into astensioni (data_inizio,data_fine,tipo,id_impiegato) " +
+                "values ('" + data + "','" + data + "','sciopero'," + matriola + ")";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(iS);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void inserisciCongedo(LocalDate data_inizio,LocalDate data_fine,String matricola){
+        Connection dbConnection = getConnection();
+        String iC = "insert into astensioni (data_inizio,data_fine,tipo,id_impiegato) " +
+                "values ('" + data_inizio + "','" + data_fine + "','congedo'," + matricola + ")";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(iC);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 }

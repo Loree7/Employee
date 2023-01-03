@@ -1,6 +1,7 @@
 package com.employee.progetto;
 
 import com.employee.progetto.Utils.DBMS;
+import com.employee.progetto.Utils.MailUtils;
 
 import java.time.*;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class GestoreSistema {
         }
         if(now.getDayOfMonth()==1)
            calcolaStipendio();
+        if(LocalTime.now().equals(LocalTime.parse("00:00:00")))
+            gestioneSciopero();
     }
     public void generaTurni(){
         System.out.println("Generazione Turni");
@@ -120,6 +123,22 @@ public class GestoreSistema {
                 stipendio += ore.get(0)*gratifiche.get(0) + ore.get(1)*gratifiche.get(1) + ore.get(2)*gratifiche.get(2) + ore.get(3)*gratifiche.get(3);
                 DBMS.inserisciStipendio(i.toString(),stipendio);
             }
+        }
+    }
+    public void gestioneSciopero(){
+        List<String> email = DBMS.getEmailSciopero();
+        if(email.size()>0) {
+            if (email.size() >= 10) {
+                for (String mail : email) {
+                    MailUtils.inviaMail("testo", "oggetto", mail);
+                    DBMS.eliminaTurno(DBMS.getMatricola(mail));
+                }
+            } else {
+                for (String mail : email) {
+                    MailUtils.inviaMail("testo", "oggetto", mail);
+                }
+            }
+            DBMS.eliminaRichiesteSciopero();
         }
     }
 }
