@@ -12,5 +12,7 @@
       <Button layoutX="143.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaComunicaCongedo" text="Comunica Congedo Parentale" />
       <Button layoutX="360.0" layoutY="69.0" mnemonicParsing="false" onAction="#cliccaSituazioneLavorativa" text="Situazione Lavorativa" />
       <Button layoutX="405.0" layoutY="164.0" mnemonicParsing="false" onAction="#cliccaVisualizzaDati" text="Visualizza dati" />
+      <Button layoutX="397.0" layoutY="226.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" text="Visualizza Servizi" />
+      <Button layoutX="405.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" text="Visualizza Turni" />
    </children>
 </AnchorPane>

@@ -134,12 +134,12 @@ public class GestoreSistema {
         if(email.size()>0) {
             if (email.size() >= 10) {
                 for (String mail : email) {
-                    MailUtils.inviaMail("testo", "oggetto", mail);
+                    MailUtils.inviaMail("Gentile impiegato (matricola: " + DBMS.getMatricola(mail) + ") la sua richiesta di sciopero e' stata accettata", "Richiesta di sciopero", mail);
                     DBMS.eliminaTurno(DBMS.getMatricola(mail));
                 }
             } else {
                 for (String mail : email) {
-                    MailUtils.inviaMail("testo", "oggetto", mail);
+                    MailUtils.inviaMail("Gentile impiegato (matricola: " + DBMS.getMatricola(mail) + ") la sua richiesta di sciopero e' stata rifiutata", "Richiesta di sciopero", mail);
                 }
             }
             DBMS.eliminaRichiesteSciopero();
