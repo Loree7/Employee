@@ -10,4 +10,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Progetto" options="--add-exports java.desktop/com.apple.eawt=com.employee.progetto,com.employee.progetto" />
+    </option>
+  </component>
 </project>

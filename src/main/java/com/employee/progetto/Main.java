@@ -20,6 +20,7 @@ public class Main extends Application {
             Platform.exit();
             System.exit(0);
         });
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
         new GestoreLogin(stage);
     }
     public static void main(String[] args) {

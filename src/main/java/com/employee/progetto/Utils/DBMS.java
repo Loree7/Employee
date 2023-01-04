@@ -20,7 +20,7 @@ public class DBMS {
     public static Connection getConnection() {
         String databaseName = "dbTeam";
         String databaseUser = "root";
-        String databasePassword = "Lorenzo10";
+        String databasePassword = "root";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
         try {
@@ -719,6 +719,19 @@ public class DBMS {
         try {
             Statement statement = dbConnection.createStatement();
             statement.executeUpdate(iC);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void inserisciMalattia(LocalDate data_inizio,LocalDate data_fine,String matricola){
+        Connection dbConnection = getConnection();
+        String iM = "insert into astensioni (data_inizio,data_fine,tipo,id_impiegato) " +
+                "values ('" + data_inizio + "','" + data_fine + "','malattia'," + matricola + ")";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(iM);
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
