@@ -725,4 +725,17 @@ public class DBMS {
             e.getCause();
         }
     }
+    public static void inserisciMalattia(LocalDate data_inizio,LocalDate data_fine,String matricola){
+        Connection dbConnection = getConnection();
+        String iM = "insert into astensioni (data_inizio,data_fine,tipo,id_impiegato) " +
+                "values ('" + data_inizio + "','" + data_fine + "','malattia'," + matricola + ")";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(iM);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
 }

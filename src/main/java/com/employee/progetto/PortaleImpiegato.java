@@ -73,7 +73,7 @@ public class PortaleImpiegato {
         LocalDate now = LocalDate.now();
         LocalDate dataFineTrimestre= LocalDate.parse(DBMS.getDataInizioTrimestre()).plusMonths(3).plusDays(-1);
         //simulazione
-        now=dataFineTrimestre;
+        //now=dataFineTrimestre;
         if(now.equals(dataFineTrimestre))
             new GestoreRichiestaFerie();
         else

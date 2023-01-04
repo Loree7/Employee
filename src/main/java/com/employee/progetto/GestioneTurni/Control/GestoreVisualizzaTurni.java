@@ -5,7 +5,6 @@ import com.employee.progetto.GestioneTurni.Boundary.MenuVisualizzaTurni;
 import com.employee.progetto.GestioneTurni.Boundary.ModuloVisualizzaTurni;
 import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.Utils;
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 

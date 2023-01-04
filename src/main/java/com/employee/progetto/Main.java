@@ -14,12 +14,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage){
         mainStage = stage;
-        stage.getIcons().add((new Image(getClass().getResourceAsStream("/images/logo2.png"))));
         stage.setTitle("Employee | Team DDLL");
         stage.setOnCloseRequest(c -> {
             Platform.exit();
             System.exit(0);
         });
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
         new GestoreLogin(stage);
     }
     public static void main(String[] args) {
