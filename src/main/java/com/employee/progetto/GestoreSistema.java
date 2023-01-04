@@ -24,11 +24,12 @@ public class GestoreSistema {
         }
         if(now.getDayOfMonth()==1)
            calcolaStipendio();
-        if(LocalTime.now().equals(LocalTime.parse("00:00:00")))
+        if(now.equals(LocalTime.parse("00:00:00")))
             gestioneSciopero();
+        controlloServizioAlto();
     }
     public void controlloOrario(LocalTime now){
-        controlloChiudiServizio();
+        controlloServizi();
     }
     public void generaTurni(){
         System.out.println("Generazione Turni");
@@ -142,14 +143,21 @@ public class GestoreSistema {
             DBMS.eliminaRichiesteSciopero();
         }
     }
-    public void controlloChiudiServizio(){
+    //fare testo email
+    public void controlloServizi(){
         int numDipendenti = 0;
         List<Integer> dipendenti = new ArrayList<>();
         List<String> servizi = DBMS.getServizi();
-        for(String s : servizi)
-            numDipendenti += DBMS.getNumDipendenti(s);
+        for(String s : servizi) {
+            int temp = DBMS.getNumDipendenti(s);
+            numDipendenti += temp;
+            if(temp==0)
+                DBMS.chiudiServizio(servizi.indexOf(s)+1);
+            else
+                DBMS.apriServizio(servizi.indexOf(s)+1);
+        }
         if(numDipendenti<=5) {
-            DBMS.chiudiServizio();
+            DBMS.chiudiServizio(4);
             List<Integer> turni = DBMS.getTurniServizio(4);
             for(Integer i : turni) {
                 for (String s : servizi)
@@ -165,6 +173,20 @@ public class GestoreSistema {
                 dipendenti.clear();
             }
         }else
-            DBMS.apriServizio();
+            DBMS.apriServizio(4);
+    }
+    public void controlloServizioAlto(){
+        List<Integer> dipendenti = new ArrayList<>();
+        for(String s : DBMS.getServizi())
+            dipendenti.add(DBMS.getNumDipendenti(s));
+        int min = Collections.min(dipendenti);
+        while(dipendenti.get(0)==min){//se il servizio a priorità più alta ha meno dipendenti glieli metto da quello con più dipendenti
+            int max = Collections.max(dipendenti);
+            List<Integer> turni = DBMS.getTurniServizio(dipendenti.indexOf(max)+1);
+            DBMS.aggiornaServizioTurno(turni.get(0),1); //faccio uno alla volta
+            dipendenti.clear();
+            for(String s : DBMS.getServizi())
+                dipendenti.add(DBMS.getNumDipendenti(s));
+        }
     }
 }

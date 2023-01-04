@@ -37,6 +37,10 @@ public class GestoreComunicaRitardo {
             Utils.creaPannelloErrore("Non esiste un impiegato con i dati inseriti");
             return;
         }
+        if(id_turno==-5){
+            Utils.creaPannelloErrore("Non puoi comunicare il ritardo se non sono passati 10m dall'inizio del turno");
+            return;
+        }
         Utils.creaPannelloConferma("Ritardo comunicato correttamente");
         s.close();
         DBMS.rilevaPresenza(id_turno);

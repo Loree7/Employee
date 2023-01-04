@@ -557,14 +557,15 @@ public class DBMS {
                     if (queryResult.getBoolean(3))
                         return -2;
                     LocalTime now = LocalTime.now();
-                    //se l'orario corrente è dopo l'ora_inizio + 10 minuti
-                    if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10))){
+                    if(ritardo){
                         if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusHours(1)))
                             return -4;
-                        if(ritardo)
+                        if(now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10)))
                             return queryResult.getInt(1);
-                        return -1;
+                        return -5;
                     }
+                    if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10)))
+                        return -1;
                     return queryResult.getInt(1);
                 }else return 0;
             }else return -3;
@@ -612,6 +613,7 @@ public class DBMS {
         String rP = "select ora_inizio,ora_fine,id_impiegato,id_servizio from turno where id=" + id;
         String rilevaTurno = "update turno set rilevato=true where id=" + id;
         String updateOre;
+        String updateStatoServizio;
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(rP);
@@ -626,8 +628,10 @@ public class DBMS {
                 updateOre = "update utente set oreServizio3 = oreServizio3 +"+(int) ore+" where matricola="+queryResult.getInt(3);
             else
                 updateOre = "update utente set oreServizio3 = oreServizio3 +"+(int) ore+" where matricola="+queryResult.getInt(3);
+            updateStatoServizio = "update servizio set stato='attivo' where id="+queryResult.getInt(4);
             statement.executeUpdate(rilevaTurno);
             statement.executeUpdate(updateOre);
+            statement.executeUpdate(updateStatoServizio);
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
@@ -794,9 +798,9 @@ public class DBMS {
             e.getCause();
         }
     }
-    public static void chiudiServizio(){
+    public static void chiudiServizio(int id){
         Connection dbConnection = getConnection();
-        String cS = "update servizio set stato='chiuso' where id=4";
+        String cS = "update servizio set stato='chiuso' where id="+id;
         try {
             Statement statement = dbConnection.createStatement();
             statement.executeUpdate(cS);
@@ -806,9 +810,9 @@ public class DBMS {
             e.getCause();
         }
     }
-    public static void apriServizio(){
+    public static void apriServizio(int id){
         Connection dbConnection = getConnection();
-        String cS = "update servizio set stato='attivo' where id=4";
+        String cS = "update servizio set stato='attivo' where id="+id;
         try {
             Statement statement = dbConnection.createStatement();
             statement.executeUpdate(cS);
