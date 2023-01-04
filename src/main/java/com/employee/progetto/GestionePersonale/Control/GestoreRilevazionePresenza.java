@@ -17,7 +17,7 @@ public class GestoreRilevazionePresenza {
             Utils.creaPannelloErrore("Compila tutti i campi");
             return;
         }
-        int id_turno = DBMS.controllaTurno(nome,cognome,matricola);
+        int id_turno = DBMS.controllaTurno(nome,cognome,matricola,false);
         if(id_turno==0){
             Utils.creaPannelloErrore("Non esiste un turno per la data corrente associato ai dati inseriti");
             return;

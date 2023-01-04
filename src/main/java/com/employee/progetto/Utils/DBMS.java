@@ -517,7 +517,7 @@ public class DBMS {
         }
         return null;
     }
-    public static int controllaTurno(String nome,String cognome,String matricola){
+    public static int controllaTurno(String nome,String cognome,String matricola,boolean ritardo){
         Connection dbConnection = getConnection();
         String cI = "select matricola from utente where matricola="+matricola+" and nome='"+nome+"' and cognome='"+cognome+"'";
         String cT = "select id,ora_inizio,rilevato from turno where id_impiegato=" + matricola + " and data = '" + LocalDate.now() + "'";
@@ -531,8 +531,13 @@ public class DBMS {
                         return -2;
                     LocalTime now = LocalTime.now();
                     //se l'orario corrente è dopo l'ora_inizio + 10 minuti
-                    if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10)))
+                    if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10))){
+                        if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusHours(1)))
+                            return -4;
+                        if(ritardo)
+                            return queryResult.getInt(1);
                         return -1;
+                    }
                     return queryResult.getInt(1);
                 }else return 0;
             }else return -3;
