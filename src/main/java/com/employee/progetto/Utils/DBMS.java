@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -477,6 +478,22 @@ public class DBMS {
             e.getCause();
         }
     }
+    public static int getStipendio(String matricola){
+        Connection dbConnection = getConnection();
+        String gS = "select stipendio from stipendio where Month(data) = '" + LocalDate.now().plusMonths(-1)+ "' AND id_impiegato = " + matricola;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gS);
+            if (queryResult.next())
+                return queryResult.getInt(1);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return 0;
+    }
+
     public static List<Integer> getOre(String matricola){
         List<Integer> ore = new ArrayList<>();
         Connection dbConnection = getConnection();
@@ -588,6 +605,7 @@ public class DBMS {
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
+            e.getCause();
             e.getCause();
         }
     }
