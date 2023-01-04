@@ -633,7 +633,7 @@ public class DBMS {
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(mT);
-            if(queryResult.next()) {
+            while(queryResult.next()) {
                 Turno t = new Turno(LocalTime.parse(queryResult.getString(1)), LocalTime.parse(queryResult.getString(2)), LocalDate.parse(queryResult.getString(3)), queryResult.getInt(4), queryResult.getString(5));
                 turni.add(t);
             }

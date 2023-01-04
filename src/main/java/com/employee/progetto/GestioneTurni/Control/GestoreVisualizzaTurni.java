@@ -24,7 +24,7 @@ public class GestoreVisualizzaTurni{
             return;
         }
         ObservableList<Turno> turni = DBMS.getTurni(data);
-        if(turni.isEmpty()){
+        if(turni.isEmpty()) {
             Utils.creaPannelloErrore("Non ci sono turni per la data inserita");
             return;
         }
