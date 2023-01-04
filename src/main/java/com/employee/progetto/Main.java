@@ -4,6 +4,7 @@ import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.Utils.DBMS;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class Main extends Application {
             Platform.exit();
             System.exit(0);
         });
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
         new GestoreLogin(stage);
     }
     public static void main(String[] args) {
