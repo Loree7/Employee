@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="329bdc67-0e9c-4c79-82af-6d831a0e129d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneImpiegato/MenuVisualizzaDati.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons8-occhio-chiuso-48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons8-visibile-48.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloRichiestaSciopero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloRichiestaSciopero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Entity/Impiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Entity/Impiegato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Entity/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Entity/Utente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/VisualizzaDati.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/MenuVisualizzaDati.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Control/GestoreVisualizzaDati.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Control/GestoreVisualizzaDati.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleAmministratore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleAmministratore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloRichiestaSciopero.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloRichiestaSciopero.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloLogin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloLogin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleImpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleImpiegato.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +51,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/images" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.com.employee.progetto.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.progetto.Main" />

@@ -4,6 +4,7 @@ import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.Utils.DBMS;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class Main extends Application {
     public void start(Stage stage){
         mainStage = stage;
         stage.setTitle("Employee | Team DDLL");
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/logo.png")));
         stage.setOnCloseRequest(c -> {
             Platform.exit();
             System.exit(0);

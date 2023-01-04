@@ -16,6 +16,13 @@ public class Utente {
         this.email = email;
     }
 
+    public Utente(String matricola, String nome, String cognome, String email) {
+        this.matricola = matricola;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+    }
+
     public Utente(String matricola, String nome, String cognome, String ruolo,String email,String password) {
         this(matricola,nome,cognome,ruolo,email);
         this.password = password;

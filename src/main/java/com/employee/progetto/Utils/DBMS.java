@@ -47,7 +47,7 @@ public class DBMS {
                         return new Amministratore(matricola, queryResult.getString(1), queryResult.getString(2)
                                 , queryResult.getString(3), queryResult.getString(4));
                     else return new Impiegato(matricola, queryResult.getString(1), queryResult.getString(2)
-                            , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5),queryResult.getInt(7));
+                            , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5),queryResult.getString(6),queryResult.getInt(7));
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
