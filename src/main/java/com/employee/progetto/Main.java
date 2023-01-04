@@ -15,6 +15,7 @@ public class Main extends Application {
     public void start(Stage stage){
         mainStage = stage;
         stage.setTitle("Employee | Team DDLL");
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/logo.png")));
         stage.setOnCloseRequest(c -> {
             Platform.exit();
             System.exit(0);
