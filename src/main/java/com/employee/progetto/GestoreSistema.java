@@ -4,10 +4,7 @@ import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.MailUtils;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GestoreSistema {
     public void controlloData(LocalDate now){
@@ -147,12 +144,26 @@ public class GestoreSistema {
     }
     public void controlloChiudiServizio(){
         int numDipendenti = 0;
-        for(String s : DBMS.getServizi()){
+        List<Integer> dipendenti = new ArrayList<>();
+        List<String> servizi = DBMS.getServizi();
+        for(String s : servizi)
             numDipendenti += DBMS.getNumDipendenti(s);
-        }
         if(numDipendenti<=5) {
             DBMS.chiudiServizio();
-
+            List<Integer> turni = DBMS.getTurniServizio(4);
+            for(Integer i : turni) {
+                for (String s : servizi)
+                    dipendenti.add(DBMS.getNumDipendenti(s));
+                int min = Collections.min(dipendenti);
+                if (min+1 == dipendenti.get(0)) //il servizio 1 ne deve avere 1 in più degli altri
+                    DBMS.aggiornaServizioTurno(i, 1);
+                else if (min == dipendenti.get(1))
+                    DBMS.aggiornaServizioTurno(i, 2);
+                else
+                    DBMS.aggiornaServizioTurno(i, 3);
+                MailUtils.inviaMail("testo", "oggetto", DBMS.getEmail(i.toString()));
+                dipendenti.clear();
+            }
         }else
             DBMS.apriServizio();
     }

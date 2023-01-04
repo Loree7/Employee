@@ -565,36 +565,23 @@ public class DBMS {
         }
         return 0;
     }
-    /*public static int controllaTurno(String matricola){
+    public static int controllaInTurno(String matricola){
         Connection dbConnection = getConnection();
-        String cT = "select id from turno where id_impiegato=" + matricola + " and data = '" + LocalDate.now() + "'";
+        String cI = "select id from turno where rilevato=true and ora_inizio<='"+LocalTime.now()+"' and ora_fine>='"+LocalTime.now()+"'" +
+                " and id_impiegato=" + matricola + " and data = '" + LocalDate.now() + "'";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(cI);
-            if(queryResult.next()) { //se esiste quell'impiegato
-                queryResult = statement.executeQuery(cT);
-                if (queryResult.next()) {
-                    if (queryResult.getBoolean(3))
-                        return -2;
-                    LocalTime now = LocalTime.now();
-                    //se l'orario corrente è dopo l'ora_inizio + 10 minuti
-                    if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10))){
-                        if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusHours(1)))
-                            return -4;
-                        if(ritardo)
-                            return queryResult.getInt(1);
-                        return -1;
-                    }
-                    return queryResult.getInt(1);
-                }else return 0;
-            }else return -3;
+            if(queryResult.next()) {
+                return  queryResult.getInt(1);
+            }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
             e.getCause();
         }
         return 0;
-    }*/
+    }
     public static String getRuolo(int id){
         List<String> servizi = new ArrayList<>();
         Connection dbConnection = getConnection();
@@ -809,5 +796,49 @@ public class DBMS {
             e.printStackTrace();
             e.getCause();
         }
+    }
+    public static void aggiornaServizioTurno(int id_turno,int id_servizio){
+        Connection dbConnection = getConnection();
+        String aS = "update turno set id_servizio="+id_servizio+" where id="+id_turno;
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(aS);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static String getEmail(String matricola){
+        Connection dbConnection = getConnection();
+        String gE = "select email from utente where matricola="+matricola;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gE);
+            if(queryResult.next())
+                return queryResult.getString(1);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static List<Integer> getTurniServizio(int id_servizio){
+        List<Integer> turni = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gT = "select id from turno where id_servizio="+id_servizio;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gT);
+            while(queryResult.next())
+                turni.add(queryResult.getInt(1));
+            return turni;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
     }
 }
