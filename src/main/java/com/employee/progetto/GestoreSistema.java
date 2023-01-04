@@ -30,6 +30,9 @@ public class GestoreSistema {
         if(LocalTime.now().equals(LocalTime.parse("00:00:00")))
             gestioneSciopero();
     }
+    public void controlloOrario(LocalTime now){
+        controlloChiudiServizio();
+    }
     public void generaTurni(){
         System.out.println("Generazione Turni");
         List<Integer> numImpiegati = DBMS.getNumImpiegati();
@@ -141,5 +144,16 @@ public class GestoreSistema {
             }
             DBMS.eliminaRichiesteSciopero();
         }
+    }
+    public void controlloChiudiServizio(){
+        int numDipendenti = 0;
+        for(String s : DBMS.getServizi()){
+            numDipendenti += DBMS.getNumDipendenti(s);
+        }
+        if(numDipendenti<=5) {
+            DBMS.chiudiServizio();
+
+        }else
+            DBMS.apriServizio();
     }
 }

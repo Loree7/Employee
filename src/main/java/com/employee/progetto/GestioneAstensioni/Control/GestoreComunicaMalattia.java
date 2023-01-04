@@ -34,6 +34,9 @@ public class GestoreComunicaMalattia {
             Utils.creaPannelloConferma("Malattia comunicata correttamente");
             s.close(); //chiudo modulo
             DBMS.inserisciMalattia(data_inizio,data_fine,matricola);
+            while(data_inizio.isBefore(data_fine) || data_inizio.isEqual(data_fine)){
+
+            }
         }else
             Utils.creaPannelloErrore("La data d'inizio o di fine, o entrambe, rientrano in delle astensioni già esistenti");
     }

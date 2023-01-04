@@ -21,7 +21,7 @@ public class DBMS {
     public static Connection getConnection() {
         String databaseName = "dbTeam";
         String databaseUser = "root";
-        String databasePassword = "root";
+        String databasePassword = "Lorenzo10";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
         try {
@@ -565,6 +565,36 @@ public class DBMS {
         }
         return 0;
     }
+    /*public static int controllaTurno(String matricola){
+        Connection dbConnection = getConnection();
+        String cT = "select id from turno where id_impiegato=" + matricola + " and data = '" + LocalDate.now() + "'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(cI);
+            if(queryResult.next()) { //se esiste quell'impiegato
+                queryResult = statement.executeQuery(cT);
+                if (queryResult.next()) {
+                    if (queryResult.getBoolean(3))
+                        return -2;
+                    LocalTime now = LocalTime.now();
+                    //se l'orario corrente è dopo l'ora_inizio + 10 minuti
+                    if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10))){
+                        if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusHours(1)))
+                            return -4;
+                        if(ritardo)
+                            return queryResult.getInt(1);
+                        return -1;
+                    }
+                    return queryResult.getInt(1);
+                }else return 0;
+            }else return -3;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return 0;
+    }*/
     public static String getRuolo(int id){
         List<String> servizi = new ArrayList<>();
         Connection dbConnection = getConnection();
@@ -750,6 +780,30 @@ public class DBMS {
         try {
             Statement statement = dbConnection.createStatement();
             statement.executeUpdate(iM);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void chiudiServizio(){
+        Connection dbConnection = getConnection();
+        String cS = "update servizio set stato='chiuso' where id=4";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(cS);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void apriServizio(){
+        Connection dbConnection = getConnection();
+        String cS = "update servizio set stato='attivo' where id=4";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(cS);
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
