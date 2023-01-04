@@ -10,6 +10,7 @@ import com.employee.progetto.GestionePersonale.Boundary.ModuloLogin;
 import com.employee.progetto.GestionePersonale.Control.GestoreComunicaStraordinari;
 import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.GestionePersonale.Control.GestoreRilevazionePresenza;
+import com.employee.progetto.GestioneServizi.Control.GestoreVisualizzaServizi;
 import com.employee.progetto.GestioneTurni.Control.GestoreVisualizzaTurni;
 import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.Utils;
@@ -18,8 +19,6 @@ import javafx.fxml.FXML;
 import java.time.LocalDate;
 
 public class PortaleImpiegato {
-    @FXML
-    public void cliccaRivelazionePresenza() {new GestoreRilevazionePresenza();}
     @FXML
     public void cliccaVisualizzaTurni(){
         new GestoreVisualizzaTurni();
@@ -83,4 +82,6 @@ public class PortaleImpiegato {
     public void cliccaRichiestaSciopero(){
         new GestoreRichiestaSciopero();
     }
+    @FXML
+    public void cliccaVisualizzaServizi() { new GestoreVisualizzaServizi(); }
 }

@@ -28,7 +28,7 @@ public class VisualizzaServizi {
     @FXML
     private TableColumn<Servizio,Integer> numDipendentiColumn;
     @FXML
-    public void initialize (){
+    public void initialize(){
         ObservableList<Servizio> servizi = DBMS.prendiServizi();
         for(Servizio s : servizi)
             s.setNumDipendenti(DBMS.getNumDipendenti(s.getNome()));
