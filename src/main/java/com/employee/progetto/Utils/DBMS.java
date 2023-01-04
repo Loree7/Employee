@@ -235,13 +235,11 @@ public class DBMS {
     }
     public static Impiegato getImpiegatoMenoOre(LocalDate giorno){
         Connection dbConnection = getConnection();
-        System.out.println(giorno);
         String gI = "select matricola,nome,cognome,ruolo,email,(oreServizio1+oreServizio2+oreServizio3+oreServizio4) as ore " +
                 "from utente where ruolo != 'amministratore' and matricola not in " +
                 "(select id_impiegato from turno where data = '"+giorno+"') and matricola not in" +
                 "(select id_impiegato from astensioni where tipo != 'sciopero' and '"+giorno+"' between data_inizio and data_fine)" +
                 "order by ore limit 1";
-        System.out.println(gI);
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gI);
@@ -321,6 +319,18 @@ public class DBMS {
         try {
             Statement statement = dbConnection.createStatement();
             statement.executeUpdate(iT);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public static void sostituisciTurno(int id_turno,String matricola){
+        Connection dbConnection = getConnection();
+        String sT = "update turno set id_impiegato="+matricola+" where id="+id_turno;
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(sT);
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
@@ -565,15 +575,14 @@ public class DBMS {
         }
         return 0;
     }
-    public static int controllaInTurno(String matricola){
+    public static int controllaInTurno(String matricola,LocalDate data){
         Connection dbConnection = getConnection();
-        String cI = "select id from turno where rilevato=true and ora_inizio<='"+LocalTime.now()+"' and ora_fine>='"+LocalTime.now()+"'" +
-                " and id_impiegato=" + matricola + " and data = '" + LocalDate.now() + "'";
+        String cI = "select id from turno where id_impiegato=" + matricola + " and data = '" + data + "'";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(cI);
             if(queryResult.next()) {
-                return  queryResult.getInt(1);
+                return queryResult.getInt(1);
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();

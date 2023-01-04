@@ -1,8 +1,10 @@
 package com.employee.progetto.GestioneAstensioni.Control;
 
+import com.employee.progetto.Entity.Impiegato;
 import com.employee.progetto.GestioneAstensioni.Boundary.ModuloComunicaMalattia;
 import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.Utils.DBMS;
+import com.employee.progetto.Utils.MailUtils;
 import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
@@ -35,7 +37,19 @@ public class GestoreComunicaMalattia {
             s.close(); //chiudo modulo
             DBMS.inserisciMalattia(data_inizio,data_fine,matricola);
             while(data_inizio.isBefore(data_fine) || data_inizio.isEqual(data_fine)){
-
+                int id_turno = DBMS.controllaInTurno(GestoreLogin.getUtente().getMatricola(),data_inizio);
+                if(id_turno != 0){
+                    Impiegato impiegato = DBMS.getImpiegatoMenoOre(data_inizio);
+                    if(impiegato!=null) {
+                        Utils.creaPannelloConferma("Straordinari comunicati all'impiegato:\n" +
+                                impiegato.getNome() + " " + impiegato.getCognome());
+                        MailUtils.inviaMail(impiegato.getNome() + " " + impiegato.getCognome() + " sei stato scelto per" +
+                                        "svolgere gli straordinari giorno: " + data_inizio
+                                , "Straordinari", impiegato.getEmail());
+                        DBMS.sostituisciTurno(id_turno,impiegato.getMatricola());
+                    }
+                }
+                data_inizio = data_inizio.plusDays(1);
             }
         }else
             Utils.creaPannelloErrore("La data d'inizio o di fine, o entrambe, rientrano in delle astensioni già esistenti");
