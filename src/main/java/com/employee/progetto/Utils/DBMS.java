@@ -743,6 +743,18 @@ public class DBMS {
             e.getCause();
         }
     }
+    public static void eliminaTurno(String matricola,LocalDate data){
+        Connection dbConnection = getConnection();
+        String eT = "delete from turno where id_impiegato="+matricola+" and data='"+data+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(eT);
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
     public static void inserisciSciopero(String matriola,LocalDate data){
         Connection dbConnection = getConnection();
         String iS = "insert into astensioni (data_inizio,data_fine,tipo,id_impiegato) " +

@@ -47,7 +47,8 @@ public class GestoreComunicaMalattia {
                                         "svolgere gli straordinari giorno: " + data_inizio
                                 , "Straordinari", impiegato.getEmail());
                         DBMS.sostituisciTurno(id_turno,impiegato.getMatricola());
-                    }
+                    }else
+                        DBMS.eliminaTurno(GestoreLogin.getUtente().getMatricola(),data_inizio);
                 }
                 data_inizio = data_inizio.plusDays(1);
             }
