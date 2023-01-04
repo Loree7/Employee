@@ -40,9 +40,9 @@
                </font>
             </Button>
             <Label layoutX="28.0" layoutY="124.0" text="Matricola" />
-            <Hyperlink fx:id="rilevazionePresenza" layoutX="94.0" layoutY="327.0" onAction="#cliccaRilevazionePresenza" prefHeight="25.0" prefWidth="134.0" text="Rilevazione Presenza">
+            <Hyperlink fx:id="rilevazionePresenza" layoutX="94.0" layoutY="327.0" onAction="#cliccaRilevazionePresenza" prefHeight="25.0" prefWidth="147.0" text="Rilevazione Presenza">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Hyperlink>
          </children>

@@ -37,7 +37,7 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurniAmministratore" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
+      <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>

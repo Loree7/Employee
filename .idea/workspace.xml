@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="329bdc67-0e9c-4c79-82af-6d831a0e129d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloRichiestaSciopero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloRichiestaSciopero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleAmministratore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleAmministratore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloRichiestaSciopero.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloRichiestaSciopero.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloLogin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestionePersonale/ModuloLogin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/PortaleAmministratore.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +93,17 @@
       <updated>1671652037180</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Employee$com_employee_progetto_Main.ic" NAME="com.employee.progetto.Main Coverage Results" MODIFIED="1672339677978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

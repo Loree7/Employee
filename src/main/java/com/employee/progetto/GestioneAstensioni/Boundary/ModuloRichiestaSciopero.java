@@ -17,7 +17,7 @@ public class ModuloRichiestaSciopero {
     @FXML
     private DatePicker data;
     @FXML
-    public void cliccaRichiedi(){
+    public void cliccaRichiestaSciopero(){
         data.requestFocus();
         gestoreRichiestaSciopero.richiediSciopero(data.getValue(),(Stage) data.getScene().getWindow());
     }

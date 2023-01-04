@@ -173,7 +173,7 @@ public class DBMS {
         return true;
     }
     public static boolean controllaAstensione(LocalDate data_inizio,LocalDate data_fine,String matricola){
-        //mi dice se la matricola è in astenssione nelle date inserite
+        //mi dice se la matricola è in astensione nelle date inserite
         Connection dbConnection = getConnection();
         String cF = "select id from astensioni where exists (select * from astensioni where data_inizio between '" +
                 data_inizio + "' and '" + data_fine + "' or data_fine between '" + data_inizio + "' and '" + data_fine +

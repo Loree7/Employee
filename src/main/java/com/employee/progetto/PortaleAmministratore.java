@@ -31,7 +31,7 @@ public class PortaleAmministratore {
     @FXML
     public void cliccaComunicaStraordinari(){new GestoreComunicaStraordinari();}
     @FXML
-    public void cliccaVisualizzaTurniAmministratore(){
+    public void cliccaVisualizzaTurni(){
         new GestoreVisualizzaTurni();
     }
     @FXML

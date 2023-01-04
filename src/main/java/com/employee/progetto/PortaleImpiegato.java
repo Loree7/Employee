@@ -21,7 +21,7 @@ public class PortaleImpiegato {
     @FXML
     public void cliccaRivelazionePresenza() {new GestoreRilevazionePresenza();}
     @FXML
-    public void cliccaVisualizzaTurniImpiegato(){
+    public void cliccaVisualizzaTurni(){
         new GestoreVisualizzaTurni();
     }
     @FXML

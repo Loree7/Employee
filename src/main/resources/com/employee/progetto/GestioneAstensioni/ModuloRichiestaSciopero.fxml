@@ -7,6 +7,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneAstensioni.Boundary.ModuloRichiestaSciopero">
    <children>
       <DatePicker fx:id="data" layoutX="195.0" layoutY="112.0" promptText="data sciopero" />
-      <Button layoutX="239.0" layoutY="187.0" mnemonicParsing="false" onAction="#cliccaRichiedi" text="Richiedi" />
+      <Button layoutX="239.0" layoutY="187.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" text="Richiedi" />
    </children>
 </AnchorPane>
