@@ -10,5 +10,6 @@
       <Button layoutX="152.0" layoutY="200.0" mnemonicParsing="false" onAction="#cliccaRichiestaPermesso" text="Richiesta Permesso" />
       <Button layoutX="143.0" layoutY="245.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" text="Richiesta Sciopero" />
       <Button layoutX="143.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaComunicaCongedo" text="Comunica Congedo Parentale" />
+      <Button layoutX="143.0" layoutY="327.0" mnemonicParsing="false" onAction="#cliccaComunicaMalattia" text="Comunica Malattia" />
    </children>
 </AnchorPane>
