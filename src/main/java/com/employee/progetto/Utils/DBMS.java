@@ -864,7 +864,8 @@ public class DBMS {
     public static List<Integer> getTurniServizio(int id_servizio){
         List<Integer> turni = new ArrayList<>();
         Connection dbConnection = getConnection();
-        String gT = "select id from turno where id_servizio="+id_servizio;
+        String gT = "select id from turno where rilevato=true and id_servizio="+id_servizio+" and data='"+LocalDate.now()+"'" +
+                " and ora_inizio<='"+LocalTime.now()+"' and ora_fine>='"+LocalTime.now()+"'";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gT);
