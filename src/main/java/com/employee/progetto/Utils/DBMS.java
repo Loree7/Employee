@@ -573,6 +573,32 @@ public class DBMS {
         }
         return 0;
     }
+    public static int controllaUscita(String nome,String cognome,String matricola){
+        Connection dbConnection = getConnection();
+        String cI = "select matricola from utente where matricola="+matricola+" and nome='"+nome+"' and cognome='"+cognome+"'";
+        String cT = "select id,ora_fine,rilevato from turno where id_impiegato=" + matricola + " and data = '" + LocalDate.now() + "'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(cI);
+            if(queryResult.next()) { //se esiste quell'impiegato
+                queryResult = statement.executeQuery(cT);
+                if (queryResult.next()) {
+                    if(!queryResult.getBoolean(3))
+                        return -3;
+                    LocalTime now = LocalTime.now();
+                    if(now.isAfter(LocalTime.parse(queryResult.getString(2)))
+                            || now.equals(LocalTime.parse(queryResult.getString(2))))
+                        return queryResult.getInt(1);
+                    return -1;
+                }else return 0;
+            }else return -2;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return 0;
+    }
     public static int controllaInTurno(String matricola,LocalDate data){
         Connection dbConnection = getConnection();
         String cI = "select id from turno where id_impiegato=" + matricola + " and data = '" + data + "'";

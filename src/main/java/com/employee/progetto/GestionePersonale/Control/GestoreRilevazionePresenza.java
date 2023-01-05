@@ -24,7 +24,6 @@ public class GestoreRilevazionePresenza {
         }
         if(id_turno==-1){
             Utils.creaPannelloErrore("Non puoi rilevare la presenza dopo 10 minuti dall'inizio del turno");
-            s.close(); //chiudo il modulo
             return;
         }
         if(id_turno==-2){

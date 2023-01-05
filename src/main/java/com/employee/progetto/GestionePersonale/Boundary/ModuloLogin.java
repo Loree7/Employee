@@ -2,6 +2,7 @@ package com.employee.progetto.GestionePersonale.Boundary;
 
 import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.GestionePersonale.Control.GestoreRilevazionePresenza;
+import com.employee.progetto.GestionePersonale.Control.GestoreRilevazioneUscita;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
@@ -27,7 +28,7 @@ public class ModuloLogin {
     @FXML
     private PasswordField password;
     @FXML
-    private Hyperlink rilevazionePresenza;
+    private Hyperlink rilevazionePresenza,rilevazioneUscita;
     @FXML
     public void cliccaLogin(){
         matricola.requestFocus();
@@ -38,5 +39,11 @@ public class ModuloLogin {
         matricola.requestFocus();
         rilevazionePresenza.setVisited(false);
         new GestoreRilevazionePresenza();
+    }
+    @FXML
+    public void cliccaRilevazioneUscita(){
+        matricola.requestFocus();
+        rilevazioneUscita.setVisited(false);
+        new GestoreRilevazioneUscita();
     }
 }
