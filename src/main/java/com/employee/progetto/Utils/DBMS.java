@@ -849,6 +849,21 @@ public class DBMS {
         }
         return null;
     }
+    public static String getEmail(int id_turno){
+        Connection dbConnection = getConnection();
+        String gM = "select id_impiegato from turno where id="+id_turno;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gM);
+            if(queryResult.next())
+                return DBMS.getEmail(queryResult.getString(1));
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
     public static List<Integer> getTurniServizio(int id_servizio){
         List<Integer> turni = new ArrayList<>();
         Connection dbConnection = getConnection();

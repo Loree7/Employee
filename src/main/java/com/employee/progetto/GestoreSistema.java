@@ -169,12 +169,13 @@ public class GestoreSistema {
                     DBMS.aggiornaServizioTurno(i, 2);
                 else
                     DBMS.aggiornaServizioTurno(i, 3);
-                MailUtils.inviaMail("testo", "oggetto", DBMS.getEmail(i.toString()));
+                MailUtils.inviaMail("testo", "oggetto", DBMS.getEmail(i));
                 dipendenti.clear();
             }
         }else
             DBMS.apriServizio(4);
     }
+    //fare testo email
     public void controlloServizioAlto(){
         List<Integer> dipendenti = new ArrayList<>();
         for(String s : DBMS.getServizi())
@@ -184,6 +185,7 @@ public class GestoreSistema {
             int max = Collections.max(dipendenti);
             List<Integer> turni = DBMS.getTurniServizio(dipendenti.indexOf(max)+1);
             DBMS.aggiornaServizioTurno(turni.get(0),1); //faccio uno alla volta
+            MailUtils.inviaMail("testo", "oggetto", DBMS.getEmail(turni.get(0)));
             dipendenti.clear();
             for(String s : DBMS.getServizi())
                 dipendenti.add(DBMS.getNumDipendenti(s));
