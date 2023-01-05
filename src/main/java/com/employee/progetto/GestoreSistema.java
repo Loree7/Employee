@@ -163,19 +163,13 @@ public class GestoreSistema {
                 for (String s : servizi)
                     dipendenti.add(DBMS.getNumDipendenti(s));
                 int min = Collections.min(dipendenti);
-                int id_servizio = 0;
-                if (min + 1 == dipendenti.get(0)) { //il servizio 1 ne deve avere 1 in più degli altri
+                if (min+1 == dipendenti.get(0)) //il servizio 1 ne deve avere 1 in più degli altri
                     DBMS.aggiornaServizioTurno(i, 1);
-                    id_servizio = 1;
-                } else if (min == dipendenti.get(1)) {
+                else if (min == dipendenti.get(1))
                     DBMS.aggiornaServizioTurno(i, 2);
-                    id_servizio = 2;
-            } else {
+                else
                     DBMS.aggiornaServizioTurno(i, 3);
-                    id_servizio = 3;
-                }
-                String email = DBMS.getEmail(i);
-                MailUtils.inviaMail("Gentile impiegato (matricola: " +  DBMS.getMatricola(email)+ "), a causa di mancanza di personale le comunichiamo il suo spostamento in un altro servizio (" + DBMS.getServizio(id_servizio) + ")", "Spostamento di servizio", email);
+                MailUtils.inviaMail("testo", "oggetto", DBMS.getEmail(i));
                 dipendenti.clear();
             }
         }else

@@ -41,8 +41,6 @@ public class GestoreComunicaMalattia {
                 if(id_turno != 0){
                     Impiegato impiegato = DBMS.getImpiegatoMenoOre(data_inizio);
                     if(impiegato!=null) {
-                        Utils.creaPannelloConferma("Straordinari comunicati all'impiegato:\n" +
-                                impiegato.getNome() + " " + impiegato.getCognome());
                         MailUtils.inviaMail(impiegato.getNome() + " " + impiegato.getCognome() + " sei stato scelto per" +
                                         "svolgere gli straordinari giorno: " + data_inizio
                                 , "Straordinari", impiegato.getEmail());

@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleImpiegato">
    <children>
       <Button layoutX="143.0" layoutY="69.0" mnemonicParsing="false" onAction="#cliccaRichiestaFerie" text="Richiesta Ferie" />
-      <Button layoutX="143.0" layoutY="138.0" mnemonicParsing="false" onAction="#cliccaComunicaRitardo" text="Comunica Ritardo" />
+      <Button layoutX="145.0" layoutY="125.0" mnemonicParsing="false" onAction="#cliccaComunicaRitardo" text="Comunica Ritardo" />
       <Button layoutX="152.0" layoutY="200.0" mnemonicParsing="false" onAction="#cliccaRichiestaPermesso" text="Richiesta Permesso" />
       <Button layoutX="143.0" layoutY="245.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" text="Richiesta Sciopero" />
       <Button layoutX="143.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaComunicaCongedo" text="Comunica Congedo Parentale" />
@@ -15,5 +15,6 @@
       <Button layoutX="397.0" layoutY="226.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" text="Visualizza Servizi" />
       <Button layoutX="405.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" text="Visualizza Turni" />
       <Button layoutX="405.0" layoutY="112.0" mnemonicParsing="false" onAction="#cliccaComunicaMalattia" text="Comunica Malattia" />
+      <Button layoutX="157.0" layoutY="164.0" mnemonicParsing="false" onAction="#cliccaComunicaAssenza" text="Comunica Assenza" />
    </children>
 </AnchorPane>
