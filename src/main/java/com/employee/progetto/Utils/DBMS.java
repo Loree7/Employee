@@ -4,10 +4,7 @@ import com.employee.progetto.Entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -874,6 +871,24 @@ public class DBMS {
             while(queryResult.next())
                 turni.add(queryResult.getInt(1));
             return turni;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+
+    public static String getServizio(int id_servizio) {
+//        List<String> servizi = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gS = "select nome from servizio where id=" + id_servizio;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gS);
+            if (queryResult.next()) {
+                return queryResult.getString(1);
+            }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
