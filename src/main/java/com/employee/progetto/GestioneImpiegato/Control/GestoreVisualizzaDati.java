@@ -1,10 +1,7 @@
 package com.employee.progetto.GestioneImpiegato.Control;
 
-import com.employee.progetto.Entity.Impiegato;
 import com.employee.progetto.GestioneImpiegato.Boundary.MenuVisualizzaDati;
-import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import com.employee.progetto.Utils.Utils;
-import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 
 public class GestoreVisualizzaDati {

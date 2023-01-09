@@ -1,18 +1,11 @@
 package com.employee.progetto.GestioneImpiegato.Boundary;
 
 import com.employee.progetto.Entity.Impiegato;
-import com.employee.progetto.Entity.Servizio;
-import com.employee.progetto.GestioneAstensioni.Control.GestoreComunicaAssenza;
 import com.employee.progetto.GestioneImpiegato.Control.GestoreSituazioneLavorativa;
 import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
-import com.employee.progetto.GestoreSistema;
 import com.employee.progetto.Utils.DBMS;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuSituazioneLavorativa {
