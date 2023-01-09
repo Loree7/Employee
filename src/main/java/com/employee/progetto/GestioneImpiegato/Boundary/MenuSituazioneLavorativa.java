@@ -42,7 +42,6 @@ public class MenuSituazioneLavorativa {
         List<Integer> ore = DBMS.getOre(GestoreLogin.getUtente().getMatricola());
 
         ruolo.setText(GestoreLogin.getUtente().getRuolo());
-        ruolo.setText(GestoreLogin.getUtente().getRuolo());
         oreServizio1.setText(ore.get(0).toString());
         oreServizio2.setText(ore.get(1).toString());
         oreServizio3.setText(ore.get(2).toString());

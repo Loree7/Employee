@@ -26,7 +26,7 @@ public class GestoreComunicaRitardo {
         }
         if(id_turno==-4){
             Utils.creaPannelloErrore("Non puoi comunica il ritardo dopo 1 ora dall'inizio del turno");
-            s.close(); //chiudo il modulo
+            s.close(); //chiudo il moduloDBMS
             return;
         }
         if(id_turno==-2){
@@ -38,7 +38,7 @@ public class GestoreComunicaRitardo {
             return;
         }
         if(id_turno==-5){
-            Utils.creaPannelloErrore("Non puoi comunicare il ritardo se non sono passati 10m dall'inizio del turno");
+            Utils.creaPannelloErrore("Non puoi comunicare il ritardo se non sono passati 10m dall'inizio del turno. Vai su rileva presenza");
             return;
         }
         Utils.creaPannelloConferma("Ritardo comunicato correttamente");
