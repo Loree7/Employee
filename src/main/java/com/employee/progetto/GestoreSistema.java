@@ -26,9 +26,9 @@ public class GestoreSistema {
            calcolaStipendio();
         if(now.equals(LocalTime.parse("00:00:00")))
             gestioneSciopero();
-        controlloServizioAlto();
     }
     public void controlloOrario(LocalTime now){
+        controlloServizioAlto();
         controlloServizi();
     }
     public void generaTurni(){

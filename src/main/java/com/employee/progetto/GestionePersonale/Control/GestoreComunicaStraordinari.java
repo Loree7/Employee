@@ -44,7 +44,7 @@ public class GestoreComunicaStraordinari {
                     Utils.creaPannelloErrore("Non esiste un impiegato libero per questa data");
                     return;
                 }
-                Utils.creaPannelloConferma("Straordinari comunicati all'impiegato:\n" +
+                Utils.creaPannelloConferma("Straordinari comunicati all'impiegato:\n" + impiegato.getMatricola() + " " +
                         impiegato.getNome() + " " + impiegato.getCognome());
                 MailUtils.inviaMail(impiegato.getNome() + " " + impiegato.getCognome() + " sei stato scelto per" +
                                 "svolgere gli straordinari giorno: " + giorno

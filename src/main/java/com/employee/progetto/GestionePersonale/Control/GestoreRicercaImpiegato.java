@@ -56,8 +56,8 @@ public class GestoreRicercaImpiegato {
                             return;
                         }
                     }
-                    DBMS.modifica(impiegato.getMatricola(), nome, cognome, ruolo, email, password);
                     Utils.creaPannelloConferma("Impiegato modificato correttamente");
+                    DBMS.modifica(impiegato.getMatricola(), nome, cognome, ruolo, email, password);
                     MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
                                     +", Email: "+email+", Password: "+password+ ", Matricola: "+DBMS.getMatricola(email)
                             ,"Invio Credenziali",email);
