@@ -36,7 +36,11 @@ public class Utils {
     public static Object cambiaInterfaccia(String interfaccia,String titolo,Stage stage, Callback c) {
         FXMLLoader loader = creaLoader(interfaccia);
         loader.setControllerFactory(c);
-        creaInterfaccia(loader, 600, 400, stage);
+        if (titolo.equals("Portale Impiegato")) {
+            creaInterfaccia(loader, 700, 400, stage);
+        } else {
+            creaInterfaccia(loader, 600, 400, stage);
+        }
         stage.setTitle(titolo);
         return loader.getController();
     }

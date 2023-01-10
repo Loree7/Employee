@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleImpiegato">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleImpiegato">
    <children>
       <Button layoutX="14.0" layoutY="71.0" mnemonicParsing="false" onAction="#cliccaRichiestaFerie" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiesta Ferie" textFill="WHITE">
          <font>
@@ -22,7 +22,7 @@
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="371.0" layoutY="408.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiesta Sciopero" textFill="WHITE">
+      <Button layoutX="243.0" layoutY="71.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiesta Sciopero" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
@@ -30,23 +30,23 @@
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="371.0" layoutY="71.0" mnemonicParsing="false" onAction="#cliccaSituazioneLavorativa" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Situazione Lavorativa" textFill="WHITE">
+      <Button layoutX="472.0" layoutY="71.0" mnemonicParsing="false" onAction="#cliccaSituazioneLavorativa" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Situazione Lavorativa" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="369.0" layoutY="276.0" mnemonicParsing="false" onAction="#cliccaVisualizzaDati" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza dati" textFill="WHITE">
+      <Button layoutX="472.0" layoutY="276.0" mnemonicParsing="false" onAction="#cliccaVisualizzaDati" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza dati" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="369.0" layoutY="209.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Servizi" textFill="WHITE">
+      <Button layoutX="472.0" layoutY="209.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Servizi" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="369.0" layoutY="342.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
+      <Button layoutX="472.0" layoutY="342.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="371.0" layoutY="140.0" mnemonicParsing="false" onAction="#cliccaComunicaMalattia" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Malattia" textFill="WHITE">
+      <Button layoutX="472.0" layoutY="140.0" mnemonicParsing="false" onAction="#cliccaComunicaMalattia" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Malattia" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
@@ -54,7 +54,7 @@
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
-      <Pane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: F89C4D;">
+      <Pane prefHeight="48.0" prefWidth="700.0" style="-fx-background-color: F89C4D;">
          <children>
             <Label layoutX="70.0" layoutY="13.0" text="Portale Impiegato" textFill="WHITE">
                <font>
