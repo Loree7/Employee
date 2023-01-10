@@ -32,17 +32,17 @@
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="14.0" layoutY="240.0" mnemonicParsing="false" onAction="#cliccaComunicaStraordinari" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Straordinari" textFill="WHITE">
+      <Button layoutX="372.0" layoutY="168.0" mnemonicParsing="false" onAction="#cliccaComunicaStraordinari" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Straordinari" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
+      <Button layoutX="14.0" layoutY="249.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="265.0" layoutY="88.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Servizi" textFill="WHITE">
+      <Button layoutX="372.0" layoutY="88.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Servizi" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
