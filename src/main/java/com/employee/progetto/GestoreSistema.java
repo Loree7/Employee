@@ -143,7 +143,6 @@ public class GestoreSistema {
             DBMS.eliminaRichiesteSciopero();
         }
     }
-    //fare testo email
     public void controlloServizi(){
         int numDipendenti = 0;
         List<Integer> dipendenti = new ArrayList<>();
@@ -163,19 +162,24 @@ public class GestoreSistema {
                 for (String s : servizi)
                     dipendenti.add(DBMS.getNumDipendenti(s));
                 int min = Collections.min(dipendenti);
-                if (min+1 == dipendenti.get(0)) //il servizio 1 ne deve avere 1 in più degli altri
+                int id_servizio = 0;
+                if (min+1 == dipendenti.get(0)) { //il servizio 1 ne deve avere 1 in più degli altri
                     DBMS.aggiornaServizioTurno(i, 1);
-                else if (min == dipendenti.get(1))
+                    id_servizio = 1;
+                } else if (min == dipendenti.get(1)) {
                     DBMS.aggiornaServizioTurno(i, 2);
-                else
+                    id_servizio = 2;
+                }else {
                     DBMS.aggiornaServizioTurno(i, 3);
-                MailUtils.inviaMail("testo", "oggetto", DBMS.getEmail(i));
+                    id_servizio = 3;
+                }
+                String email = DBMS.getEmail(i);
+                MailUtils.inviaMail("Gentile impiegato (matricola: " + DBMS.getMatricola(email) + ") a causa di mancanza di personale, le notifichiamo il suo spostamento di servizio (" + DBMS.getServizio(id_servizio) + ")", "Spostamento di servizio", email);
                 dipendenti.clear();
             }
         }else
             DBMS.apriServizio(4);
     }
-    //fare testo email
     public void controlloServizioAlto(){
         List<Integer> dipendenti = new ArrayList<>();
         for(String s : DBMS.getServizi())
@@ -185,7 +189,8 @@ public class GestoreSistema {
             int max = Collections.max(dipendenti);
             List<Integer> turni = DBMS.getTurniServizio(dipendenti.indexOf(max)+1);
             DBMS.aggiornaServizioTurno(turni.get(0),1); //faccio uno alla volta
-            MailUtils.inviaMail("testo", "oggetto", DBMS.getEmail(turni.get(0)));
+            String email = DBMS.getEmail(turni.get(0));
+            MailUtils.inviaMail("Gentile impiegato (matricola: " + DBMS.getMatricola(email) + ") a causa di mancanza di personale, le notifichiamo il suo spostamento di servizio (" + DBMS.getServizio(1) + ")", "Spostamento di servizio", email);
             dipendenti.clear();
             for(String s : DBMS.getServizi())
                 dipendenti.add(DBMS.getNumDipendenti(s));

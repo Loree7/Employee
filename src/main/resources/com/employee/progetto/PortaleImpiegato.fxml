@@ -1,20 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleImpiegato">
+<AnchorPane prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleImpiegato">
    <children>
-      <Button layoutX="143.0" layoutY="69.0" mnemonicParsing="false" onAction="#cliccaRichiestaFerie" text="Richiesta Ferie" />
-      <Button layoutX="145.0" layoutY="125.0" mnemonicParsing="false" onAction="#cliccaComunicaRitardo" text="Comunica Ritardo" />
-      <Button layoutX="152.0" layoutY="200.0" mnemonicParsing="false" onAction="#cliccaRichiestaPermesso" text="Richiesta Permesso" />
-      <Button layoutX="143.0" layoutY="245.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" text="Richiesta Sciopero" />
-      <Button layoutX="143.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaComunicaCongedo" text="Comunica Congedo Parentale" />
-      <Button layoutX="360.0" layoutY="69.0" mnemonicParsing="false" onAction="#cliccaSituazioneLavorativa" text="Situazione Lavorativa" />
-      <Button layoutX="405.0" layoutY="164.0" mnemonicParsing="false" onAction="#cliccaVisualizzaDati" text="Visualizza dati" />
-      <Button layoutX="397.0" layoutY="226.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" text="Visualizza Servizi" />
-      <Button layoutX="405.0" layoutY="287.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" text="Visualizza Turni" />
-      <Button layoutX="405.0" layoutY="112.0" mnemonicParsing="false" onAction="#cliccaComunicaMalattia" text="Comunica Malattia" />
-      <Button layoutX="157.0" layoutY="164.0" mnemonicParsing="false" onAction="#cliccaComunicaAssenza" text="Comunica Assenza" />
+      <Button layoutX="14.0" layoutY="71.0" mnemonicParsing="false" onAction="#cliccaRichiestaFerie" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiesta Ferie" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="14.0" layoutY="140.0" mnemonicParsing="false" onAction="#cliccaComunicaRitardo" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Ritardo" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="14.0" layoutY="209.0" mnemonicParsing="false" onAction="#cliccaRichiestaPermesso" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiesta Permesso" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="371.0" layoutY="408.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiesta Sciopero" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="14.0" layoutY="276.0" mnemonicParsing="false" onAction="#cliccaComunicaCongedo" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Congedo" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="371.0" layoutY="71.0" mnemonicParsing="false" onAction="#cliccaSituazioneLavorativa" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Situazione Lavorativa" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="369.0" layoutY="276.0" mnemonicParsing="false" onAction="#cliccaVisualizzaDati" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza dati" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="369.0" layoutY="209.0" mnemonicParsing="false" onAction="#cliccaVisualizzaServizi" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Servizi" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="369.0" layoutY="342.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Visualizza Turni" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="371.0" layoutY="140.0" mnemonicParsing="false" onAction="#cliccaComunicaMalattia" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Malattia" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="14.0" layoutY="342.0" mnemonicParsing="false" onAction="#cliccaComunicaAssenza" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica Assenza" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Pane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: F89C4D;">
+         <children>
+            <Label layoutX="70.0" layoutY="13.0" text="Portale Impiegato" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/icons8-female-working-with-a-laptop-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
