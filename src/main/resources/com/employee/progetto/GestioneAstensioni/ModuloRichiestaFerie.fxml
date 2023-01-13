@@ -3,14 +3,41 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneAstensioni.Boundary.ModuloRichiestaFerie">
    <children>
-      <Button layoutX="273.0" layoutY="200.0" mnemonicParsing="false" onAction="#cliccaRichiedi" text="Richiedi" />
-      <Label layoutX="137.0" layoutY="68.0" text="Data inizio:" />
-      <Label layoutX="137.0" layoutY="140.0" text="Data fine:" />
-      <DatePicker fx:id="data_inizio" layoutX="220.0" layoutY="63.0" />
-      <DatePicker fx:id="data_fine" layoutX="220.0" layoutY="135.0" />
+      <Button layoutX="193.0" layoutY="275.0" mnemonicParsing="false" onAction="#cliccaRichiedi" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiedi" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Label layoutX="117.0" layoutY="109.0" text="Data inizio">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font></Label>
+      <Label layoutX="123.0" layoutY="190.0" text="Data fine">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font></Label>
+      <DatePicker fx:id="data_inizio" layoutX="220.0" layoutY="106.0" />
+      <DatePicker fx:id="data_fine" layoutX="220.0" layoutY="187.0" />
+      <Pane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: F89C4D;">
+         <children>
+            <Label layoutX="70.0" layoutY="13.0" text="Modulo Richiesta Ferie" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-valigia-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

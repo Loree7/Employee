@@ -2,11 +2,38 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneAstensioni.Boundary.ModuloRichiestaSciopero">
    <children>
-      <DatePicker fx:id="data" layoutX="195.0" layoutY="112.0" promptText="data sciopero" />
-      <Button layoutX="239.0" layoutY="187.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" text="Richiedi" />
+      <DatePicker fx:id="data" layoutX="254.0" layoutY="136.0" promptText="data sciopero" />
+      <Button layoutX="193.0" layoutY="229.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiedi" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Pane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: F89C4D;">
+         <children>
+            <Label layoutX="70.0" layoutY="13.0" text="Modulo Richiesta Sciopero" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-sciopero-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="61.0" layoutY="139.0" text="Data dello sciopero">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
