@@ -11,8 +11,8 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneAstensioni.Boundary.ModuloComunicaCongedo">
    <children>
-      <DatePicker fx:id="data_inizio" layoutX="267.0" layoutY="116.0" promptText="data inizio" />
-      <DatePicker fx:id="data_fine" layoutX="267.0" layoutY="189.0" promptText="data fine" />
+      <DatePicker fx:id="data_inizio" layoutX="267.0" layoutY="116.0" promptText="data inizio" stylesheets="@../CssInterface/datePicker.css" />
+      <DatePicker fx:id="data_fine" layoutX="267.0" layoutY="189.0" promptText="data fine" stylesheets="@../CssInterface/datePicker.css" />
       <Button layoutX="193.0" layoutY="295.0" mnemonicParsing="false" onAction="#cliccaComunica" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Comunica" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />

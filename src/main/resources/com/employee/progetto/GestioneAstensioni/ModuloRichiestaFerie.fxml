@@ -23,8 +23,8 @@
          <font>
             <Font name="Arial" size="18.0" />
          </font></Label>
-      <DatePicker fx:id="data_inizio" layoutX="220.0" layoutY="106.0" />
-      <DatePicker fx:id="data_fine" layoutX="220.0" layoutY="187.0" />
+      <DatePicker fx:id="data_inizio" layoutX="220.0" layoutY="106.0" stylesheets="@../CssInterface/datePicker.css" />
+      <DatePicker fx:id="data_fine" layoutX="220.0" layoutY="187.0" stylesheets="@../CssInterface/datePicker.css" />
       <Pane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: F89C4D;">
          <children>
             <Label layoutX="70.0" layoutY="13.0" text="Modulo Richiesta Ferie" textFill="WHITE">

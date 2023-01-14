@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneTurni.Boundary.ModuloVisualizzaTurni">
    <children>
-      <DatePicker fx:id="data" layoutX="207.0" layoutY="157.0" promptText="data" />
+      <DatePicker fx:id="data" layoutX="207.0" layoutY="157.0" promptText="data" stylesheets="@../CssInterface/datePicker.css" />
       <Button layoutX="174.0" layoutY="235.0" mnemonicParsing="false" onAction="#cliccaVisualizzaTurni" prefHeight="60.0" prefWidth="251.0" style="-fx-background-color: #F89C4D;" text="Visualizza Turni" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="21.0" />

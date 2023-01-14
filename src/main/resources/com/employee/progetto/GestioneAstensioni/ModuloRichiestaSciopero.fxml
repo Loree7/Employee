@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneAstensioni.Boundary.ModuloRichiestaSciopero">
    <children>
-      <DatePicker fx:id="data" layoutX="254.0" layoutY="136.0" promptText="data sciopero" />
+      <DatePicker fx:id="data" layoutX="254.0" layoutY="136.0" promptText="data sciopero" stylesheets="@../CssInterface/datePicker.css" />
       <Button layoutX="193.0" layoutY="229.0" mnemonicParsing="false" onAction="#cliccaRichiestaSciopero" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Richiedi" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />

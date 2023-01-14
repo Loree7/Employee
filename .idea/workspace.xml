@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="329bdc67-0e9c-4c79-82af-6d831a0e129d" name="Changes" comment="Fix riga MenuSituazioneLavorativa">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons8-genitorialità-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons8-illness-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons8-partire-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons8-sciopero-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/icons8-valigia-48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/CssInterface/datePicker.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloComunicaAssenza.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloComunicaAssenza.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloComunicaCongedo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/employee/progetto/GestioneAstensioni/ModuloComunicaCongedo.fxml" afterDir="false" />
@@ -53,6 +49,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/employee/progetto/CssInterface" />
+      <recent name="$PROJECT_DIR$/src/main/resources/com/employee/progetto" />
       <recent name="$PROJECT_DIR$/src/main/resources/images" />
     </key>
   </component>
