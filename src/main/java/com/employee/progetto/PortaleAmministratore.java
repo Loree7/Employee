@@ -1,6 +1,5 @@
 package com.employee.progetto;
 
-import com.employee.progetto.GestionePersonale.Control.GestoreComunicaStraordinari;
 import com.employee.progetto.GestionePersonale.Control.GestoreRegistraImpiegato;
 import com.employee.progetto.GestionePersonale.Control.GestoreRicercaImpiegato;
 import com.employee.progetto.GestioneServizi.Control.GestoreVisualizzaServizi;
@@ -30,8 +29,6 @@ public class PortaleAmministratore {
     public void cliccaRicercaImpiegato(){
         new GestoreRicercaImpiegato();
     }
-    @FXML
-    public void cliccaComunicaStraordinari(){new GestoreComunicaStraordinari();}
     @FXML
     public void cliccaVisualizzaTurni(){
         new GestoreVisualizzaTurni();
