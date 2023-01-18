@@ -31,7 +31,7 @@ public class VisualizzaServizi {
     public void initialize(){
         ObservableList<Servizio> servizi = DBMS.prendiServizi();
         for(Servizio s : servizi)
-            s.setNumDipendenti(DBMS.getNumDipendenti(s.getNome()));
+            s.setNumDipendenti(DBMS.getNumDipendenti(s.getNome(),LocalDate.now()));
         servizioColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         statoColumn.setCellValueFactory(new PropertyValueFactory<>("stato"));
         numDipendentiColumn.setCellValueFactory(new PropertyValueFactory<>("numDipendenti"));

@@ -325,16 +325,15 @@ public class DBMS {
         }
         return null;
     }
-    public static int getNumDipendenti(String nome){
+    public static int getNumDipendenti(String nome,LocalDate data){
         Connection dbConnection = getConnection();
         String gS = "select id from servizio where nome='"+nome+"'";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gS);
             if(queryResult.next()) {
-                String gN = "select count(id_impiegato) from turno where rilevato=true and data='" + LocalDate.now() + "' and " +
-                        "id_servizio=" + queryResult.getInt(1) + " and ora_inizio<='"+LocalTime.now()+"' and " +
-                        "ora_fine>='"+LocalTime.now()+"'";
+                String gN = "select count(id_impiegato) from turno where data='" + data + "' and " +
+                        "id_servizio=" + queryResult.getInt(1);
                 queryResult = statement.executeQuery(gN);
                 if(queryResult.next())
                     return queryResult.getInt(1);
@@ -501,7 +500,6 @@ public class DBMS {
         }
     }
     public static void inserisciStipendio(String id_impiegato,int stipendio){
-        System.out.println(stipendio);
         Connection dbConnection = getConnection();
         String iS = "insert into stipendio (id_impiegato,stipendio,data) " +
                 "values (" + id_impiegato + "," + stipendio + ",'" + LocalDate.now() + "')";
@@ -921,8 +919,7 @@ public class DBMS {
     public static List<Integer> getTurniServizio(int id_servizio){
         List<Integer> turni = new ArrayList<>();
         Connection dbConnection = getConnection();
-        String gT = "select id from turno where rilevato=true and id_servizio="+id_servizio+" and data='"+LocalDate.now()+"'" +
-                " and ora_inizio<='"+LocalTime.now()+"' and ora_fine>='"+LocalTime.now()+"'";
+        String gT = "select id from turno where id_servizio="+id_servizio+" and data='"+LocalDate.now().plusDays(1)+"'";
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gT);

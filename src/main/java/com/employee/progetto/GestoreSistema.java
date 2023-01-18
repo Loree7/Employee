@@ -26,8 +26,17 @@ public class GestoreSistema {
            calcolaStipendio();
     }
     public void controlloOrario(LocalTime now){
-        controlloServizioAlto();
-        chiudiServizio();
+        List<String> servizi = DBMS.getServizi();
+        for(String s : servizi) {
+            if(DBMS.getNumDipendenti(s,LocalDate.now())==0)
+                DBMS.chiudiServizio(servizi.indexOf(s)+1);
+            else
+                DBMS.apriServizio(servizi.indexOf(s)+1);
+        }
+        if(now.equals(LocalTime.parse("20:00:00"))) {
+            chiudiServizio();
+            controlloServizioAlto();
+        }
         if(now.equals(LocalTime.parse("16:00:00")))
             gestioneSciopero();
     }
@@ -183,20 +192,15 @@ public class GestoreSistema {
         int numDipendenti = 0;
         List<Integer> dipendenti = new ArrayList<>();
         List<String> servizi = DBMS.getServizi();
-        for(String s : servizi) {
-            int temp = DBMS.getNumDipendenti(s);
-            numDipendenti += temp;
-            if(temp==0)
-                DBMS.chiudiServizio(servizi.indexOf(s)+1);
-            else
-                DBMS.apriServizio(servizi.indexOf(s)+1);
-        }
-        if(numDipendenti<=5) {
+        for(String s : servizi)
+            numDipendenti += DBMS.getNumDipendenti(s,LocalDate.now().plusDays(1));
+        //devono essere almeno 13 per coprire tutte le fasce orarie
+        if(numDipendenti<=12) {
             DBMS.chiudiServizio(4);
             List<Integer> turni = DBMS.getTurniServizio(4);
             for(Integer i : turni) {
                 for (String s : servizi)
-                    dipendenti.add(DBMS.getNumDipendenti(s));
+                    dipendenti.add(DBMS.getNumDipendenti(s,LocalDate.now().plusDays(1)));
                 int min = Collections.min(dipendenti);
                 int id_servizio = 0;
                 if (min+1 == dipendenti.get(0)) { //il servizio 1 ne deve avere 1 in più degli altri
@@ -219,7 +223,7 @@ public class GestoreSistema {
     public void controlloServizioAlto(){
         List<Integer> dipendenti = new ArrayList<>();
         for(String s : DBMS.getServizi())
-            dipendenti.add(DBMS.getNumDipendenti(s));
+            dipendenti.add(DBMS.getNumDipendenti(s,LocalDate.now().plusDays(1)));
         int min = Collections.min(dipendenti);
         while(dipendenti.get(0)==min){//se il servizio a priorità più alta ha meno dipendenti glieli metto da quello con più dipendenti
             int max = Collections.max(dipendenti);
@@ -229,7 +233,7 @@ public class GestoreSistema {
             MailUtils.inviaMail("Gentile impiegato (matricola: " + DBMS.getMatricola(email) + ") a causa di mancanza di personale, le notifichiamo il suo spostamento di servizio (" + DBMS.getServizio(1) + ")", "Spostamento di servizio", email);
             dipendenti.clear();
             for(String s : DBMS.getServizi())
-                dipendenti.add(DBMS.getNumDipendenti(s));
+                dipendenti.add(DBMS.getNumDipendenti(s,LocalDate.now().plusDays(1)));
         }
     }
 }
