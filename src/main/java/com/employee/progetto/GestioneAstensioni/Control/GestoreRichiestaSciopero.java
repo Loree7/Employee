@@ -7,6 +7,7 @@ import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class GestoreRichiestaSciopero {
     public GestoreRichiestaSciopero(){
@@ -27,6 +28,10 @@ public class GestoreRichiestaSciopero {
         }
         if(data.compareTo(LocalDate.now())==0){
             Utils.creaPannelloErrore("Non puoi richiedere lo sciopero per la data corrente");
+            return;
+        }
+        if(data.compareTo(LocalDate.now().plusDays(1))==0 && LocalTime.now().getHour()>=16){
+            Utils.creaPannelloErrore("Puoi richiedere lo sciopero per il giorno dopo solo se non sono passate le 16");
             return;
         }
         String matricola = GestoreLogin.getUtente().getMatricola();

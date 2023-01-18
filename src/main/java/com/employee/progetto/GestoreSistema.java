@@ -8,10 +8,10 @@ import java.util.*;
 
 public class GestoreSistema {
     public void controlloData(LocalDate now){
+        calcolaStipendio();
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
-        //simulazione :
-        //now = LocalDate.parse("2022-12-01");
-        //dataInizioTrimestre = LocalDate.parse("2022-12-01");
+        //simulazione genera turni:
+        //dataInizioTrimestre = now.plusMonths(-3);
         Period period = Period.between(dataInizioTrimestre,now);
         while(period.getYears()>0) { //in realtà non serve se inserisci una dataInizioTrimestre normale
            DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(9));
@@ -19,22 +19,25 @@ public class GestoreSistema {
            period = Period.between(dataInizioTrimestre,now);
         }
         if(period.getMonths() >= 3) {
-            DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3));
+            DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3).plusDays(1));
             generaTurni();
         }
         if(now.getDayOfMonth()==1)
            calcolaStipendio();
-        if(now.equals(LocalTime.parse("00:00:00")))
-            gestioneSciopero();
     }
     public void controlloOrario(LocalTime now){
         controlloServizioAlto();
-        controlloServizi();
+        chiudiServizio();
+        if(now.equals(LocalTime.parse("16:00:00")))
+            gestioneSciopero();
     }
     public void generaTurni(){
         System.out.println("Generazione Turni");
         List<Integer> numImpiegati = DBMS.getNumImpiegati();
         List<List<Integer>> impiegati = DBMS.getImpiegati();
+        int nImpiegati = 0;
+        int giorniRiposo = 1;
+        //fasccio in modo che il servizio 1 ha più impiegati
         for(int i=3;i>0;i--){
             if(numImpiegati.get(0)<numImpiegati.get(i)){
                 int k = numImpiegati.get(i) - numImpiegati.get(0);
@@ -48,20 +51,31 @@ public class GestoreSistema {
                 for(Integer integer:l)
                     impiegati.get(0).add(integer);
             }
+            nImpiegati += numImpiegati.get(i);
         }
+        nImpiegati += numImpiegati.get(0);
+        int numImpiegatiLiberi = nImpiegati/(7*giorniRiposo);
         HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(impiegati,false);
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
         LocalDate giorno = dataInizioTrimestre;
         Period period;
         boolean inAstensione = false;
+        List<Integer> matricole = new ArrayList<>();
+        for(List<Integer> l : impiegati)
+            for(Integer i : l)
+                matricole.add(i);
+        int indiceImpiegatoLibero = 0;
         do {
+            int controllo = numImpiegatiLiberi;
             for (int i = 0; i < impiegati.size(); i++) {
+                int fasciaOraria = 1;
                 for (int j = 0; j < impiegati.get(i).size(); j++) {
-                    if(!(giorno.getDayOfWeek().name().equals("SATURDAY") || giorno.getDayOfWeek().name().equals("SUNDAY"))) {
+                    //se controllo è 0 significa che ho dato già finito di dare i giorni di riposo
+                    if(matricole.get(indiceImpiegatoLibero)!=impiegati.get(i).get(j) || controllo==0) {
                         //se la matricola è dentro le matricole che hanno delle astensioni
-                        if (astensioni.containsKey(impiegati.get(i).get(j))) {
+                        if (astensioni.containsKey(impiegati.get(i).get(j).toString())) {
                             //per ogni lista che contiene data inizio e fine di ogni astensione di quella matricola
-                            for (List<LocalDate> l : astensioni.get(impiegati.get(i).get(j))) {
+                            for (List<LocalDate> l : astensioni.get((impiegati.get(i).get(j)).toString())) {
                                 //se il giorno non è prima l'inizio astensione o dopo la fine dell'astensione allora è in astensione
                                 if (!(giorno.isBefore(l.get(0)) || giorno.isAfter(l.get(1)))) {
                                     inAstensione = true;
@@ -70,14 +84,26 @@ public class GestoreSistema {
                             }
                         }
                         if (!inAstensione) {
-                            if (j % 2 == 0)
-                                DBMS.inserisciTurno(LocalTime.parse("06:00:00"), LocalTime.parse("14:00:00")
+                            //se controllo è 0 significa che ho dato già finito di dare i giorni di riposo
+                            if (fasciaOraria == 1)
+                                DBMS.inserisciTurno(LocalTime.parse("00:00:00"), LocalTime.parse("08:00:00")
                                         , giorno, (i + 1), impiegati.get(i).get(j).toString());
-                            else
-                                DBMS.inserisciTurno(LocalTime.parse("14:00:00"), LocalTime.parse("22:00:00")
+                            if (fasciaOraria == 2)
+                                DBMS.inserisciTurno(LocalTime.parse("08:00:00"), LocalTime.parse("16:00:00")
                                         , giorno, (i + 1), impiegati.get(i).get(j).toString());
+                            if (fasciaOraria == 3) {
+                                DBMS.inserisciTurno(LocalTime.parse("16:00:00"), LocalTime.parse("00:00:00")
+                                        , giorno, (i + 1), impiegati.get(i).get(j).toString());
+                                fasciaOraria = 0;
+                            }
+                            fasciaOraria++;
                         }
                         inAstensione = false;
+                    }else{
+                        if(indiceImpiegatoLibero==matricole.size()-1)
+                            indiceImpiegatoLibero=0;
+                        else indiceImpiegatoLibero++;
+                        controllo--;
                     }
                 }
             }
@@ -88,30 +114,41 @@ public class GestoreSistema {
     public void calcolaStipendio(){
         System.out.println("Calcolo stipendi");
         LocalDate now = LocalDate.now();
-        //simulazione :
-        //now = LocalDate.parse("2022-12-01");
+
+        //simulazione stipendi:
+        //now = now.withDayOfMonth(1);
+
         List<List<Integer>> impiegati = DBMS.getImpiegati();
         HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(impiegati,true);
         HashMap<String,Integer> giorniAstensioni = new HashMap<>();
         for(Map.Entry<String,List<List<LocalDate>>> m : astensioni.entrySet()){
             giorniAstensioni.put(m.getKey(),0);
             //per ogni astensione
+            //prendo tutte le astensioni che finiscono all'inizio o dopo il mese per cui sto calcolando lo stipendio
+            //e che iniziano entro la fine del mese - > se prendo 2022-12-01 - 2023-01-xx diventa 2023-12-01 - 2023-12-xx
            for(List<LocalDate> l : m.getValue()){
                LocalDate data_fine = l.get(1);
-               //se l'anno della data di fine è maggiore dell'anno dell'anno corrente
-               // o se il mese della data di fine è maggiore del mese dell'anno corrente
-               if(l.get(1).getYear()>now.getYear() || l.get(1).getMonthValue()>=now.getMonthValue()){
-                   // la data di fine diventa l'ultimo giorno del mese di cui si calcola lo stipendio
-                   l.set(1,now.plusMonths(-1).withDayOfMonth(now.plusMonths(-1).lengthOfMonth()));
-                   // aggiorno il record mettendo come data d'inizio il primo giorno del mese dopo
-                   LocalDate nuova_data_inizio = now.withDayOfMonth(1);
-                   DBMS.aggiornaAstensione(nuova_data_inizio,data_fine,m.getKey());
-               }else // se le astensioni rientrano nel mese le cancello semplicemente
-                   DBMS.cancellaAstensione(m.getKey(),data_fine);
-               int giorni = giorniAstensioni.get(m.getKey()) + Period.between(l.get(0),l.get(1)).getDays();
+               LocalDate data_inizio = l.get(0);
+               //se la data d'inizio è prima l'inizio del mese per il quale si calcola lo stipendio
+               //setto la data di inizio all'inizio del mese
+               if(data_inizio.isBefore(now.plusMonths(-1)))
+                   l.set(0,now.plusMonths(-1));
+               //se l'astensione inizia dopo o all'inizio del mese per cui si calcola lo stipendio
+               if(data_inizio.isAfter(now.plusMonths(-1).withDayOfMonth(1))
+                       || data_inizio.isEqual(now.plusMonths(-1).withDayOfMonth(1))){
+                   //se la data di fine iniziale è entro la fine del mese per cui si calcola lo stipendio elimino il record
+                   if(data_fine.isBefore(now))
+                       DBMS.cancellaAstensione(m.getKey(),data_fine);
+                   //altrimenti aggiorno la data di astensione con la data di inizio che parte dal mese dopo il calcolo del mese e finisce alla data fine iniziale
+                   else {
+                       //la data di fine diventa l'ultimo giorno del mese per cui si calcola lo stipendio
+                       int ultimoGiorno = now.plusMonths(-1).lengthOfMonth();
+                       l.set(1,now.plusMonths(-1).withDayOfMonth(ultimoGiorno));
+                       DBMS.aggiornaAstensione(now.withDayOfMonth(1), data_fine, m.getKey());
+                   }
+               }
+               int giorni = giorniAstensioni.get(m.getKey()) + Period.between(l.get(0),l.get(1)).getDays()+1;
                giorniAstensioni.put(m.getKey(),giorni);
-               //2022-10-03 - 2023-01-03 diventerà 2022-10-03 - 2022-11-30 e aggiungo il record 2022-12-01 - 2023-01-03
-               //il prossimo mese, 2022-12-01 - 2023-01-03 dienterà 2022-12-01 - 2022-12-31 -> 2023-01-01 - 2023-01-03 fine
             }
         }
         for(List<Integer> l : impiegati) {
@@ -126,7 +163,6 @@ public class GestoreSistema {
             }
         }
     }
-    //AGGIUSTARE TESTI EMAIL
     public void gestioneSciopero(){
         List<String> email = DBMS.getEmailSciopero();
         if(email.size()>0) {
@@ -143,7 +179,7 @@ public class GestoreSistema {
             DBMS.eliminaRichiesteSciopero();
         }
     }
-    public void controlloServizi(){
+    public void chiudiServizio(){
         int numDipendenti = 0;
         List<Integer> dipendenti = new ArrayList<>();
         List<String> servizi = DBMS.getServizi();

@@ -45,7 +45,6 @@ public class Utente {
     public String getPassword(){
         return password;
     }
-
     public void setMatricola(String matricola) {
         this.matricola = matricola;
     }

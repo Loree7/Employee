@@ -38,7 +38,6 @@ public class GestoreRegistraImpiegato{
         }
         Utils.creaPannelloErrore("Ruolo non esistente, scegli tra: Alto, Medio, Basso");
     }
-
     public String generaPassword(int len){
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();

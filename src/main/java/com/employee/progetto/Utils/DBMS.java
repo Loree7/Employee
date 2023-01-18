@@ -230,7 +230,7 @@ public class DBMS {
             e.getCause();
         }
     }
-    public static Impiegato getImpiegatoMenoOre(LocalDate giorno){
+    public static Impiegato sostituisciTurno(LocalDate giorno,int id_turno){
         Connection dbConnection = getConnection();
         String gI = "select matricola,nome,cognome,ruolo,email,(oreServizio1+oreServizio2+oreServizio3+oreServizio4) as ore " +
                 "from utente where ruolo != 'amministratore' and matricola not in " +
@@ -240,9 +240,47 @@ public class DBMS {
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gI);
-            if(queryResult.next())
-                return new Impiegato(queryResult.getString(1),queryResult.getString(2)
-                        ,queryResult.getString(3),queryResult.getString(4),queryResult.getString(5));
+            if(queryResult.next()) {
+                Impiegato impiegato = new Impiegato(queryResult.getString(1), queryResult.getString(2)
+                        , queryResult.getString(3), queryResult.getString(4), queryResult.getString(5));
+                String sT = "update turno set id_impiegato="+queryResult.getString(1)+" where id="+id_turno;
+                statement.executeUpdate(sT);
+                return impiegato;
+            }
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+    public static Impiegato scambiaTurno(LocalDate giorno,int id_turno,String matricola){
+        Connection dbConnection = getConnection();
+        String gT = "select ora_inizio,ora_fine,id_servizio,id_impiegato from turno where id =" + id_turno;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gT);
+            if(queryResult.next()) {
+                LocalTime ora_inizio = LocalTime.parse(queryResult.getString(1));
+                LocalTime ora_fine = LocalTime.parse(queryResult.getString(2));
+                int id_servizio = queryResult.getInt(3);
+                int id_impiegato = queryResult.getInt(4);
+                //cerco un impiegato il giorno dopo che ha la stessa fascia oraria e possibilmente lo stesso servizio
+                String gI = "select matricola,nome,cognome,ruolo,email,id_servizio,id_turno from utente,turno where matricola !="+id_impiegato+"" +
+                " matricola=id_impiegato and data='" + giorno + "' and ora_inizio='" + ora_inizio + "'" +
+                " and ora_fine ='"+ ora_fine +"' order by id_servizio=" + id_servizio + " desc limit 1";
+                queryResult = statement.executeQuery(gI);
+                if(queryResult.next()) { //se esiste scambio i turni
+                    int idDaScambiare = queryResult.getInt(7);
+                    Impiegato impiegato = new Impiegato(queryResult.getString(1), queryResult.getString(2)
+                            , queryResult.getString(3), queryResult.getString(4), queryResult.getString(5));
+                    String sT = "update turno set id_impiegato="+queryResult.getString(1)+" where id="+id_turno;
+                    statement.executeUpdate(sT);
+                    sT = "update turno set id_impiegato="+matricola+" where id="+idDaScambiare;
+                    statement.executeUpdate(sT);
+                    return impiegato;
+                }
+            }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
@@ -322,18 +360,6 @@ public class DBMS {
             e.getCause();
         }
     }
-    public static void sostituisciTurno(int id_turno,String matricola){
-        Connection dbConnection = getConnection();
-        String sT = "update turno set id_impiegato="+matricola+" where id="+id_turno;
-        try {
-            Statement statement = dbConnection.createStatement();
-            statement.executeUpdate(sT);
-        } catch (Exception e) {
-            erroreComunicazioneDBMS();
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
     public static List<List<Integer>> getImpiegati(){
         List<List<Integer>> impiegati = new ArrayList<>();
         Connection dbConnection = getConnection();
@@ -403,8 +429,10 @@ public class DBMS {
         HashMap<String,List<List<LocalDate>>> astensioni = new HashMap<>();
         Connection dbConnection = getConnection();
         LocalDate now = LocalDate.now();
-        //simulazione :
-        //now = LocalDate.parse("2022-12-01");
+
+        //simulazione stipendi:
+        //now = now.withDayOfMonth(1);
+
         try{
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult;
@@ -412,9 +440,9 @@ public class DBMS {
                 for(Integer i : l){ //per ogni matricola prendo le astensioni e le metto in una lista
                     String gA;
                     if(!flag)
-                        gA = "select data_inizio,data_fine from astensioni where tipo != 'sciopero' and id_impiegato=" + i + " and data_fine > '" + now + "'";
+                        gA = "select data_inizio,data_fine from astensioni where tipo != 'sciopero' and id_impiegato=" + i + " and data_fine >= '" + now + "'";
                     else gA = "select data_inizio,data_fine from astensioni where tipo != 'sciopero' and id_impiegato=" + i +
-                            " and data_fine > '" + now.plusMonths(-1) + "' and data_inizio < '" + now+"'";
+                            " and data_fine >= '" + now.plusMonths(-1) + "' and data_inizio < '" + now+"'";
                     queryResult = statement.executeQuery(gA);
                     List<List<LocalDate>> temp = new ArrayList<>();
                     if(queryResult.next()) {
@@ -473,6 +501,7 @@ public class DBMS {
         }
     }
     public static void inserisciStipendio(String id_impiegato,int stipendio){
+        System.out.println(stipendio);
         Connection dbConnection = getConnection();
         String iS = "insert into stipendio (id_impiegato,stipendio,data) " +
                 "values (" + id_impiegato + "," + stipendio + ",'" + LocalDate.now() + "')";
@@ -555,8 +584,10 @@ public class DBMS {
                         return -2;
                     LocalTime now = LocalTime.now();
                     if(ritardo){
-                        if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusHours(1)))
+                        if (now.isAfter(LocalTime.parse(queryResult.getString(2)).plusHours(1))){
+                            DBMS.eliminaTurno(Integer.parseInt(matricola));
                             return -4;
+                        }
                         if(now.isAfter(LocalTime.parse(queryResult.getString(2)).plusMinutes(10)))
                             return queryResult.getInt(1);
                         return -5;
@@ -725,7 +756,7 @@ public class DBMS {
         List<String> email = new ArrayList<>();
         Connection dbConnection = getConnection();
         String gM = "select id_impiegato from astensioni where tipo='sciopero' and " +
-                "data_inizio='"+LocalDate.now()+"' and data_fine='"+LocalDate.now()+"'";
+                "data_inizio='"+LocalDate.now().plusDays(1)+"' and data_fine='"+LocalDate.now().plusDays(1)+"'";
         String gE = "select email from utente where matricola=";
         try {
             Statement statement = dbConnection.createStatement();
