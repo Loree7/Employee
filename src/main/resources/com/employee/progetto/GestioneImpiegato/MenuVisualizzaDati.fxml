@@ -5,8 +5,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneImpiegato.Boundary.MenuVisualizzaDati">
    <children>
@@ -66,5 +66,19 @@
             <Image url="@../../../../images/icons8-occhio-chiuso-48.png" />
          </image>
       </ImageView>
+      <Pane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: F89C4D;">
+         <children>
+            <Label layoutX="70.0" layoutY="13.0" text="Menu Visualizza Dati" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-cerchiato-utente-maschio-tipo-di-pelle-5-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

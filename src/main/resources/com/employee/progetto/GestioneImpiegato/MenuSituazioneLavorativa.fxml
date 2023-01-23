@@ -1,68 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneImpiegato.Boundary.MenuSituazioneLavorativa">
    <children>
-      <AnchorPane prefHeight="86.0" prefWidth="600.0">
-         <children>
-            <Text layoutX="189.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Situazione Lavorativa">
-               <font>
-                  <Font name="Arial Bold" size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-      <Label fx:id="oreServizio1" layoutX="300.0" layoutY="236.0" prefHeight="17.0" prefWidth="34.0" />
-      <Text layoutX="73.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio1">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
+      <Label fx:id="oreServizio1" layoutX="223.0" layoutY="236.0" prefHeight="17.0" prefWidth="34.0" />
       <Text layoutX="73.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ruolo">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Text>
       <Label fx:id="ruolo" layoutX="300.0" layoutY="128.0" prefHeight="17.0" prefWidth="34.0" />
-      <Text layoutX="73.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stipendio">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
       <Label fx:id="stipendio" layoutX="300.0" layoutY="156.0" prefHeight="17.0" prefWidth="34.0" />
-      <Text layoutX="73.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore di permesso rimanenti:">
+      <Label fx:id="oreDiPermesso" layoutX="328.0" layoutY="180.0" prefHeight="17.0" prefWidth="34.0" />
+      <Label fx:id="giorniDiFerie" layoutX="317.0" layoutY="206.0" prefHeight="17.0" prefWidth="34.0" />
+      <Label fx:id="oreServizio2" layoutX="223.0" layoutY="260.0" prefHeight="17.0" prefWidth="34.0" />
+      <Label fx:id="oreServizio3" layoutX="223.0" layoutY="284.0" prefHeight="17.0" prefWidth="34.0" />
+      <Label fx:id="oreServizio4" layoutX="223.0" layoutY="310.0" prefHeight="17.0" prefWidth="34.0" />
+      <Pane prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: F89C4D;">
+         <children>
+            <Label layoutX="70.0" layoutY="13.0" text="Menu Situazione Lavorativa" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-show-permit-card-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Text layoutX="73.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stipendio">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Text>
-      <Label fx:id="oreDiPermesso" layoutX="300.0" layoutY="180.0" prefHeight="17.0" prefWidth="34.0" />
-      <Text layoutX="73.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giorni di ferie disponibili:">
+      <Text layoutX="73.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore di permesso rimanenti">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Text>
-      <Label fx:id="giorniDiFerie" layoutX="300.0" layoutY="212.0" prefHeight="17.0" prefWidth="34.0" />
-      <Label fx:id="oreServizio2" layoutX="300.0" layoutY="260.0" prefHeight="17.0" prefWidth="34.0" />
-      <Text layoutX="73.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio2">
+      <Text layoutX="73.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giorni di ferie disponibili">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Text>
-      <Label fx:id="oreServizio3" layoutX="300.0" layoutY="284.0" prefHeight="17.0" prefWidth="34.0" />
-      <Text layoutX="73.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio3">
+      <Text layoutX="73.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio1">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Text>
-      <Label fx:id="oreServizio4" layoutX="300.0" layoutY="310.0" prefHeight="17.0" prefWidth="34.0" />
-      <Text layoutX="73.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio4">
+      <Text layoutX="73.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio4">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="73.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio3">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="73.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ore servizio2">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Text>
    </children>

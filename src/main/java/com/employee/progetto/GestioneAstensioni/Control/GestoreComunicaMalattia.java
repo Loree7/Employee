@@ -32,6 +32,7 @@ public class GestoreComunicaMalattia {
             Utils.creaPannelloErrore("La data d'inizio non può essere dopo quella di fine");
             return;
         }
+
         String matricola = GestoreLogin.getUtente().getMatricola();
         if(!DBMS.controllaAstensione(data_inizio,data_fine,matricola)){
             Utils.creaPannelloConferma("Malattia comunicata correttamente");
@@ -42,8 +43,9 @@ public class GestoreComunicaMalattia {
                 int id_turno = DBMS.controllaInTurno(GestoreLogin.getUtente().getMatricola(),data_inizio);
                 if(id_turno != 0){
                     Impiegato impiegato = DBMS.scambiaTurno(data_inizio.plusDays(durataMalattia),id_turno,GestoreLogin.getUtente().getMatricola());
+                    String info = DBMS.getInfoTurno(id_turno);
                     if(impiegato != null) //scambio effettuato correttamente
-                        MailUtils.inviaMail("testo","oggetto",impiegato.getEmail());
+                        MailUtils.inviaMail("Gentile impiegato (matricola: " + matricola + "), le informiamo che a causa di un comunicazione di malattia da parte di un altro impiegato, dovra' svolgere il suo turno il " + info ,"Scambio di turni",impiegato.getEmail());
                     else { //se non esiste un impiegato con cui scambiare il turno comunico straordinari
                         Impiegato sostituto = DBMS.sostituisciTurno(data_inizio,id_turno);
                         if (sostituto != null)

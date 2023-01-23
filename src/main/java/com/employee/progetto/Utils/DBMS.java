@@ -934,6 +934,28 @@ public class DBMS {
         return null;
     }
 
+    public static String getInfoTurno(int id_turno) {
+        Connection dbConnection = getConnection();
+        String gIT = "select ora_inizio, ora_fine, data from turno where id=" + id_turno;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gIT);
+            if (queryResult.next()) {
+                String info = "";
+                for (int i = 0; i < 3; i++) {
+                    info += queryResult.getString(i);
+                }
+                info.replace("", " ").trim();
+                return info;
+            }
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
+
     public static String getServizio(int id_servizio) {
 //        List<String> servizi = new ArrayList<>();
         Connection dbConnection = getConnection();
