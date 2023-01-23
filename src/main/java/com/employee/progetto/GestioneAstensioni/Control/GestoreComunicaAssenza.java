@@ -9,6 +9,7 @@ import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class GestoreComunicaAssenza {
     public GestoreComunicaAssenza(){
@@ -31,12 +32,18 @@ public class GestoreComunicaAssenza {
             Utils.creaPannelloErrore("Non puoi comunicare l'assenza per la data corrente");
             return;
         }
+        if(data.compareTo(LocalDate.now().plusDays(1))==0 && LocalTime.now().getHour()>19){
+            Utils.creaPannelloErrore("Puoi comunicare l'assenza per il giorno successivo entro le 19");
+            return;
+        }
         int id_turno = DBMS.controllaInTurno(GestoreLogin.getUtente().getMatricola(),data);
         if(id_turno != 0){
             Utils.creaPannelloConferma("Assenza comunicata correttamente");
             Impiegato impiegato = DBMS.scambiaTurno(data.plusDays(1),id_turno,GestoreLogin.getUtente().getMatricola());
-            if(impiegato != null) //scambio effettuato correttamente
-                MailUtils.inviaMail("testo","oggetto",impiegato.getEmail());
+            if(impiegato != null) { //scambio effettuato correttamente
+                MailUtils.inviaMail("testo", "oggetto", impiegato.getEmail());
+                MailUtils.inviaMail("testo", "oggetto", GestoreLogin.getUtente().getEmail());
+            }
             else { //se non esiste un impiegato con cui scambiare il turno comunico straordinari
                 Impiegato sostituto = DBMS.sostituisciTurno(data,id_turno);
                 if (sostituto != null)

@@ -267,8 +267,8 @@ public class DBMS {
                 int id_impiegato = queryResult.getInt(4);
                 //cerco un impiegato il giorno dopo che ha la stessa fascia oraria e possibilmente lo stesso servizio
                 String gI = "select matricola,nome,cognome,ruolo,email,id_servizio,id_turno from utente,turno where matricola !="+id_impiegato+"" +
-                " matricola=id_impiegato and data='" + giorno + "' and ora_inizio='" + ora_inizio + "'" +
-                " and ora_fine ='"+ ora_fine +"' order by id_servizio=" + id_servizio + " desc limit 1";
+                        " matricola=id_impiegato and data='" + giorno + "' and ora_inizio='" + ora_inizio + "'" +
+                        " and ora_fine ='"+ ora_fine +"' order by id_servizio=" + id_servizio + " desc limit 1";
                 queryResult = statement.executeQuery(gI);
                 if(queryResult.next()) { //se esiste scambio i turni
                     int idDaScambiare = queryResult.getInt(7);
@@ -345,7 +345,27 @@ public class DBMS {
         }
         return 0;
     }
-
+    public static int getNumDipendentiInTurno(String nome){
+        Connection dbConnection = getConnection();
+        String gS = "select id from servizio where nome='"+nome+"'";
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gS);
+            if(queryResult.next()) {
+                String gN = "select count(id_impiegato) from turno where rilevato = true and data='" + LocalDate.now() + "' and " +
+                        "id_servizio=" + queryResult.getInt(1) + " and ora_inizio<='" + LocalTime.now() + "' " +
+                        "and ora_fine>='" + LocalTime.now() + "'";
+                queryResult = statement.executeQuery(gN);
+                if(queryResult.next())
+                    return queryResult.getInt(1);
+            }
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return 0;
+    }
     public static void inserisciTurno(LocalTime ora_inizio,LocalTime ora_fine,LocalDate giorno,int id_servizio,String id_impiegato){
         Connection dbConnection = getConnection();
         String iT = "insert into turno (ora_inizio,ora_fine,data,id_servizio,id_impiegato) " +
@@ -389,35 +409,6 @@ public class DBMS {
                 impiegati.get(3).add(matricole.getInt(1));
             return impiegati;
         }catch (Exception e) {
-            erroreComunicazioneDBMS();
-            e.printStackTrace();
-            e.getCause();
-        }
-        return null;
-    }
-    public static List<Integer> getNumImpiegati() {
-        List<Integer> num = new ArrayList<>();
-        Connection dbConnection = getConnection();
-        String gA = "select count(matricola) from utente where ruolo= 'Alto'";
-        String gI = "select count(matricola) from utente where ruolo= 'Intermedio'";
-        String gM = "select count(matricola) from utente where ruolo= 'Medio'";
-        String gB = "select count(matricola) from utente where ruolo= 'Basso'";
-        try {
-            Statement statement = dbConnection.createStatement();
-            ResultSet numImpiegati = statement.executeQuery(gA);
-            if(numImpiegati.next())
-                num.add(numImpiegati.getInt(1));
-            numImpiegati = statement.executeQuery(gI);
-            if(numImpiegati.next())
-                num.add(numImpiegati.getInt(1));
-            numImpiegati = statement.executeQuery(gM);
-            if(numImpiegati.next())
-                num.add(numImpiegati.getInt(1));
-            numImpiegati = statement.executeQuery(gB);
-            if(numImpiegati.next())
-                num.add(numImpiegati.getInt(1));
-            return num;
-        } catch (Exception e) {
             erroreComunicazioneDBMS();
             e.printStackTrace();
             e.getCause();
@@ -934,19 +925,14 @@ public class DBMS {
         return null;
     }
 
-    public static String getInfoTurno(int id_turno) {
+    public static String getServizio(int id_servizio) {
         Connection dbConnection = getConnection();
-        String gIT = "select ora_inizio, ora_fine, data from turno where id=" + id_turno;
+        String gS = "select nome from servizio where id=" + id_servizio;
         try {
             Statement statement = dbConnection.createStatement();
-            ResultSet queryResult = statement.executeQuery(gIT);
+            ResultSet queryResult = statement.executeQuery(gS);
             if (queryResult.next()) {
-                String info = "";
-                for (int i = 0; i < 3; i++) {
-                    info += queryResult.getString(i);
-                }
-                info.replace("", " ").trim();
-                return info;
+                return queryResult.getString(1);
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
@@ -955,16 +941,17 @@ public class DBMS {
         }
         return null;
     }
-
-    public static String getServizio(int id_servizio) {
-//        List<String> servizi = new ArrayList<>();
+    public static String getInfoTurno(int id_turno) {
         Connection dbConnection = getConnection();
-        String gS = "select nome from servizio where id=" + id_servizio;
+        String gIT = "select ora_inizio, ora_fine, data from turno where id=" + id_turno;
         try {
             Statement statement = dbConnection.createStatement();
-            ResultSet queryResult = statement.executeQuery(gS);
+            ResultSet queryResult = statement.executeQuery(gIT);
             if (queryResult.next()) {
-                return queryResult.getString(1);
+                String info = "";
+                for (int i = 1; i < 4; i++)
+                    info += queryResult.getString(i) + " ";
+                return info;
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();

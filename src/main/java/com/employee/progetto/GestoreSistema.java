@@ -28,12 +28,12 @@ public class GestoreSistema {
     public void controlloOrario(LocalTime now){
         List<String> servizi = DBMS.getServizi();
         for(String s : servizi) {
-            if(DBMS.getNumDipendenti(s,LocalDate.now())==0)
+            if(DBMS.getNumDipendentiInTurno(s)==0)
                 DBMS.chiudiServizio(servizi.indexOf(s)+1);
             else
                 DBMS.apriServizio(servizi.indexOf(s)+1);
         }
-        if(now.equals(LocalTime.parse("20:00:00"))) {
+        if(now.equals(LocalTime.parse("23:00:00"))) {
             chiudiServizio();
             controlloServizioAlto();
         }
@@ -42,27 +42,34 @@ public class GestoreSistema {
     }
     public void generaTurni(){
         System.out.println("Generazione Turni");
-        List<Integer> numImpiegati = DBMS.getNumImpiegati();
         List<List<Integer>> impiegati = DBMS.getImpiegati();
         int nImpiegati = 0;
         int giorniRiposo = 1;
-        //fasccio in modo che il servizio 1 ha più impiegati
-        for(int i=3;i>0;i--){
-            if(numImpiegati.get(0)<numImpiegati.get(i)){
-                int k = numImpiegati.get(i) - numImpiegati.get(0);
-                numImpiegati.set(0,numImpiegati.get(0)+k);
-                numImpiegati.set(i,numImpiegati.get(i)-k);
-                List<Integer> l = new ArrayList<>();
-                for(int j=0;j<k;j++) {
-                    l.add(impiegati.get(i).get(j));
-                    impiegati.get(i).remove(j);
+        //faccio in modo che almeno ogni servizio ha 3 impiegati
+        for(List<Integer> l : impiegati){
+            while(l.size()<3){
+                int max=0;
+                int indice=0;
+                //prendo la lista più grande
+                for(List<Integer> list : impiegati) {
+                    if (max < list.size()) {
+                        max = list.size();
+                        indice = impiegati.indexOf(list);
+                    }
                 }
-                for(Integer integer:l)
-                    impiegati.get(0).add(integer);
+                //sposto un elemento dalla lista più grande a quella in cui devo mettere almeno 3 impiegati
+                l.add(impiegati.get(indice).remove(0));
             }
-            nImpiegati += numImpiegati.get(i);
         }
-        nImpiegati += numImpiegati.get(0);
+        //faccio in modo che il servizio 1 ha più impiegati
+        for(int i=3;i>0;i--){
+            //finchè il una lista di impiegati ha più impiegati del servizio più alto
+            while(impiegati.get(0).size()-1<impiegati.get(i).size() && impiegati.get(i).size()>3){
+                impiegati.get(0).add(impiegati.get(i).remove(0));
+            }
+            nImpiegati += impiegati.get(i).size();
+        }
+        nImpiegati += impiegati.get(0).size();
         int numImpiegatiLiberi = nImpiegati/(7*giorniRiposo);
         HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(impiegati,false);
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
@@ -196,7 +203,7 @@ public class GestoreSistema {
             numDipendenti += DBMS.getNumDipendenti(s,LocalDate.now().plusDays(1));
         //devono essere almeno 13 per coprire tutte le fasce orarie
         if(numDipendenti<=12) {
-            DBMS.chiudiServizio(4);
+            //DBMS.chiudiServizio(4); non ho bisogno di chiuderlo qui
             List<Integer> turni = DBMS.getTurniServizio(4);
             for(Integer i : turni) {
                 for (String s : servizi)
@@ -218,7 +225,7 @@ public class GestoreSistema {
                 dipendenti.clear();
             }
         }else
-            DBMS.apriServizio(4);
+            DBMS.apriServizio(4); // teoricamente non ho bisogno manco di aprirlo qui
     }
     public void controlloServizioAlto(){
         List<Integer> dipendenti = new ArrayList<>();

@@ -12,7 +12,7 @@ public class BoundarySistema {
         this.gestoreSistema = gestoreSistema;
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(this::chiediData, 0, 1, TimeUnit.DAYS);
-        executor.scheduleAtFixedRate(this::chiediOrario, 0, 1, TimeUnit.HOURS);
+        executor.scheduleAtFixedRate(this::chiediOrario, 0, 1, TimeUnit.MINUTES);
     }
     public void chiediData(){
         gestoreSistema.controlloData(LocalDate.now());
