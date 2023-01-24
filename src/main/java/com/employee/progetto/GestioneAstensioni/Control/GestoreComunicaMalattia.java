@@ -43,8 +43,9 @@ public class GestoreComunicaMalattia {
                 if(id_turno != 0){
                     Impiegato impiegato = DBMS.scambiaTurno(data_inizio.plusDays(durataMalattia),id_turno,GestoreLogin.getUtente().getMatricola());
                     if(impiegato != null) {//scambio effettuato correttamente
-                        MailUtils.inviaMail("testo", "oggetto", impiegato.getEmail());
-                        MailUtils.inviaMail("testo", "oggetto", GestoreLogin.getUtente().getEmail());
+                        String info = DBMS.getInfoTurno(id_turno);
+                        MailUtils.inviaMail("Gentile impiegato (matricola: " + impiegato.getMatricola() + ") la informiamo che a causa dell'assenza comunicata da un altro impiegato, il suo turno e' stato spostato a " + info, "Cambio turno", impiegato.getEmail());
+                        MailUtils.inviaMail("Gentile impiegato (matricola: " + GestoreLogin.getUtente().getMatricola() + ") la informiamo che e' stato trovato un impiegato con cui scambiare il suo turno" ,"Cambio turno per comunicazione malattia", GestoreLogin.getUtente().getEmail());
                     }else { //se non esiste un impiegato con cui scambiare il turno comunico straordinari
                         Impiegato sostituto = DBMS.sostituisciTurno(data_inizio,id_turno);
                         if (sostituto != null)
