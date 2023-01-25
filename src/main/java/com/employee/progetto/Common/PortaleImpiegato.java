@@ -1,4 +1,4 @@
-package com.employee.progetto;
+package com.employee.progetto.Common;
 
 import com.employee.progetto.Entity.Impiegato;
 import com.employee.progetto.GestioneAstensioni.Control.*;

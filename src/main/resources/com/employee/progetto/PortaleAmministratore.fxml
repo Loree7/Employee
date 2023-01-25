@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ECECE7;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.PortaleAmministratore">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ECECE7;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.Common.PortaleAmministratore">
    <children>
       <Button layoutX="14.0" layoutY="88.0" mnemonicParsing="false" onAction="#cliccaRegistraImpiegato" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: F89C4D;" text="Registra Impiegato" textFill="WHITE">
          <font>
