@@ -25,9 +25,6 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         System.out.println(((DBMS.getDataInizioTrimestre() + " - " + LocalDate.parse(DBMS.getDataInizioTrimestre()).plusMonths(3))));
-        //per simulare la proposta turni:
-        //DBMS.setDataInizioTrimestre(LocalDate.now().plusMonths(-3));
-        // la boundary chiede da sola la data ogni giorni o a ogni esecuzione
         new BoundarySistema(new GestoreSistema());
         launch();
     }

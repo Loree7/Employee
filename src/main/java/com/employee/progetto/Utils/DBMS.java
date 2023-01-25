@@ -254,7 +254,7 @@ public class DBMS {
         }
         return null;
     }
-    public static Impiegato scambiaTurno(LocalDate giorno,int id_turno,String matricola){
+    public static Impiegato scambiaTurno(LocalDate giorno,int id_turno,String matricola,LocalDate giornoScambio){
         Connection dbConnection = getConnection();
         String gT = "select ora_inizio,ora_fine,id_servizio,id_impiegato from turno where id =" + id_turno;
         try {
@@ -270,16 +270,16 @@ public class DBMS {
                         " and matricola=id_impiegato and data='" + giorno + "' and ora_inizio='" + ora_inizio + "'" +
                         " and ora_fine ='"+ ora_fine +"' order by id_servizio=" + id_servizio + " desc limit 1";
                 queryResult = statement.executeQuery(gI);
-                int id_servizio2 = queryResult.getInt(6);
                 if(queryResult.next()) { //se esiste scambio i turni
                     int idDaScambiare = queryResult.getInt(7);
+                    int id_servizio2 = queryResult.getInt(6);
                     Impiegato impiegato = new Impiegato(queryResult.getString(1), queryResult.getString(2)
                             , queryResult.getString(3), queryResult.getString(4), queryResult.getString(5));
                     String sT = "update turno set id_impiegato="+queryResult.getString(1)+" where id="+id_turno;
                     statement.executeUpdate(sT);
                     sT = "update turno set id_impiegato="+matricola+" where id="+idDaScambiare;
                     statement.executeUpdate(sT);
-                    MailUtils.inviaMail("Gentile impiegato (matricola: " + impiegato.getMatricola() + ") la informiamo che a causa dell'assenza comunicata da un altro impiegato, il suo turno e' stato spostato il giorno " + giorno.plusDays(-1) + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio), "Cambio turno", impiegato.getEmail());
+                    MailUtils.inviaMail("Gentile impiegato (matricola: " + impiegato.getMatricola() + ") la informiamo che a causa dell'assenza comunicata da un altro impiegato, il suo turno e' stato spostato il giorno " + giornoScambio + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio), "Cambio turno", impiegato.getEmail());
                     MailUtils.inviaMail("Gentile impiegato (matricola: " + GestoreLogin.getUtente().getMatricola() + ") la informiamo che e' stato trovato un impiegato con cui scambiare il suo turno, percio' il suo turno sara' il giorno " + giorno + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio2), "Cambio turno per comunicazione assenza", GestoreLogin.getUtente().getEmail());
                     return impiegato;
                 }
@@ -936,25 +936,6 @@ public class DBMS {
             ResultSet queryResult = statement.executeQuery(gS);
             if (queryResult.next()) {
                 return queryResult.getString(1);
-            }
-        } catch (Exception e) {
-            erroreComunicazioneDBMS();
-            e.printStackTrace();
-            e.getCause();
-        }
-        return null;
-    }
-    public static String getInfoTurno(int id_turno) {
-        Connection dbConnection = getConnection();
-        String gIT = "select ora_inizio, ora_fine, data from turno where id=" + id_turno;
-        try {
-            Statement statement = dbConnection.createStatement();
-            ResultSet queryResult = statement.executeQuery(gIT);
-            if (queryResult.next()) {
-                String info = "";
-                for (int i = 1; i < 4; i++)
-                    info += queryResult.getString(i) + " ";
-                return info;
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
