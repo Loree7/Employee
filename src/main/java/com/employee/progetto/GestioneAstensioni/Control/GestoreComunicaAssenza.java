@@ -44,8 +44,8 @@ public class GestoreComunicaAssenza {
                 Impiegato sostituto = DBMS.sostituisciTurno(data,id_turno);
                 if (sostituto != null)
                     MailUtils.inviaMail(sostituto.getNome() + " " + sostituto.getCognome() +
-                    " sei stato scelto per svolgere gli straordinari giorno: " + data
-                    , "Straordinari", sostituto.getEmail());
+                                    " sei stato scelto per svolgere gli straordinari giorno: " + data
+                            , "Straordinari", sostituto.getEmail());
                 else
                     DBMS.eliminaTurno(GestoreLogin.getUtente().getMatricola(), data);
             }

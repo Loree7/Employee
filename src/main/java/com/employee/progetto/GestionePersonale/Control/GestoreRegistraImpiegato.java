@@ -24,6 +24,10 @@ public class GestoreRegistraImpiegato{
             Utils.creaPannelloErrore("Email già esistente");
             return;
         }
+        if (!MailUtils.verificaMail(email)) {
+            Utils.creaPannelloErrore("Email inserita inesistente");
+            return;
+        }
         for(String str : ruoli) {
             if (ruolo.toLowerCase().equals(str)) {
                 String password = generaPassword(12);

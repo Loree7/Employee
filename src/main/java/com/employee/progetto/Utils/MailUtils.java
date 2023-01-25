@@ -1,8 +1,11 @@
 package com.employee.progetto.Utils;
 
+
 import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import com.mailboxvalidator.*;
 
 public class MailUtils {
     public static void inviaMail(String testo,String oggetto,String email){
@@ -29,5 +32,19 @@ public class MailUtils {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean verificaMail(String email) {
+        try {
+            SingleValidation mbv = new com.mailboxvalidator.SingleValidation("1NGUYDB5CPFEK2QH97W6");
+            MBVResult rec = mbv.ValidateEmail(email);
+            if (rec.getIsVerified().equals("True")) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -3,6 +3,7 @@ module com.employee.progetto {
     requires javafx.fxml;
     requires java.sql;
     requires java.mail;
+    requires mailboxvalidator;
 
     exports com.employee.progetto;
     opens com.employee.progetto to javafx.fxml;

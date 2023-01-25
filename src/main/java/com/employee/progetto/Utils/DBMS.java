@@ -70,6 +70,7 @@ public class DBMS {
         }
         return false;
     }
+
     public static void registraImpiegato(String nome, String cognome, String ruolo, String email, String password) {
         Connection dbConnection = getConnection();
         String rI = "insert into utente (nome,cognome,ruolo,email,password,ferie) " +
