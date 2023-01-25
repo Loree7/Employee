@@ -1,6 +1,7 @@
 package com.employee.progetto.Utils;
 
 import com.employee.progetto.Entity.*;
+import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -8,7 +9,6 @@ import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -266,10 +266,11 @@ public class DBMS {
                 int id_servizio = queryResult.getInt(3);
                 int id_impiegato = queryResult.getInt(4);
                 //cerco un impiegato il giorno dopo che ha la stessa fascia oraria e possibilmente lo stesso servizio
-                String gI = "select matricola,nome,cognome,ruolo,email,id_servizio,id_turno from utente,turno where matricola !="+id_impiegato+"" +
-                        " matricola=id_impiegato and data='" + giorno + "' and ora_inizio='" + ora_inizio + "'" +
+                String gI = "select matricola,nome,cognome,ruolo,email,id_servizio,id from utente,turno where matricola !="+id_impiegato+"" +
+                        " and matricola=id_impiegato and data='" + giorno + "' and ora_inizio='" + ora_inizio + "'" +
                         " and ora_fine ='"+ ora_fine +"' order by id_servizio=" + id_servizio + " desc limit 1";
                 queryResult = statement.executeQuery(gI);
+                int id_servizio2 = queryResult.getInt(6);
                 if(queryResult.next()) { //se esiste scambio i turni
                     int idDaScambiare = queryResult.getInt(7);
                     Impiegato impiegato = new Impiegato(queryResult.getString(1), queryResult.getString(2)
@@ -278,6 +279,8 @@ public class DBMS {
                     statement.executeUpdate(sT);
                     sT = "update turno set id_impiegato="+matricola+" where id="+idDaScambiare;
                     statement.executeUpdate(sT);
+                    MailUtils.inviaMail("Gentile impiegato (matricola: " + impiegato.getMatricola() + ") la informiamo che a causa dell'assenza comunicata da un altro impiegato, il suo turno e' stato spostato il giorno " + giorno.plusDays(-1) + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio), "Cambio turno", impiegato.getEmail());
+                    MailUtils.inviaMail("Gentile impiegato (matricola: " + GestoreLogin.getUtente().getMatricola() + ") la informiamo che e' stato trovato un impiegato con cui scambiare il suo turno, percio' il suo turno sara' il giorno " + giorno + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio2), "Cambio turno per comunicazione assenza", GestoreLogin.getUtente().getEmail());
                     return impiegato;
                 }
             }

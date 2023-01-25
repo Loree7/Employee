@@ -1,6 +1,5 @@
 package com.employee.progetto.GestioneAstensioni.Boundary;
 
-import com.employee.progetto.GestioneAstensioni.Control.GestoreComunicaCongedo;
 import com.employee.progetto.GestioneAstensioni.Control.GestoreComunicaMalattia;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;

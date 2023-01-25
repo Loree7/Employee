@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="329bdc67-0e9c-4c79-82af-6d831a0e129d" name="Changes" comment="Fix riga MenuSituazioneLavorativa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaAssenza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaAssenza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaMalattia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaMalattia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloComunicaMalattia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Boundary/ModuloComunicaMalattia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaCongedo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneAstensioni/Control/GestoreComunicaCongedo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/MenuSituazioneLavorativa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestioneImpiegato/Boundary/MenuSituazioneLavorativa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestoreSistema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/GestoreSistema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/PortaleImpiegato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/employee/progetto/Utils/DBMS.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +33,6 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2JEnJUQKuJRIHkx0crNzNb8RqK5" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

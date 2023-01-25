@@ -11,7 +11,7 @@ public class GestoreSistema {
         calcolaStipendio();
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
         //simulazione genera turni:
-        //dataInizioTrimestre = now.plusMonths(-3);
+        dataInizioTrimestre = now.plusMonths(-3);
         Period period = Period.between(dataInizioTrimestre,now);
         while(period.getYears()>0) { //in realtà non serve se inserisci una dataInizioTrimestre normale
            DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(9));
