@@ -13,11 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MenuVisualizzaTurni {
-
-    private GestoreVisualizzaTurni gestoreVisualizzaTurni;
     private LocalDate data;
-    public MenuVisualizzaTurni(GestoreVisualizzaTurni gestoreVisualizzaTurni, ObservableList<Turno> turni,LocalDate data) {
-        this.gestoreVisualizzaTurni = gestoreVisualizzaTurni;
+    public MenuVisualizzaTurni(ObservableList<Turno> turni,LocalDate data) {
         this.turni = turni;
         this.data = data;
     }

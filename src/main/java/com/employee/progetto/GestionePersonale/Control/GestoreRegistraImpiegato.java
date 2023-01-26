@@ -1,11 +1,13 @@
 package com.employee.progetto.GestionePersonale.Control;
 
 import com.employee.progetto.GestionePersonale.Boundary.ModuloRegistraImpiegato;
+import com.employee.progetto.Utils.Crittografia;
 import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.MailUtils;
 import com.employee.progetto.Utils.Utils;
 import javafx.stage.Stage;
 
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class GestoreRegistraImpiegato{
@@ -31,7 +33,15 @@ public class GestoreRegistraImpiegato{
         for(String str : ruoli) {
             if (ruolo.toLowerCase().equals(str)) {
                 String password = generaPassword(12);
-                DBMS.registraImpiegato(nome, cognome, ruolo, email,password);
+                String salt = Crittografia.generazioneSalt();
+                try {
+                    String passwordCrittografata = Crittografia.codifica(password + salt);
+                    DBMS.registraImpiegato(nome, cognome, ruolo, email,passwordCrittografata,salt);
+                }catch (NoSuchAlgorithmException e){
+                    e.printStackTrace();
+                    Utils.creaPannelloErrore("Si e' verificato un errore");
+                    return;
+                }
                 Utils.creaPannelloConferma("Impiegato registrato correttamente");
                 s.close(); //chiude registra
                 MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo

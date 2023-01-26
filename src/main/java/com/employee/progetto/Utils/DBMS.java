@@ -35,17 +35,17 @@ public class DBMS {
     }
     public static Utente verificaCredenziali(String matricola, String password) {
         Connection dbConnection = getConnection();
-        String vC = "select nome,cognome,ruolo,email,ferie,password,orePermesso from utente where matricola =" + matricola;
+        String vC = "select nome,cognome,ruolo,email,ferie,password,orePermesso,salt from utente where matricola =" + matricola;
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(vC);
             if(queryResult.next()){
-                if(password.equals(queryResult.getString(6)))
+                if(Crittografia.codifica(password+queryResult.getString(8)).equals(queryResult.getString(6)))
                     if (queryResult.getString(3).equals("Amministratore"))
                         return new Amministratore(matricola, queryResult.getString(1), queryResult.getString(2)
                                 , queryResult.getString(3), queryResult.getString(4));
                     else return new Impiegato(matricola, queryResult.getString(1), queryResult.getString(2)
-                            , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5),queryResult.getString(6),queryResult.getInt(7));
+                            , queryResult.getString(3), queryResult.getString(4),queryResult.getInt(5),password,queryResult.getInt(7));
             }
         } catch (Exception e) {
             erroreComunicazioneDBMS();
@@ -71,11 +71,11 @@ public class DBMS {
         return false;
     }
 
-    public static void registraImpiegato(String nome, String cognome, String ruolo, String email, String password) {
+    public static void registraImpiegato(String nome, String cognome, String ruolo, String email, String password, String salt) {
         Connection dbConnection = getConnection();
-        String rI = "insert into utente (nome,cognome,ruolo,email,password,ferie) " +
+        String rI = "insert into utente (nome,cognome,ruolo,email,password,ferie,salt) " +
                 "values ('" + nome + "','" + cognome + "','" + ruolo.toLowerCase() + "','" + email +
-                "','" + password + "'," + 28 + ")";
+                "','" + password + "'," + 28 + ",'" + salt +"')";
         try {
             Statement statement = dbConnection.createStatement();
             statement.executeUpdate(rI);

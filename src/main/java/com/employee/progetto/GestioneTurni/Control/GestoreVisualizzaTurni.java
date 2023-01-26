@@ -29,7 +29,7 @@ public class GestoreVisualizzaTurni{
             return;
         }
         Utils.cambiaInterfaccia("GestioneTurni/MenuVisualizzaTurni.fxml", "Menù Visualizza Turni", new Stage(), c->{
-            return new MenuVisualizzaTurni(this, turni,data);
+            return new MenuVisualizzaTurni( turni,data);
         });
     }
 }

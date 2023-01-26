@@ -50,11 +50,6 @@ public class Utils {
         creaInterfaccia(loader, w, h, stage);
         return loader.getController();
     }
-    public static Object cambiaInterfaccia(String interfaccia, Stage stage, int w, int h) {
-        FXMLLoader loader = creaLoader(interfaccia);
-        creaInterfaccia(loader, w, h, stage);
-        return loader.getController();
-    }
     public static void creaPannelloErrore(String messaggio) {
         Stage stage = new Stage();
         stage.setResizable(false);
