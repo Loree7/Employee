@@ -3,17 +3,45 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestionePersonale.Boundary.ModuloRilevazioneUscita">
     <children>
-        <Label layoutX="181.0" layoutY="89.0" text="Nome" />
-        <Label layoutX="180.0" layoutY="142.0" text="Cognome" />
-        <Label layoutX="182.0" layoutY="192.0" text="Matricola" />
-        <TextField fx:id="nome" layoutX="272.0" layoutY="85.0" promptText="nome" />
-        <TextField fx:id="cognome" layoutX="272.0" layoutY="138.0" promptText="cognome" />
-        <TextField fx:id="matricola" layoutX="272.0" layoutY="187.0" promptText="matricola" />
-        <Button layoutX="288.0" layoutY="260.0" mnemonicParsing="false" onAction="#cliccaConferma" text="Conferma" />
+        <Label layoutX="181.0" layoutY="112.0" text="Nome">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Label>
+        <Label layoutX="180.0" layoutY="165.0" text="Cognome">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Label>
+        <Label layoutX="182.0" layoutY="215.0" text="Matricola">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Label>
+        <TextField fx:id="nome" layoutX="272.0" layoutY="108.0" promptText="nome" />
+        <TextField fx:id="cognome" layoutX="272.0" layoutY="161.0" promptText="cognome" />
+        <TextField fx:id="matricola" layoutX="272.0" layoutY="210.0" promptText="matricola" />
+        <Button layoutX="206.0" layoutY="282.0" mnemonicParsing="false" onAction="#cliccaConferma" prefHeight="48.0" prefWidth="214.0" style="-fx-background-color: #F89C4D;" text="Conferma" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font></Button>
+      <AnchorPane prefHeight="84.0" prefWidth="600.0" style="-fx-background-color: #F89C4D;">
+         <children>
+            <ImageView fx:id="shieldImageView" fitHeight="42.0" fitWidth="69.0" layoutX="32.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/icons8-segnale-d'uscita-48.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="86.0" layoutY="27.0" text="Rilevazione Uscita" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
