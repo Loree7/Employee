@@ -17,7 +17,7 @@ public class GestoreRegistraImpiegato{
         });
     }
     public void registraImpiegato(String nome,String cognome,String ruolo,String email,Stage s){
-        String[] ruoli = {"alto","medio","basso"};
+        String[] ruoli = {"alto","medio","intermedio","basso"};
         if(nome.isBlank() || cognome.isBlank() || ruolo.isBlank() || email.isBlank()){
             Utils.creaPannelloErrore("Completa tutti i campi");
             return;
@@ -44,13 +44,13 @@ public class GestoreRegistraImpiegato{
                 }
                 Utils.creaPannelloConferma("Impiegato registrato correttamente");
                 s.close(); //chiude registra
-                MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
+                MailUtils.inviaMail("Benvenuto, siamo lieti di averti tra noi.\nEcco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
                         +", Email: "+email+", Password: "+password+ ", Matricola: "+DBMS.getMatricola(email)
                         ,"Invio Credenziali",email);
                 return;
             }
         }
-        Utils.creaPannelloErrore("Ruolo non esistente, scegli tra: Alto, Medio, Basso");
+        Utils.creaPannelloErrore("Ruolo non esistente, scegli tra: Alto, Medio, Intermedio, Basso");
     }
     public String generaPassword(int len){
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

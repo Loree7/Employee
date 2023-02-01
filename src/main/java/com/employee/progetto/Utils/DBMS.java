@@ -5,6 +5,7 @@ import com.employee.progetto.GestionePersonale.Control.GestoreLogin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -104,9 +105,13 @@ public class DBMS {
     }
     public static void elimina(String matricola) {
         Connection dbConnection = getConnection();
-        String el = "delete from utente where matricola=" + matricola;
+        String el = "delete from turno where id_impiegato=" + matricola;
         try {
             Statement statement = dbConnection.createStatement();
+            statement.executeUpdate(el);
+            el = "delete from stipendio where id_impiegato=" + matricola;
+            statement.executeUpdate(el);
+            el = "delete from utente where matricola=" + matricola;
             statement.executeUpdate(el);
         } catch (Exception e) {
             erroreComunicazioneDBMS();
@@ -116,7 +121,17 @@ public class DBMS {
     }
     public static void modifica(String matricola, String nome, String cognome, String ruolo, String email, String password) {
         Connection dbConnection = getConnection();
-        String m = "update utente set nome='"+nome+"',cognome='"+cognome+"',ruolo='"+ruolo+"',password='"+password+"' where matricola =" + matricola;
+        String m = "";
+        if(password.equals("")) {
+            m = "update utente set nome='" + nome + "',cognome='" + cognome + "',ruolo='" + ruolo + "' where matricola =" + matricola;
+        }else{
+            String salt = Crittografia.generazioneSalt();
+            try {
+                m = "update utente set nome='" + nome + "',cognome='" + cognome + "',ruolo='" + ruolo + "',password='" + Crittografia.codifica(password + salt) + "',salt='"+salt+"' where matricola =" + matricola;
+            }catch (NoSuchAlgorithmException e){
+                e.printStackTrace();
+            }
+        }
         try {
             Statement statement = dbConnection.createStatement();
             statement.executeUpdate(m);
@@ -276,13 +291,15 @@ public class DBMS {
                     int id_servizio2 = queryResult.getInt(6);
                     Impiegato impiegato = new Impiegato(queryResult.getString(1), queryResult.getString(2)
                             , queryResult.getString(3), queryResult.getString(4), queryResult.getString(5));
-                    String sT = "update turno set id_impiegato="+queryResult.getString(1)+" where id="+id_turno;
-                    statement.executeUpdate(sT);
-                    sT = "update turno set id_impiegato="+matricola+" where id="+idDaScambiare;
-                    statement.executeUpdate(sT);
-                    MailUtils.inviaMail("Gentile impiegato (matricola: " + impiegato.getMatricola() + ") la informiamo che a causa dell'assenza comunicata da un altro impiegato, il suo turno e' stato spostato il giorno " + giornoScambio + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio), "Cambio turno", impiegato.getEmail());
-                    MailUtils.inviaMail("Gentile impiegato (matricola: " + GestoreLogin.getUtente().getMatricola() + ") la informiamo che e' stato trovato un impiegato con cui scambiare il suo turno, percio' il suo turno sara' il giorno " + giorno + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio2), "Cambio turno per comunicazione assenza", GestoreLogin.getUtente().getEmail());
-                    return impiegato;
+                    if(controllaInTurno(impiegato.getMatricola(),giornoScambio)==0) {
+                        String sT = "update turno set id_impiegato=" + queryResult.getString(1) + " where id=" + id_turno;
+                        statement.executeUpdate(sT);
+                        sT = "update turno set id_impiegato=" + matricola + " where id=" + idDaScambiare;
+                        statement.executeUpdate(sT);
+                        MailUtils.inviaMail("Gentile impiegato (matricola: " + impiegato.getMatricola() + ") la informiamo che a causa dell'assenza comunicata da un altro impiegato, il suo turno e' stato spostato il giorno " + giornoScambio + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio), "Cambio turno", impiegato.getEmail());
+                        MailUtils.inviaMail("Gentile impiegato (matricola: " + GestoreLogin.getUtente().getMatricola() + ") la informiamo che e' stato trovato un impiegato con cui scambiare il suo turno, percio' il suo turno sara' il giorno " + giorno + " per la fascia: " + ora_inizio + " - " + ora_fine + ", per il servizio: " + getServizio(id_servizio2), "Cambio turno per comunicazione assenza", GestoreLogin.getUtente().getEmail());
+                        return impiegato;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -357,8 +374,8 @@ public class DBMS {
             ResultSet queryResult = statement.executeQuery(gS);
             if(queryResult.next()) {
                 String gN = "select count(id_impiegato) from turno where rilevato = true and data='" + LocalDate.now() + "' and " +
-                        "id_servizio=" + queryResult.getInt(1) + " and ora_inizio<='" + LocalTime.now() + "' " +
-                        "and ora_fine>='" + LocalTime.now() + "'";
+                        "id_servizio=" + queryResult.getInt(1) + " and ora_inizio<=cast('" + LocalTime.now() + "' as time) " +
+                        "and ora_fine>=cast('" + LocalTime.now() + "' as time)";
                 queryResult = statement.executeQuery(gN);
                 if(queryResult.next())
                     return queryResult.getInt(1);

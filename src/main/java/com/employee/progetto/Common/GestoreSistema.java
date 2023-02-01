@@ -1,4 +1,4 @@
-package com.employee.progetto;
+package com.employee.progetto.Common;
 
 import com.employee.progetto.Utils.DBMS;
 import com.employee.progetto.Utils.MailUtils;
@@ -21,6 +21,8 @@ public class GestoreSistema {
             DBMS.setDataInizioTrimestre(dataInizioTrimestre.plusMonths(3).plusDays(1));
             generaTurni();
         }
+        //simulazione stipendi
+        //calcolaStipendio();
         if(now.getDayOfMonth()==1)
            calcolaStipendio();
     }
@@ -70,7 +72,7 @@ public class GestoreSistema {
                 impiegati.get(0).add(impiegati.get(i).remove(0));
             }
         }
-        int numImpiegatiLiberi = nImpiegati/(7*giorniRiposo);
+        int numImpiegatiLiberi = (nImpiegati/7)*giorniRiposo;
         HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(impiegati,false);
         LocalDate dataInizioTrimestre = LocalDate.parse(DBMS.getDataInizioTrimestre());
         LocalDate giorno = dataInizioTrimestre;
@@ -108,7 +110,7 @@ public class GestoreSistema {
                                 DBMS.inserisciTurno(LocalTime.parse("08:00:00"), LocalTime.parse("16:00:00")
                                         , giorno, (i + 1), impiegati.get(i).get(j).toString());
                             if (fasciaOraria == 3) {
-                                DBMS.inserisciTurno(LocalTime.parse("16:00:00"), LocalTime.parse("00:00:00")
+                                DBMS.inserisciTurno(LocalTime.parse("16:00:00"), LocalTime.parse("23:59:59")
                                         , giorno, (i + 1), impiegati.get(i).get(j).toString());
                                 fasciaOraria = 0;
                             }

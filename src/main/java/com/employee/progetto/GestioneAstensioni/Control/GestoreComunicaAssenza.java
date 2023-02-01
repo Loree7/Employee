@@ -39,8 +39,18 @@ public class GestoreComunicaAssenza {
         int id_turno = DBMS.controllaInTurno(GestoreLogin.getUtente().getMatricola(),data);
         if(id_turno != 0){
             Utils.creaPannelloConferma("Assenza comunicata correttamente");
-            Impiegato impiegato = DBMS.scambiaTurno(data.plusDays(1),id_turno,GestoreLogin.getUtente().getMatricola(),data);
-            if(impiegato == null){ //se non esiste un impiegato con cui scambiare il turno comunico straordinari
+            if(DBMS.controllaInTurno(GestoreLogin.getUtente().getMatricola(),data.plusDays(1))==0){
+                Impiegato impiegato = DBMS.scambiaTurno(data.plusDays(1),id_turno,GestoreLogin.getUtente().getMatricola(),data);
+                if(impiegato == null){ //se non esiste un impiegato con cui scambiare il turno comunico straordinari
+                    Impiegato sostituto = DBMS.sostituisciTurno(data,id_turno);
+                    if (sostituto != null)
+                        MailUtils.inviaMail(sostituto.getNome() + " " + sostituto.getCognome() +
+                                        " sei stato scelto per svolgere gli straordinari giorno: " + data
+                                , "Straordinari", sostituto.getEmail());
+                    else
+                        DBMS.eliminaTurno(GestoreLogin.getUtente().getMatricola(), data);
+                }
+            }else{
                 Impiegato sostituto = DBMS.sostituisciTurno(data,id_turno);
                 if (sostituto != null)
                     MailUtils.inviaMail(sostituto.getNome() + " " + sostituto.getCognome() +

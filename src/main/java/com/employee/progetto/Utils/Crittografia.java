@@ -23,7 +23,6 @@ public class Crittografia {
     public static String codifica(String password) throws NoSuchAlgorithmException{
         return toHex(hash(password.getBytes(),"MD5"));
     }
-
     public static String generazioneSalt(){
         StringBuilder salt = new StringBuilder();
         String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";

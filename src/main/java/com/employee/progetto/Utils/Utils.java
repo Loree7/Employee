@@ -43,8 +43,7 @@ public class Utils {
         }
         stage.setTitle(titolo);
         return loader.getController();
-    }
-    public static Object cambiaInterfaccia(String interfaccia, Stage stage, Callback c, int w, int h) {
+    }public static Object cambiaInterfaccia(String interfaccia, Stage stage, Callback c, int w, int h) {
         FXMLLoader loader = creaLoader(interfaccia);
         loader.setControllerFactory(c);
         creaInterfaccia(loader, w, h, stage);

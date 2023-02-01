@@ -23,6 +23,10 @@ public class GestoreRichiestaPermesso {
             Utils.creaPannelloErrore("Compila tutti i campi");
             return;
         }
+        if(data.compareTo(LocalDate.now())<0){
+            Utils.creaPannelloErrore("La data d'inizio non può essere antecedente alla data corrente");
+            return;
+        }
         if(ora_inizio.isAfter(ora_fine) || ora_inizio.compareTo(ora_fine)==0){
             Utils.creaPannelloErrore("Non puoi inserire un'ora di inizio maggiore o uguale a quella di fine");
             return;

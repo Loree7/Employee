@@ -15,7 +15,7 @@
          </font></Button>
       <TextField fx:id="cognome" layoutX="229.0" layoutY="146.0" promptText="cognome" />
       <TextField fx:id="ruolo" layoutX="229.0" layoutY="222.0" promptText="ruolo" />
-      <TextField fx:id="password" layoutX="229.0" layoutY="258.0" promptText="password" />
+      <TextField fx:id="password" layoutX="229.0" layoutY="258.0" promptText="Inserisci password nuova" />
       <Button layoutX="45.0" layoutY="307.0" mnemonicParsing="false" onAction="#cliccaElimina" prefHeight="60.0" prefWidth="209.0" style="-fx-background-color: #F89C4D;" text="Elimina" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="21.0" />

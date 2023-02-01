@@ -41,7 +41,7 @@ public class GestoreRicercaImpiegato {
         }
     }
     public void modifica(String nome,String cognome,String ruolo,String email,String password,Stage s){
-        if(nome.isBlank() || cognome.isBlank() || ruolo.isBlank() || email.isBlank() || password.isBlank()){
+        if(nome.isBlank() || cognome.isBlank() || ruolo.isBlank() || email.isBlank()){
             Utils.creaPannelloErrore("Completa tutti i campi");
             return;
         }
@@ -49,8 +49,12 @@ public class GestoreRicercaImpiegato {
         for(String str : ruoli) {
             if (str.equals(ruolo.toLowerCase())) {
                 if (!nome.equals(impiegato.getNome()) || !cognome.equals(impiegato.getCognome()) || !ruolo.equals(impiegato.getRuolo())
-                        || !password.equals(impiegato.getPassword()) || !email.equals(impiegato.getEmail())){ // se ha cambiato uno dei campi
+                        || !password.equals(impiegato.getPassword())  || !email.equals(impiegato.getEmail())){ // se ha cambiato uno dei campi
                     if(!email.equals(impiegato.getEmail())){ //se cambia email
+                        if(!MailUtils.verificaMail(email)){
+                            Utils.creaPannelloErrore("Email non esistente");
+                            return;
+                        }
                         if(DBMS.controllaEmail(email)) { // controllo se già è presente
                             Utils.creaPannelloErrore("Email già presente");
                             return;
@@ -58,9 +62,13 @@ public class GestoreRicercaImpiegato {
                     }
                     Utils.creaPannelloConferma("Impiegato modificato correttamente");
                     DBMS.modifica(impiegato.getMatricola(), nome, cognome, ruolo, email, password);
-                    MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: "+nome+", Cognome: "+cognome+", Ruolo: "+ruolo
-                                    +", Email: "+email+", Password: "+password+ ", Matricola: "+DBMS.getMatricola(email)
-                            ,"Invio Credenziali",email);
+                    if(password.equals("")) {
+                        MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: " + nome + ", Cognome: " + cognome + ", Ruolo: " + ruolo
+                                        + ", Email: " + email + ", Password: Non modificata" + ", Matricola: " + DBMS.getMatricola(email)
+                                , "Invio Credenziali", email);
+                    }else MailUtils.inviaMail("Ecco a te i tuoi dati:\nNome: " + nome + ", Cognome: " + cognome + ", Ruolo: " + ruolo
+                                    + ", Email: " + email + ", Password: " + password + ", Matricola: " + DBMS.getMatricola(email)
+                            , "Invio Credenziali", email);
                     s.close(); //chiude vista impiegato
                     return;
                 }

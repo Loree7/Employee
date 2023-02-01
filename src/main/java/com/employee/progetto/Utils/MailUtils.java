@@ -41,7 +41,6 @@ public class MailUtils {
             if (rec.getIsVerified().equals("True")) {
                 return true;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

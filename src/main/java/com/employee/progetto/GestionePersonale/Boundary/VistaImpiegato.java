@@ -35,7 +35,6 @@ public class VistaImpiegato {
         cognome.setText(impiegato.getCognome());
         ruolo.setText(impiegato.getRuolo());
         email.setText(impiegato.getEmail());
-        password.setText(impiegato.getPassword());
 
         nome.setOnAction(event -> {
             cognome.requestFocus();

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneImpiegato.Boundary.MenuSituazioneLavorativa">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.employee.progetto.GestioneImpiegato.Boundary.MenuSituazioneLavorativa">
    <children>
       <Label fx:id="oreServizio1" layoutX="204.0" layoutY="236.0" prefHeight="17.0" prefWidth="34.0">
          <font>
@@ -19,7 +16,7 @@
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Text>
-      <Label fx:id="ruolo" layoutX="138.0" layoutY="129.0" prefHeight="17.0" prefWidth="34.0">
+      <Label fx:id="ruolo" layoutX="138.0" layoutY="129.0" prefHeight="17.0" prefWidth="218.0">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font></Label>
@@ -39,7 +36,10 @@
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <Label fx:id="oreServizio3" layoutX="206.0" layoutY="284.0" prefHeight="17.0" prefWidth="34.0" />
+      <Label fx:id="oreServizio3" layoutX="206.0" layoutY="284.0" prefHeight="17.0" prefWidth="34.0">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Label>
       <Label fx:id="oreServizio4" layoutX="204.0" layoutY="310.0" prefHeight="17.0" prefWidth="34.0">
          <font>
             <Font name="Arial Bold" size="14.0" />
