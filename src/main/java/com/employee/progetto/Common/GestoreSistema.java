@@ -130,10 +130,12 @@ public class GestoreSistema {
         }while(period.getMonths()<3);
     }
     public void calcolaStipendio(){
-        System.out.println("Calcolo stipendi");
         LocalDate now = LocalDate.now();
         //simulazione stipendi:
         //now = now.withDayOfMonth(1);
+        if(DBMS.controllaStipendi())
+            return;
+        System.out.println("Calcolo stipendi");
         List<List<Integer>> impiegati = DBMS.getImpiegati();
         HashMap<String,List<List<LocalDate>>> astensioni = DBMS.getAstensioni(impiegati,true);
         HashMap<String,Integer> giorniAstensioni = new HashMap<>();

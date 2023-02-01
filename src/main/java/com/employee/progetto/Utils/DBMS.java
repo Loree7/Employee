@@ -524,9 +524,24 @@ public class DBMS {
             e.getCause();
         }
     }
+    public static boolean controllaStipendi(){
+        Connection dbConnection = getConnection();
+        String cS = "select stipendio from stipendio where Month(data) = " + LocalDate.now().getMonthValue();
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(cS);
+            if (queryResult.next())
+                return true;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return false;
+    }
     public static int getStipendio(String matricola){
         Connection dbConnection = getConnection();
-        String gS = "select stipendio from stipendio where Month(data) = '" + LocalDate.now().plusMonths(-1)+ "' AND id_impiegato = " + matricola;
+        String gS = "select stipendio from stipendio where Month(data) = " + LocalDate.now().getMonthValue()+ " AND id_impiegato = " + matricola;
         try {
             Statement statement = dbConnection.createStatement();
             ResultSet queryResult = statement.executeQuery(gS);
@@ -539,7 +554,27 @@ public class DBMS {
         }
         return 0;
     }
-
+    public static List<Integer> getOreImpiegato(String matricola) {
+        List<Integer> ore = new ArrayList<>();
+        Connection dbConnection = getConnection();
+        String gO = "select oreServizio1,oreServizio2,oreServizio3,oreServizio4 from utente where matricola=" + matricola;
+        try {
+            Statement statement = dbConnection.createStatement();
+            ResultSet queryResult = statement.executeQuery(gO);
+            if (queryResult.next()) {
+                ore.add(queryResult.getInt(1));
+                ore.add(queryResult.getInt(2));
+                ore.add(queryResult.getInt(3));
+                ore.add(queryResult.getInt(4));
+            }
+            return ore;
+        } catch (Exception e) {
+            erroreComunicazioneDBMS();
+            e.printStackTrace();
+            e.getCause();
+        }
+        return null;
+    }
     public static List<Integer> getOre(String matricola){
         List<Integer> ore = new ArrayList<>();
         Connection dbConnection = getConnection();

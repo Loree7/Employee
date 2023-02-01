@@ -33,7 +33,7 @@ public class MenuSituazioneLavorativa {
     private Label giorniDiFerie;
     @FXML
     public void initialize (){
-        List<Integer> ore = DBMS.getOre(GestoreLogin.getUtente().getMatricola());
+        List<Integer> ore = DBMS.getOreImpiegato(GestoreLogin.getUtente().getMatricola());
 
         ruolo.setText(GestoreLogin.getUtente().getRuolo());
         ruolo.setText(GestoreLogin.getUtente().getRuolo());
@@ -41,7 +41,7 @@ public class MenuSituazioneLavorativa {
         oreServizio2.setText(ore.get(1).toString());
         oreServizio3.setText(ore.get(2).toString());
         oreServizio4.setText(ore.get(3).toString());
-        stipendio.setText(Integer.toString(DBMS.getStipendio(GestoreLogin.getUtente().getMatricola())));
+        stipendio.setText(DBMS.getStipendio(GestoreLogin.getUtente().getMatricola())+"€");
         oreDiPermesso.setText((Integer.toString((((Impiegato) GestoreLogin.getUtente()).getOrePermesso()))));
         giorniDiFerie.setText((Integer.toString(((Impiegato) GestoreLogin.getUtente()).getFerie())));
     }
