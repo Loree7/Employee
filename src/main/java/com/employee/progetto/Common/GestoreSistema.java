@@ -34,6 +34,9 @@ public class GestoreSistema {
             else
                 DBMS.apriServizio(servizi.indexOf(s)+1);
         }
+        //simulazione
+        //chiudiServizio();
+        //controlloServizioAlto();
         if(now.equals(LocalTime.parse("23:00:00"))) {
             chiudiServizio();
             controlloServizioAlto();
@@ -233,9 +236,9 @@ public class GestoreSistema {
         List<Integer> dipendenti = new ArrayList<>();
         for(String s : DBMS.getServizi())
             dipendenti.add(DBMS.getNumDipendenti(s,LocalDate.now().plusDays(1)));
-        int min = Collections.min(dipendenti);
-        while(dipendenti.get(0)==min){//se il servizio a priorità più alta ha meno dipendenti glieli metto da quello con più dipendenti
-            int max = Collections.max(dipendenti);
+        int max = Collections.max(dipendenti);
+        while(dipendenti.get(0)!=max){//se il servizio a priorità più alta ha meno dipendenti di qualsiasi servizio glieli metto da quello con più dipendenti
+            //int max = Collections.max(dipendenti);
             List<Integer> turni = DBMS.getTurniServizio(dipendenti.indexOf(max)+1);
             DBMS.aggiornaServizioTurno(turni.get(0),1); //faccio uno alla volta
             String email = DBMS.getEmail(turni.get(0));

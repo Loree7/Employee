@@ -16,8 +16,8 @@ public class PortaleAmministratore {
         LocalDate now = LocalDate.now();
         LocalDate dataFineTrimestre= LocalDate.parse(DBMS.getDataInizioTrimestre()).plusMonths(3).plusDays(-1);
         //L'amministratore può registrare solo se siamo un giorno prima l'inizio del prossimo trimestre
-        //simulazione
-        now=dataFineTrimestre;
+        //simulazione registra impiegato
+        //now=dataFineTrimestre;
         if(now.equals(dataFineTrimestre))
             new GestoreRegistraImpiegato();
         else{
