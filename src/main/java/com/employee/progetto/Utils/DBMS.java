@@ -19,7 +19,7 @@ public class DBMS {
     public static Connection getConnection() {
         String databaseName = "dbTeam";
         String databaseUser = "root";
-        String databasePassword = "Lorenzo10";
+        String databasePassword = "DaDaLoLu";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
         try {
